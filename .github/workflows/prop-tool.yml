@@ -1,0 +1,56 @@
+name: Prop tool page
+
+# Rebuilds the over/under tool page (scripts/prop_tool/) from Mingus Football's live data and model scorecard into the
+# data branch (tool/prop-tool.html). A scheduled Claude task republishes it to Josh's private artifact. Not a public page.
+
+on:
+  schedule:
+    - cron: "10 15 * * 2,4,0"     # Tue / Thu / Sun mornings ET
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/prop_tool/**", ".github/workflows/prop-tool.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  tool:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inputs
+        env:
+          REPO: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
+        run: |
+          mkdir -p livedata
+          for f in meta players games teams; do
+            curl -fsSL "https://joshwilliams332.github.io/mingus/data/$f.json" -o "livedata/$f.json"
+          done
+          git clone -q --depth 1 --branch data --filter=blob:none --sparse https://github.com/joshwilliams332/mingus fantasy
+          git -C fantasy sparse-checkout set model
+          if git ls-remote --exit-code --heads "$REPO" data >/dev/null; then
+            git clone -q --depth 1 --branch data "$REPO" store
+          else
+            mkdir store && git -C store init -q -b data && git -C store remote add origin "$REPO"
+          fi
+      - name: Build
+        run: |
+          mkdir -p store/tool
+          python3 scripts/prop_tool/build.py --data livedata --store fantasy --out store/tool/prop-tool.html | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Save to the data branch
+        run: |
+          cd store
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
+          git commit -q -m "Prop tool $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q origin data || (git pull -q --rebase origin data && git push -q origin data)
