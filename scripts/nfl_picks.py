@@ -1169,7 +1169,8 @@ def main(argv=None):
                       "lock": lock(data, a.store, now, api, a.force_lock, slate=slate),
                       "quick": quick_results(data, a.store, now, slate) if not a.no_odds else {"state": "skipped"}}
     lk = lock(data, a.store, now, api, a.force_lock)
-    status = {"checked": now.isoformat(), "today": et_date(now), "lock": lk, "recap": rc, "results": res,
+    status = {"checked": now.isoformat(), "today": et_date(now), "odds_key": bool(key), "lock": lk, "recap": rc,
+              "results": res,
               "sunday": sun,
               "credits": (api.usage if api else read(Path(a.store) / "odds" / "usage.json", {}))}
     write(Path(a.store) / "picks" / "status.json", status)

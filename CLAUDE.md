@@ -1,8 +1,7 @@
 # Mingus Picks: notes for Claude
 
-NFL player-prop picks for Mingus Sports (Josh, joshwilliams332). Split out of Mingus Football on Nov 3, 2026: Josh wants
-Mingus Football (`joshwilliams332/mingus`) to be the wholesome fantasy project he can show on a resume, with no betting
-in it. Everything about picks, odds and grading lives here. This repo is public; Josh doesn't link it on his resume.
+NFL player-prop picks for Mingus Sports (Josh, joshwilliams332): picks, odds pulls and grading. Moved here from
+Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
 
 ## Ground rules (Mingus team charter)
 - Honest record: picks lock before kickoff and are never edited; losses get posted like wins. Never "lock" or "guaranteed".
@@ -14,7 +13,7 @@ in it. Everything about picks, odds and grading lives here. This repo is public;
 
 ## How it fits with Mingus Football
 - The projection model (`projection()`, `chance_over()`, `td_chance()`, the tuned settings) is developed and tested in
-  Mingus Football (`scripts/nfl_picks.py` there, `scripts/model_review.py`, `scripts/backtest/`). `scripts/nfl_picks.py`
+  Mingus Football (`scripts/projections.py` there, `scripts/model_review.py`, `scripts/backtest/`). `scripts/nfl_picks.py`
   here is a copy of it plus the picks code. When the model changes there, copy the model functions here too.
 - Each picks run reads Mingus Football's live site data (`https://joshwilliams332.github.io/mingus/data/*.json`) and its
   tuned settings (`model/settings.json` on that repo's `data` branch).
@@ -88,4 +87,3 @@ in it. Everything about picks, odds and grading lives here. This repo is public;
 - Odds API key: `ODDS_API_KEY` repo secret, the same free key Hoop Lab uses (500 credits/month shared). Night games
   only ≈ 50-60 credits/month. Hoop Lab's budget spends whatever is left, so it should hold back ~60/month for football.
   If Josh upgrades ($30/month = 20,000 credits), all slates and a pre-kickoff closing-line pull become affordable.
-- Deploy schedule: daily 23:17 UTC plus post-game runs (Sun 22:47, Mon 01:47, Mon/Tue/Fri 05:47 UTC). GitHub often
