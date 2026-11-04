@@ -475,61 +475,45 @@ if __name__ == "__main__":
     unittest.main()
 
 
-def espn_injury_fake(phi=(), was=()):
-    sb = {"events": [{"id": "e1", "competitions": [{"competitors": [
-        {"team": {"abbreviation": "WSH"}}, {"team": {"abbreviation": "PHI"}}]}]}]}
-    side = lambda abbr, rows: {"team": {"abbreviation": abbr}, "injuries": [
-        {"status": st, "athlete": {"displayName": name, "position": {"abbreviation": pos}}} for name, pos, st in rows]}
-    summ = {"injuries": [side("PHI", phi), side("WSH", was)]}
-    return lambda url: sb if "scoreboard" in url else summ
 
-
-class HeadsUp(unittest.TestCase):
+class SundayResults(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.data = make_data(Path(self.tmp.name))
-        wr = {"id": "WR1", "name": "A.J. Brown", "pos": "WR", "team": "PHI", "injury": {"status": "Questionable"}, "log": []}
-        self.data.by_id["WR1"] = wr
         self.store = Path(self.tmp.name) / "store"
-        self.pick = {"id": "a", "gid": "2026_09_PHI_WAS", "pid": "TE1", "name": "Dallas Goedert", "team": "PHI", "opp": "WAS",
-                     "week": 9, "stat": "rec_yds", "side": "o", "line": 45.5, "price": -110}
+        night = {"id": "a", "gid": "2026_09_PHI_WAS", "pid": "TE1", "name": "Dallas Goedert", "team": "PHI", "opp": "WAS",
+                 "week": 9, "stat": "rec_yds", "side": "o", "line": 45.5, "price": -110}
+        early = {"id": "d", "gid": "2026_09_DAL_NYG", "pid": "Y1", "name": "Some TE", "team": "DAL", "opp": "NYG",
+                 "week": 9, "stat": "rec_yds", "side": "u", "line": 20.5, "price": -110}
         N.write(self.store / "picks" / "2026-11-08.json", {"season": 2026, "week": 9, "test": False, "slate": "night",
-                                                           "games": ["2026_09_PHI_WAS"], "picks": [self.pick]})
-        N.write(self.store / "odds" / "props" / "2026_09_PHI_WAS.json", {"rows": [
-            {"pid": "TE1", "stat": "rec_yds"}, {"pid": "WR1", "stat": "rec_yds"}, {"pid": "QB1", "stat": "pass_yds"}]})
+                                                           "games": ["2026_09_PHI_WAS"], "picks": [night]})
+        N.write(self.store / "picks" / "sun-early" / "2026-11-08.json", {"season": 2026, "week": 9, "test": False,
+                "slate": "early", "games": ["2026_09_DAL_NYG"], "picks": [early]})
 
     def tearDown(self):
         self.tmp.cleanup()
 
-    def at(self, hhmm):
-        return datetime.fromisoformat(f"2026-11-08T{hhmm}").replace(tzinfo=ET)
+    def quick(self, folder, rec):
+        N.write(self.store / "picks" / folder / "2026-11-08-quick.json",
+                {"record": rec, "post": {"main": f"results {folder or 'night'}\nFor entertainment. 21+ · Gamble responsibly · 1-800-GAMBLER"}})
 
-    def doc(self):
-        return json.loads((self.store / "picks" / "headsup" / "2026-11-08-night.json").read_text())
+    def test_sunday_day(self):
+        at = lambda s: datetime.fromisoformat(s).replace(tzinfo=ET)
+        self.assertEqual(N.sunday_day(at("2026-11-08T23:50")), "2026-11-08")
+        self.assertEqual(N.sunday_day(at("2026-11-09T00:40")), "2026-11-08")    # the night game ran past midnight
+        self.assertIsNone(N.sunday_day(at("2026-11-09T09:00")))
 
-    def test_waits_for_inactives_then_writes_once(self):
-        fake = espn_injury_fake()
-        self.assertEqual(N.headsup(self.data, self.store, self.at("18:30"), "night", fake)["state"], "waiting")
-        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
-        self.assertEqual((r["state"], r["affected"]), ("done", 0))
-        self.assertIn("no changes for our picks", self.doc()["email"]["subject"])
-        self.assertIn("✅ Dallas Goedert O 45.5 rec yds: active", self.doc()["email"]["text"])
-        self.assertIn("1-800-GAMBLER", self.doc()["email"]["text"])
-        self.assertEqual(N.headsup(self.data, self.store, self.at("19:30"), "night", fake)["state"], "done")
-
-    def test_teammate_out_and_cleared_players(self):
-        fake = espn_injury_fake(phi=[("A.J. Brown", "WR", "Out")], was=[("Jayden Daniels", "QB", "Active")])
-        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
-        self.assertEqual(r["affected"], 1)
-        text = self.doc()["email"]["text"]
-        self.assertIn("teammate A.J. Brown (WR) out. More targets could go his way (helps the over)", text)
-        self.assertIn("PHI: A.J. Brown (WR)", text)
-
-    def test_pick_player_out_is_a_void(self):
-        fake = espn_injury_fake(phi=[("Dallas Goedert", "TE", "Out")])
-        N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
-        self.assertIn("Graded as a void", self.doc()["email"]["text"])
-
-    def test_too_late_or_nothing_locked(self):
-        self.assertEqual(N.headsup(self.data, self.store, self.at("20:30"), "night", espn_injury_fake())["state"], "missed")
-        self.assertEqual(N.headsup(self.data, self.store, self.at("12:00"), "early", espn_injury_fake())["state"], "none")
+    def test_one_email_after_the_night_game(self):
+        now = datetime.fromisoformat("2026-11-08T17:30").replace(tzinfo=ET)
+        self.quick("sun-early", {"w": 1, "l": 0, "p": 0, "profit": 0.909})
+        self.assertEqual(N.sunday_results(self.data, self.store, now, "2026-11-08")["state"], "waiting")   # night not graded
+        self.quick("", {"w": 0, "l": 1, "p": 0, "profit": -1.0})
+        r = N.sunday_results(self.data, self.store, now, "2026-11-08")
+        self.assertEqual((r["state"], r["record"]), ("done", "1-1"))
+        doc = json.loads((self.store / "picks" / "sunday" / "2026-11-08-results.json").read_text())
+        self.assertIn("Sunday results (unofficial) · Sun 11/8 · 1-1", doc["email"]["subject"])
+        text = doc["email"]["text"]
+        self.assertLess(text.index("Sunday 1 PM"), text.index("Sunday night · PHI @ WAS"))
+        self.assertIn("1-800-GAMBLER", text)
+        self.assertEqual(N.sunday_results(self.data, self.store, now, "2026-11-08")["state"], "done")
+        self.assertEqual(N.sunday_results(self.data, self.store, now, None)["state"], "none")

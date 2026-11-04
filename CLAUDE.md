@@ -57,28 +57,27 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   night, `picks/YYYY-MM-DD-results.json` (that night's graded picks + season record, written once; Josh wanted results
   the next morning like Hoop Lab, not just weekly). `week-NN-recap.json` is written once a week's night games are all graded; `record.json` holds the season record. Week 8 is a test run
   (`RECORD_START_WEEK = 9`): emailed, graded, marked TEST, not counted. Every post carries the 21+ line.
-  Delivery: scheduled Claude tasks email Josh (joshwilliams332@comcast.net) TNF picks ~10:00 AM Thu, MNF / Saturday
-  night picks 6:00 PM, Sunday's picks (all slates) ~7:45 PM Sat, heads-ups Sundays,
-  8:41 AM ET Fri/Sun/Mon/Tue (last night's results) and Tue 1:41 PM ET (weekly recap); they only fetch `picks/` from the `data` branch and send it as written. No model
+  Delivery (Josh, Nov 3: one email per window, nothing else): scheduled Claude tasks email Josh
+  (joshwilliams332@comcast.net) TNF picks ~9:47 AM Thu, Sunday's picks (all slates) ~7:47 PM Sat, MNF / Saturday night
+  picks 6:00 PM, night-game results 8:41 AM Fri and Tue, and Sunday's results (all slates, unofficial) after the night
+  game; they only fetch `picks/` from the `data` branch and send it as written. No model
   backtest exists yet (no historical lines); the public record is the test.
 - **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, "for tracking"; same script,
   `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, "late" = 4-6:59 PM; both lock Saturday night
   with SNF. Not London 9:30 AM or Thanksgiving.
   **One Sunday email** (`sunday_preview`, Josh Nov 3): `picks/sunday/<Sunday>.json`, written once all of Sunday's
   slates have locked (or at 11:30 PM ET Saturday with whatever has), one post per time slot; emailed Saturday ~7:45 PM.
-  **Heads-ups** (`headsup`): `picks/headsup/<day>-<slate>.json`, written once 80 min before a slate's last kickoff
-  (after inactives, ~90 min before kickoff): ESPN game-day injury statuses (summary `injuries`; healthy scratches aren't
-  listed) for players with posted props, who's ruled out / cleared, and what it means for each locked pick (void,
-  teammate out = more targets / carries). Emailed ~11:45 AM, ~3:10 PM, ~7:05 PM ET Sundays. Locked picks never change. Files `picks/sun-early/` and `picks/sun-late/` (picks + morning-after results); both
+  Files `picks/sun-early/` and `picks/sun-late/` (picks + morning-after results); both
   count in one `picks/sunday-record.json`, never mixed into the night record. Only receiving + rushing yards
   (`DAY_MARKETS`, 2 credits a game, ~22 a Sunday, ~110 a month) to stay inside the ~200/month football budget; same
   pick rules, best 5 by edge per slate (`DAY_MAX_PICKS`). Counts from Week 8 (`DAY_RECORD_START_WEEK`). Locks come
   before inactives (inactive = void). The Monday 8:41 AM results email adds both slates.
-  Same-day unofficial results (Josh, Nov 1: wanted the 1 PM results that evening): `quick_results` grades a Sunday slate
-  from ESPN's box scores (site.api.espn.com, free; reachable from Actions, not from the cloud sandbox) once every game is
-  final -> `picks/sun-*/YYYY-MM-DD-quick.json`, written once, marked unofficial, never counted; a player missing from
-  ESPN's box score shows as "check". The record still comes from nflverse the next morning. Emailed ~5:15 PM (1 PM games)
-  and ~8:15 PM ET (4 PM games) by scheduled tasks.
+  Sunday results (unofficial): `quick_results` grades each Sunday slate (1 PM, 4 PM, night) from ESPN's box scores
+  (site.api.espn.com, free; reachable from Actions, not from the cloud sandbox) once its games are final ->
+  `picks/sun-*/YYYY-MM-DD-quick.json` / `picks/YYYY-MM-DD-quick.json`, written once, never counted; a player missing from
+  ESPN's box score shows as "check". `sunday_results` combines them into `picks/sunday/<day>-results.json` (one post
+  per slot) after the night game; emailed ~11:47 PM ET. The records still come from nflverse the next morning, with no
+  separate email.
 
 ## Other pieces
 - **Prop tool** (`scripts/prop_tool/`, `.github/workflows/prop-tool.yml`): the over/under tool page, rebuilt into the data
