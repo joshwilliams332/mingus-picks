@@ -9,15 +9,21 @@ name: NFL night picks
 
 on:
   schedule:
-    # Lock window, every 30 min on Thu/Sat/Sun/Mon afternoons: 3:15-7:45 PM EDT / 2:15-6:45 PM EST. Picks lock on the
-    # first run within 4 hours of kickoff; the extra runs cover GitHub starting scheduled runs late.
+    # Thursday morning (Josh, Nov 3, 2026: lines and picks out earlier): TNF picks lock from 9 AM ET, every 30 min
+    # 8:05-11:35 AM EST / 9:05 AM-12:35 PM EDT. Pulls landing before 10:37 AM show on NFL Lab's 10:37 AM run.
+    - cron: "5,35 13-16 * * 4"
+    # Saturday night: every Sunday game (1 PM, 4 PM, night) locks from 7 PM ET Saturday and one Sunday email is written
+    # (picks/sunday/), every 30 min Sat 7:10-11:40 PM EST / 8:10 PM-12:40 AM EDT (Sunday 00-04 UTC).
+    - cron: "10,40 0-4 * * 0"
+    # Game-day afternoons Thu/Sat/Sun/Mon, every 30 min 3:15-6:45 PM EST: MNF and Saturday night games lock within
+    # 4 hours of kickoff; on Sundays these also write the 4 PM heads-up (~3:10 PM) and the 1 PM same-day results.
+    # Thursday runs are a fallback if the morning runs were skipped. GitHub often starts scheduled runs late.
     - cron: "15,45 20-23 * * 0,1,4,6"
-    # Sunday daytime slates, every 30 min 7:05 AM-2:35 PM EST / 8:05 AM-3:35 PM EDT: the 1 PM games lock on the first
-    # run within 5 hours of kickoff (for the 9 AM email), the 4 PM games within 3 hours (for the 2 PM email).
-    - cron: "5,35 12-19 * * 0"
-    # Same-day unofficial results (ESPN box scores) for the Sunday 4 PM games: every 15 min, Sun 7:05-10:50 PM EST
-    # (Mon 00-03 UTC). GitHub skips or delays scheduled runs on busy Sunday nights (Nov 1: nothing ran 00:15-02:44 UTC),
-    # so there are plenty of chances. The 1 PM games are covered by the 20-23 UTC runs above.
+    # Sunday late morning, every 30 min 10:15 AM-2:45 PM EST: the 1 PM heads-up (inactives, ~11:45 AM) and a fallback lock
+    # for any Sunday slate that couldn't lock Saturday night.
+    - cron: "15,45 15-19 * * 0"
+    # Sunday night (Mon 00-03 UTC), every 15 min 7:05-10:50 PM EST: the night-game heads-up (~7 PM) and same-day
+    # unofficial results for the 4 PM games. GitHub skips or delays scheduled runs on busy Sunday nights.
     - cron: "5,20,35,50 0-3 * * 1"
     # Grading, the morning after night games (Fri, Sun, Mon, Tue), once nflverse has the box scores: 4:30 / 7:30 /
     # 10:30 AM / 1:30 PM EST. The 7:30 run lands before the 8:41 AM results email (which also waits up to an hour).

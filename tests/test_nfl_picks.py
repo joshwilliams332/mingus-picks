@@ -285,10 +285,27 @@ class LockAndGrade(unittest.TestCase):
     def at(self, hhmm, day="2026-11-08"):
         return datetime.fromisoformat(f"{day}T{hhmm}").replace(tzinfo=ET)
 
-    def test_waits_until_four_hours_before_kickoff(self):
+    def test_sunday_games_lock_saturday_night(self):
         api = FakeAPI(event_odds())
-        self.assertEqual(N.lock(self.data, self.store, self.at("15:00"), api)["state"], "waiting")
+        sat = lambda t: self.at(t, "2026-11-07")
+        r = N.lock(self.data, self.store, sat("18:30"), api, day="2026-11-08")
+        self.assertEqual(r["state"], "waiting")
+        self.assertIn("7 PM", r["why"])
         self.assertEqual(api.calls, [])                         # no credits spent while waiting
+        self.assertEqual(N.lock(self.data, self.store, sat("19:05"), api, day="2026-11-08")["state"], "locked")
+        doc = json.loads((self.store / "picks" / "2026-11-08.json").read_text())
+        self.assertEqual(doc["date"], "2026-11-08")              # filed under the game's date, not Saturday's
+        self.assertIn("before inactives", doc["email"]["html"])
+
+    def test_lock_times(self):
+        g = lambda d, t: {"date": d, "time": t}
+        opens = lambda d, t: N.lock_opens([g(d, t)]).strftime("%a %H:%M")
+        self.assertEqual(opens("2026-11-05", "20:15"), "Thu 09:00")     # TNF: Thursday morning
+        self.assertEqual(opens("2026-11-08", "13:00"), "Sat 19:00")     # every Sunday game: Saturday night
+        self.assertEqual(opens("2026-11-08", "16:25"), "Sat 19:00")
+        self.assertEqual(opens("2026-11-08", "20:20"), "Sat 19:00")
+        self.assertEqual(opens("2026-11-09", "20:15"), "Mon 16:15")     # MNF: 4 hours before
+        self.assertEqual(opens("2026-12-19", "20:00"), "Sat 16:00")     # late-season Saturday night: 4 hours before
 
     def test_no_night_games(self):
         self.assertEqual(N.lock(self.data, self.store, self.at("17:00", "2026-11-10"), FakeAPI(None))["state"], "no-games")
@@ -319,9 +336,9 @@ class LockAndGrade(unittest.TestCase):
                 {"name": "Over", "description": "Some TE", "price": -110, "point": 20.5},
                 {"name": "Under", "description": "Some TE", "price": -110, "point": 20.5}]})
         api = FakeAPI(odds)
-        self.assertEqual(N.lock(self.data, self.store, self.at("07:30"), api, slate="early")["state"], "waiting")
-        self.assertEqual(N.lock(self.data, self.store, self.at("08:05"), api, slate="late")["state"], "no-games")
-        r = N.lock(self.data, self.store, self.at("08:05"), api, slate="early")   # in time for the 9 AM email
+        sat = self.at("19:10", "2026-11-07")
+        self.assertEqual(N.lock(self.data, self.store, sat, api, slate="late", day="2026-11-08")["state"], "no-games")
+        r = N.lock(self.data, self.store, sat, api, slate="early", day="2026-11-08")
         self.assertEqual(r["state"], "locked")
         self.assertEqual(api.calls, ["events", "ev2"])            # only the 1 PM game, never the night game
         self.assertEqual(api.markets, list(N.DAY_MARKETS))        # 2 credits, not 4
@@ -330,22 +347,41 @@ class LockAndGrade(unittest.TestCase):
         self.assertLessEqual(len(doc["picks"]), N.DAY_MAX_PICKS)
         self.assertIn("Sunday 1 PM games", doc["post"]["main"])
         self.assertIn("1-800-GAMBLER", doc["post"]["main"])
-        self.assertTrue(doc["email"]["subject"].startswith("🏈 Sunday 1 PM post"))
         self.assertFalse((self.store / "picks" / "2026-11-08.json").exists())   # the night slate is untouched
         self.assertEqual(N.lock(self.data, self.store, self.at("10:00"), api, slate="early")["why"], "already locked")
-        self.assertEqual(N.lock(self.data, self.store, self.at("17:00"), api)["state"], "locked")   # night still locks
+        self.assertEqual(N.lock(self.data, self.store, sat, api, day="2026-11-08")["state"], "locked")   # night locks too
         self.assertEqual(api.markets, list(N.MARKETS))
 
-    def test_sunday_4pm_slate_locks_about_three_hours_before(self):
-        g = {"id": "2026_09_NYG_DAL", "week": 9, "date": "2026-11-08", "time": "16:25", "away": "NYG", "home": "DAL",
-             "home_spread": -3, "home_implied": 24.0, "away_implied": 21.0}
-        self.data.games.append(g)
-        self.data.game[g["id"]] = g
-        api = FakeAPI(event_odds())
-        self.assertEqual(N.lock(self.data, self.store, self.at("12:30"), api, slate="late")["state"], "waiting")
-        self.assertEqual(api.calls, [])
-        r = N.lock(self.data, self.store, self.at("13:35"), api, slate="late")   # in time for the 2 PM email
-        self.assertNotEqual(r["state"], "waiting")
+    def test_sunday_email_waits_for_every_slate_then_writes_once(self):
+        odds = event_odds(over=110, under=-140)
+        for b in odds["bookmakers"]:
+            b["markets"].append({"key": "player_reception_yds", "outcomes": [
+                {"name": "Over", "description": "Some TE", "price": -110, "point": 20.5},
+                {"name": "Under", "description": "Some TE", "price": -110, "point": 20.5}]})
+        api = FakeAPI(odds)
+        sat = lambda t: self.at(t, "2026-11-07")
+        self.assertEqual(N.sunday_preview(self.data, self.store, sat("19:10"))["state"], "waiting")
+        N.lock(self.data, self.store, sat("19:10"), api, day="2026-11-08")              # night locked, 1 PM not yet
+        self.assertEqual(N.sunday_preview(self.data, self.store, sat("19:10"))["state"], "waiting")
+        N.lock(self.data, self.store, sat("19:40"), api, slate="early", day="2026-11-08")
+        r = N.sunday_preview(self.data, self.store, sat("19:40"))
+        self.assertEqual(r["state"], "done")
+        doc = json.loads((self.store / "picks" / "sunday" / "2026-11-08.json").read_text())
+        self.assertEqual(doc["slates"], ["early", "night"])
+        html = doc["email"]["html"]
+        self.assertLess(html.index("Sunday 1 PM"), html.index("Sunday night · PHI @ WAS"))   # split by time slot
+        self.assertIn("1-800-GAMBLER", doc["email"]["text"])
+        self.assertTrue(doc["email"]["subject"].startswith("🏈 Sunday picks · Sun 11/8"))
+        self.assertEqual(N.sunday_preview(self.data, self.store, sat("20:10"))["state"], "done")
+        self.assertEqual(N.sunday_preview(self.data, self.store, self.at("12:00", "2026-11-05"))["state"], "none")
+
+    def test_sunday_email_goes_out_late_saturday_with_what_locked(self):
+        N.lock(self.data, self.store, self.at("19:10", "2026-11-07"), FakeAPI(event_odds()), day="2026-11-08")
+        self.assertEqual(N.sunday_preview(self.data, self.store, self.at("23:10", "2026-11-07"))["state"], "waiting")
+        self.assertEqual(N.sunday_preview(self.data, self.store, self.at("23:40", "2026-11-07"))["state"], "done")
+        doc = json.loads((self.store / "picks" / "sunday" / "2026-11-08.json").read_text())
+        self.assertEqual(doc["pending"], ["early"])
+        self.assertIn("Not locked yet: Sunday 1 PM", doc["email"]["text"])
 
     def test_day_results_and_record_kept_apart(self):
         day_dir = self.store / "picks" / "sun-early"
@@ -437,3 +473,63 @@ class LockAndGrade(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def espn_injury_fake(phi=(), was=()):
+    sb = {"events": [{"id": "e1", "competitions": [{"competitors": [
+        {"team": {"abbreviation": "WSH"}}, {"team": {"abbreviation": "PHI"}}]}]}]}
+    side = lambda abbr, rows: {"team": {"abbreviation": abbr}, "injuries": [
+        {"status": st, "athlete": {"displayName": name, "position": {"abbreviation": pos}}} for name, pos, st in rows]}
+    summ = {"injuries": [side("PHI", phi), side("WSH", was)]}
+    return lambda url: sb if "scoreboard" in url else summ
+
+
+class HeadsUp(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.data = make_data(Path(self.tmp.name))
+        wr = {"id": "WR1", "name": "A.J. Brown", "pos": "WR", "team": "PHI", "injury": {"status": "Questionable"}, "log": []}
+        self.data.by_id["WR1"] = wr
+        self.store = Path(self.tmp.name) / "store"
+        self.pick = {"id": "a", "gid": "2026_09_PHI_WAS", "pid": "TE1", "name": "Dallas Goedert", "team": "PHI", "opp": "WAS",
+                     "week": 9, "stat": "rec_yds", "side": "o", "line": 45.5, "price": -110}
+        N.write(self.store / "picks" / "2026-11-08.json", {"season": 2026, "week": 9, "test": False, "slate": "night",
+                                                           "games": ["2026_09_PHI_WAS"], "picks": [self.pick]})
+        N.write(self.store / "odds" / "props" / "2026_09_PHI_WAS.json", {"rows": [
+            {"pid": "TE1", "stat": "rec_yds"}, {"pid": "WR1", "stat": "rec_yds"}, {"pid": "QB1", "stat": "pass_yds"}]})
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def at(self, hhmm):
+        return datetime.fromisoformat(f"2026-11-08T{hhmm}").replace(tzinfo=ET)
+
+    def doc(self):
+        return json.loads((self.store / "picks" / "headsup" / "2026-11-08-night.json").read_text())
+
+    def test_waits_for_inactives_then_writes_once(self):
+        fake = espn_injury_fake()
+        self.assertEqual(N.headsup(self.data, self.store, self.at("18:30"), "night", fake)["state"], "waiting")
+        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertEqual((r["state"], r["affected"]), ("done", 0))
+        self.assertIn("no changes for our picks", self.doc()["email"]["subject"])
+        self.assertIn("✅ Dallas Goedert O 45.5 rec yds: active", self.doc()["email"]["text"])
+        self.assertIn("1-800-GAMBLER", self.doc()["email"]["text"])
+        self.assertEqual(N.headsup(self.data, self.store, self.at("19:30"), "night", fake)["state"], "done")
+
+    def test_teammate_out_and_cleared_players(self):
+        fake = espn_injury_fake(phi=[("A.J. Brown", "WR", "Out")], was=[("Jayden Daniels", "QB", "Active")])
+        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertEqual(r["affected"], 1)
+        text = self.doc()["email"]["text"]
+        self.assertIn("teammate A.J. Brown (WR) out. More targets could go his way (helps the over)", text)
+        self.assertIn("PHI: A.J. Brown (WR)", text)
+
+    def test_pick_player_out_is_a_void(self):
+        fake = espn_injury_fake(phi=[("Dallas Goedert", "TE", "Out")])
+        N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertIn("Graded as a void", self.doc()["email"]["text"])
+
+    def test_too_late_or_nothing_locked(self):
+        self.assertEqual(N.headsup(self.data, self.store, self.at("20:30"), "night", espn_injury_fake())["state"], "missed")
+        self.assertEqual(N.headsup(self.data, self.store, self.at("12:00"), "early", espn_injury_fake())["state"], "none")
