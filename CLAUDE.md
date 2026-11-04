@@ -1,8 +1,7 @@
 # Mingus Picks: notes for Claude
 
-NFL player-prop picks for Mingus Sports (Josh, joshwilliams332). Split out of Mingus Football on Nov 3, 2026, so Mingus
-Football (`joshwilliams332/mingus`) stays a fantasy site with no betting in it. Everything about picks, odds and grading
-lives here. This repo is public.
+NFL player-prop picks for Mingus Sports (Josh, joshwilliams332): picks, odds pulls and grading. Moved here from
+Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
 
 ## Ground rules (Mingus team charter)
 - Honest record: picks lock before kickoff and are never edited; losses get posted like wins. Never "lock" or "guaranteed".
