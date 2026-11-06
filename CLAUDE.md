@@ -26,8 +26,10 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   `.github/workflows/nfl-picks.yml`, separate from the deploy; it downloads the live site's data JSON instead of
   rebuilding). Night games only (kickoff 7 PM ET+: TNF, SNF, MNF, late-season Saturdays), Josh's choice so football
   uses little of the Odds API key it shares with Hoop Lab. Props pulled once per night game (4 markets: pass / rush /
-  rec yds, receptions; 4 credits; event list free; never pulls below `CREDIT_RESERVE`), on the first run within 4 h of
-  kickoff, into `data` branch `odds/props/<game id>.json`. Picks lock once into `picks/YYYY-MM-DD.json` (never
+  rec yds, receptions; 4 credits; event list free; never pulls below `CREDIT_RESERVE`), on the first run after
+  `lock_opens()` (Josh, Nov 3: lines and picks out earlier): TNF from 9 AM ET Thursday, every Sunday game (1 PM, 4 PM
+  and SNF) from 7 PM ET Saturday, MNF / Saturday night within 4 h of kickoff; into `data` branch
+  `odds/props/<game id>.json`. Files are named by the game's date (a Saturday-night lock writes Sunday's file). Picks lock once into `picks/YYYY-MM-DD.json` (never
   rewritten). Same rules as Hoop Lab: chance = 30% projection + 70% books' no-vig consensus at the most-posted line,
   skip if they differ by 20+ points, >= 54% and >= 3% edge at the best price, prices -200 to +180, one per player, up to
   2 per game, skip anyone Questionable / Doubtful / Out / DNP, regulars only (20 att / 8 car / 3.5 tgt a game), line
@@ -55,23 +57,27 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   night, `picks/YYYY-MM-DD-results.json` (that night's graded picks + season record, written once; Josh wanted results
   the next morning like Hoop Lab, not just weekly). `week-NN-recap.json` is written once a week's night games are all graded; `record.json` holds the season record. Week 8 is a test run
   (`RECORD_START_WEEK = 9`): emailed, graded, marked TEST, not counted. Every post carries the 21+ line.
-  Delivery: scheduled Claude tasks email Josh (joshwilliams332@comcast.net) at 6:00 PM ET Thu/Sat/Sun/Mon (picks),
-  8:41 AM ET Fri/Sun/Mon/Tue (last night's results) and Tue 1:41 PM ET (weekly recap); they only fetch `picks/` from the `data` branch and send it as written. No model
+  Delivery (Josh, Nov 3: one email per window, nothing else): scheduled Claude tasks email Josh
+  (joshwilliams332@comcast.net) TNF picks ~9:47 AM Thu, Sunday's picks (all slates) ~7:47 PM Sat, MNF / Saturday night
+  picks 6:00 PM, night-game results 8:41 AM Fri and Tue, and Sunday's results (all slates, unofficial) after the night
+  game; they only fetch `picks/` from the `data` branch and send it as written. No model
   backtest exists yet (no historical lines); the public record is the test.
-- **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, emailed 9 AM and 2 PM ET,
-  "for tracking"; same script, `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, locked on the first
-  run within 5 h (from 8 AM); "late" = 4-6:59 PM, within 3 h (from ~1 PM). Not London 9:30 AM or Thanksgiving. Sunday
-  crons every 30 min 12-19 UTC. Files `picks/sun-early/` and `picks/sun-late/` (picks + morning-after results); both
+- **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, "for tracking"; same script,
+  `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, "late" = 4-6:59 PM; both lock Saturday night
+  with SNF. Not London 9:30 AM or Thanksgiving.
+  **One Sunday email** (`sunday_preview`, Josh Nov 3): `picks/sunday/<Sunday>.json`, written once all of Sunday's
+  slates have locked (or at 11:30 PM ET Saturday with whatever has), one post per time slot; emailed Saturday ~7:45 PM.
+  Files `picks/sun-early/` and `picks/sun-late/` (picks + morning-after results); both
   count in one `picks/sunday-record.json`, never mixed into the night record. Only receiving + rushing yards
   (`DAY_MARKETS`, 2 credits a game, ~22 a Sunday, ~110 a month) to stay inside the ~200/month football budget; same
   pick rules, best 5 by edge per slate (`DAY_MAX_PICKS`). Counts from Week 8 (`DAY_RECORD_START_WEEK`). Locks come
-  before inactives (inactive = void). Scheduled Claude tasks email each slate at 9:00 AM / 2:00 PM ET Sundays; the
-  Monday 8:41 AM results email adds both.
-  Same-day unofficial results (Josh, Nov 1: wanted the 1 PM results that evening): `quick_results` grades a Sunday slate
-  from ESPN's box scores (site.api.espn.com, free; reachable from Actions, not from the cloud sandbox) once every game is
-  final -> `picks/sun-*/YYYY-MM-DD-quick.json`, written once, marked unofficial, never counted; a player missing from
-  ESPN's box score shows as "check". The record still comes from nflverse the next morning. Emailed ~5:15 PM (1 PM games)
-  and ~8:15 PM ET (4 PM games) by scheduled tasks.
+  before inactives (inactive = void). The Monday 8:41 AM results email adds both slates.
+  Sunday results (unofficial): `quick_results` grades each Sunday slate (1 PM, 4 PM, night) from ESPN's box scores
+  (site.api.espn.com, free; reachable from Actions, not from the cloud sandbox) once its games are final ->
+  `picks/sun-*/YYYY-MM-DD-quick.json` / `picks/YYYY-MM-DD-quick.json`, written once, never counted; a player missing from
+  ESPN's box score shows as "check". `sunday_results` combines them into `picks/sunday/<day>-results.json` (one post
+  per slot) after the night game; emailed ~11:47 PM ET. The records still come from nflverse the next morning, with no
+  separate email.
 
 ## Other pieces
 - **Prop tool** (`scripts/prop_tool/`, `.github/workflows/prop-tool.yml`): the over/under tool page, rebuilt into the data
