@@ -577,3 +577,12 @@ class HeadsUp(unittest.TestCase):
     def test_too_late_or_nothing_locked(self):
         self.assertEqual(N.headsup(self.data, self.store, self.at("20:30"), "night", espn_injury_fake())["state"], "missed")
         self.assertEqual(N.headsup(self.data, self.store, self.at("12:00"), "early", espn_injury_fake())["state"], "none")
+
+
+class WhyLine(unittest.TestCase):
+    def test_under_with_average_above_the_line_explains_itself(self):
+        c = {"row": {"stat": "rec_yds", "line": 19.5}, "side": "u", "model": 0.64, "player": {"pos": "RB", "team": "IND"},
+             "proj": {"mean": 20.2, "parts": {}, "vals": [12, 9, 50, 14, 11]}}
+        w = N.why_line(c)
+        self.assertIn("gives the under a 64% chance", w)
+        self.assertNotIn("projects 20.2 vs the 19.5 line", w)

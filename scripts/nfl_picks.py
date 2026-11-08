@@ -631,6 +631,12 @@ def why_line(c, data=None):
     short, over, parts = STAT[r["stat"]][1], c["side"] == "o", proj.get("parts") or {}
     pos = p["pos"] + "s"
     first = f"Our model projects {proj['mean']:g} vs the {r['line']:g} line"
+    if not over and proj["mean"] >= r["line"]:
+        # Skewed stats: a few big games lift his average above the line even though most of his games land under it.
+        first = (f"Our model gives the under a {c['model']:.0%} chance: his average projects {proj['mean']:g}, but most "
+                 f"of his games land under {r['line']:g} and a few big ones lift the average")
+    elif over and proj["mean"] <= r["line"]:
+        first = f"Our model gives the over a {c['model']:.0%} chance at {r['line']:g} (projects {proj['mean']:g})"
     extra = []
     rk = proj.get("opp_rank")
     if rk and over and rk["rank"] <= 8:
