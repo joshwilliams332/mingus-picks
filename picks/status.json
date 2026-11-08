@@ -1,11 +1,12 @@
 {
- "checked": "2026-11-08T06:45:12.686381+00:00",
+ "checked": "2026-11-08T06:45:22.647730+00:00",
  "today": "2026-11-08",
  "odds_key": true,
  "lock": {
   "day": "2026-11-08",
-  "state": "waiting",
-  "why": "locks within 4 hours of the 8:20 PM ET kickoff"
+  "state": "locked",
+  "why": "2 pick(s) locked",
+  "new": true
  },
  "recap": {
   "week": 8,
@@ -23,8 +24,9 @@
    },
    "lock": {
     "day": "2026-11-08",
-    "state": "waiting",
-    "why": "locks within 5 hours of the 1 PM ET kickoff"
+    "state": "locked",
+    "why": "4 pick(s) locked",
+    "new": true
    },
    "quick": {
     "day": "2026-11-08",
@@ -38,8 +40,9 @@
    },
    "lock": {
     "day": "2026-11-08",
-    "state": "waiting",
-    "why": "locks within 3 hours of the 4:05 PM ET kickoff"
+    "state": "locked",
+    "why": "4 pick(s) locked",
+    "new": true
    },
    "quick": {
     "day": "2026-11-08",
@@ -47,10 +50,39 @@
    }
   }
  },
+ "tomorrow": {
+  "day": "2026-11-09",
+  "early": {
+   "day": "2026-11-09",
+   "state": "no-games",
+   "why": "no Sunday 1 PM games on Mon 11/9"
+  },
+  "late": {
+   "day": "2026-11-09",
+   "state": "no-games",
+   "why": "no Sunday 4 PM games on Mon 11/9"
+  },
+  "night": {
+   "day": "2026-11-09",
+   "state": "waiting",
+   "why": "locks from Mon 11/9 4:15 PM ET"
+  }
+ },
+ "sunday_email": {
+  "day": "2026-11-08",
+  "state": "done",
+  "new": true,
+  "picks": 10
+ },
+ "sunday_results": {
+  "day": "2026-11-08",
+  "state": "waiting",
+  "why": "0 of 3 slates graded"
+ },
  "credits": {
-  "remaining": 453,
-  "used": 47,
+  "remaining": 376,
+  "used": 124,
   "last_cost": 4,
-  "checked": "2026-11-02T23:00:07+00:00"
+  "checked": "2026-11-08T06:45:24+00:00"
  }
 }

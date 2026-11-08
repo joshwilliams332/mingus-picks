@@ -1,0 +1,181 @@
+{
+ "date": "2026-11-08",
+ "season": 2026,
+ "week": 9,
+ "test": false,
+ "slate": "early",
+ "games": [
+  "2026_09_DEN_CAR",
+  "2026_09_DAL_IND",
+  "2026_09_NYJ_KC",
+  "2026_09_DET_MIA",
+  "2026_09_CLE_NO",
+  "2026_09_NYG_PHI",
+  "2026_09_LA_WAS"
+ ],
+ "locked_at": "2026-11-08T06:45:22.647730+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_09_DEN_CAR-00-0041496-rush_yds",
+   "gid": "2026_09_DEN_CAR",
+   "week": 9,
+   "pid": "00-0041496",
+   "name": "Jonah Coleman",
+   "team": "DEN",
+   "opp": "CAR",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 56.5,
+   "price": -111,
+   "book": "DraftKings",
+   "books": 4,
+   "proj": 50.4,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.556,
+   "model": 0.689,
+   "market": 0.499,
+   "edge": 0.057,
+   "kickoff": "2026-11-08T13:00:00-05:00",
+   "why": "Our model projects 50.4 vs the 56.5 line, stayed under 56.5 in 4 of his last 4.",
+   "deep": [
+    "Jonah Coleman U 56.5 rush yds \u00b7 -111 (best price: DraftKings; line from 4 books)",
+    "Projection 50.4 = half Sleeper (61.6), half our model (39.1), less 3%; season 33.5, last 3 44.7 per game.",
+    "Volume: 8.2 carries/game \u2192 8.4 after CAR defense \u00d71.02, DEN implied 23.5 \u00d71.00, game script (favored 2.5) \u00d71.00.",
+    "Efficiency: 4.3 yds/carry (steadied toward the league) \u00d7 CAR allows \u00d71.02 \u2192 4.4.",
+    "Chance: ours 69%, books' no-vig 50%, blended 56%; edge +6% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_DAL_IND-00-0036223-rec_yds",
+   "gid": "2026_09_DAL_IND",
+   "week": 9,
+   "pid": "00-0036223",
+   "name": "Jonathan Taylor",
+   "team": "IND",
+   "opp": "DAL",
+   "pos": "RB",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 19.5,
+   "price": -111,
+   "book": "DraftKings",
+   "books": 3,
+   "proj": 20.2,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.545,
+   "model": 0.639,
+   "market": 0.505,
+   "edge": 0.036,
+   "kickoff": "2026-11-08T13:00:00-05:00",
+   "why": "Our model projects 20.2 vs the 19.5 line.",
+   "deep": [
+    "Jonathan Taylor U 19.5 rec yds \u00b7 -111 (best price: DraftKings; line from 3 books)",
+    "Projection 20.2 = half Sleeper (15.2), half our model (25.2), less 3%; season 25.2, last 3 32 per game.",
+    "Volume: 3.9 targets/game \u2192 3.9 after DAL defense \u00d70.98, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.",
+    "Efficiency: 6.1 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.00 \u2192 6.1.",
+    "Chance: ours 64%, books' no-vig 50%, blended 54%; edge +4% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_DAL_IND-00-0032951-rec_yds",
+   "gid": "2026_09_DAL_IND",
+   "week": 9,
+   "pid": "00-0032951",
+   "name": "Laquon Treadwell",
+   "team": "IND",
+   "opp": "DAL",
+   "pos": "WR",
+   "stat": "rec_yds",
+   "side": "o",
+   "line": 14.5,
+   "price": -113,
+   "book": "FanDuel",
+   "books": 4,
+   "proj": 25.0,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.547,
+   "model": 0.644,
+   "market": 0.505,
+   "edge": 0.03,
+   "kickoff": "2026-11-08T13:00:00-05:00",
+   "why": "Our model projects 25 vs the 14.5 line, DAL allows the 7th most rec yds to WRs; cleared 14.5 in 5 of his last 5.",
+   "deep": [
+    "Laquon Treadwell O 14.5 rec yds \u00b7 -113 (best price: FanDuel; line from 4 books)",
+    "Projection 25 = half Sleeper (20.5), half our model (29.5), less 3%; season 26.9, last 3 19.3 per game.",
+    "Volume: 3.6 targets/game \u2192 3.6 after DAL defense \u00d71.01, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.",
+    "Efficiency: 7.7 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.01 \u2192 7.8.",
+    "Chance: ours 64%, books' no-vig 51%, blended 55%; edge +3% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_CLE_NO-00-0041547-rec_yds",
+   "gid": "2026_09_CLE_NO",
+   "week": 9,
+   "pid": "00-0041547",
+   "name": "KC Concepcion",
+   "team": "CLE",
+   "opp": "NO",
+   "pos": "WR",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 46.5,
+   "price": -111,
+   "book": "DraftKings",
+   "books": 4,
+   "proj": 47.3,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.542,
+   "model": 0.641,
+   "market": 0.499,
+   "edge": 0.03,
+   "kickoff": "2026-11-08T13:00:00-05:00",
+   "why": "Our model projects 47.3 vs the 46.5 line, CLE is implied for just 19.8; stayed under 46.5 in 3 of his last 5.",
+   "deep": [
+    "KC Concepcion U 46.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)",
+    "Projection 47.3 = half Sleeper (44.9), half our model (49.6), less 3%; season 44, last 3 67.7 per game.",
+    "Volume: 6.1 targets/game \u2192 5.9 after NO defense \u00d70.99, CLE implied 19.8 \u00d70.98, game script (underdog 3) \u00d71.00.",
+    "Efficiency: 7.9 yds/target (steadied toward the league) \u00d7 NO allows \u00d71.00 \u2192 7.9.",
+    "Chance: ours 64%, books' no-vig 50%, blended 54%; edge +3% at this price."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 1 PM games\n\nOur top 4:\n\nJonah Coleman U 56.5 rush yds\nJonathan Taylor U 19.5 rec yds\nLaquon Treadwell O 14.5 rec yds\nKC Concepcion U 46.5 rec yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Jonah Coleman U 56.5 rush yds: Our model projects 50.4 vs the 56.5 line, stayed under 56.5 in 4 of his last 4.",
+   "Jonathan Taylor U 19.5 rec yds: Our model projects 20.2 vs the 19.5 line.",
+   "Laquon Treadwell O 14.5 rec yds: Our model projects 25 vs the 14.5 line, DAL allows the 7th most rec yds to WRs; cleared 14.5 in 5 of his last 5.",
+   "KC Concepcion U 46.5 rec yds: Our model projects 47.3 vs the 46.5 line, CLE is implied for just 19.8; stayed under 46.5 in 3 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Sunday 1 PM post \u00b7 Sun 11/8 \u00b7 4 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Sunday 1 PM post \u00b7 Sun 11/8 \u00b7 4 picks</h2><p style=\"color:#555;margin:0 0 16px\">Copy, paste, post. Long-press a box to copy it.</p><h3 style=\"margin:0 0 6px\">Post</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 1 PM games\n\nOur top 4:\n\nJonah Coleman U 56.5 rush yds\nJonathan Taylor U 19.5 rec yds\nLaquon Treadwell O 14.5 rec yds\nKC Concepcion U 46.5 rec yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Thread replies</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Jonah Coleman U 56.5 rush yds: Our model projects 50.4 vs the 56.5 line, stayed under 56.5 in 4 of his last 4.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Jonathan Taylor U 19.5 rec yds: Our model projects 20.2 vs the 19.5 line.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Laquon Treadwell O 14.5 rec yds: Our model projects 25 vs the 14.5 line, DAL allows the 7th most rec yds to WRs; cleared 14.5 in 5 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">KC Concepcion U 46.5 rec yds: Our model projects 47.3 vs the 46.5 line, CLE is implied for just 19.8; stayed under 46.5 in 3 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive (for you, not for posting)</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Jonah Coleman U 56.5 rush yds \u00b7 -111 (best price: DraftKings; line from 4 books)</b><div style=\"margin-top:4px;color:#333\">Projection 50.4 = half Sleeper (61.6), half our model (39.1), less 3%; season 33.5, last 3 44.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 8.2 carries/game \u2192 8.4 after CAR defense \u00d71.02, DEN implied 23.5 \u00d71.00, game script (favored 2.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 4.3 yds/carry (steadied toward the league) \u00d7 CAR allows \u00d71.02 \u2192 4.4.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 69%, books&#x27; no-vig 50%, blended 56%; edge +6% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Jonathan Taylor U 19.5 rec yds \u00b7 -111 (best price: DraftKings; line from 3 books)</b><div style=\"margin-top:4px;color:#333\">Projection 20.2 = half Sleeper (15.2), half our model (25.2), less 3%; season 25.2, last 3 32 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 3.9 targets/game \u2192 3.9 after DAL defense \u00d70.98, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 6.1 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.00 \u2192 6.1.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 64%, books&#x27; no-vig 50%, blended 54%; edge +4% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Laquon Treadwell O 14.5 rec yds \u00b7 -113 (best price: FanDuel; line from 4 books)</b><div style=\"margin-top:4px;color:#333\">Projection 25 = half Sleeper (20.5), half our model (29.5), less 3%; season 26.9, last 3 19.3 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 3.6 targets/game \u2192 3.6 after DAL defense \u00d71.01, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 7.7 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.01 \u2192 7.8.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 64%, books&#x27; no-vig 51%, blended 55%; edge +3% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>KC Concepcion U 46.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)</b><div style=\"margin-top:4px;color:#333\">Projection 47.3 = half Sleeper (44.9), half our model (49.6), less 3%; season 44, last 3 67.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 6.1 targets/game \u2192 5.9 after NO defense \u00d70.99, CLE implied 19.8 \u00d70.98, game script (underdog 3) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 7.9 yds/target (steadied toward the league) \u00d7 NO allows \u00d71.00 \u2192 7.9.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 64%, books&#x27; no-vig 50%, blended 54%; edge +3% at this price.</div></div><h3 style=\"margin:16px 0 6px\">For you, not for posting</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Sunday 1 PM games: receiving and rushing yards only (2 credits a game). Tracked in the Sunday record, separate from the night-game record.</li><li>Locked about 11 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 1:45 AM ET from 108 prop sides across 7 game(s); prices are from that moment, so check your book before posting.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 1 PM games\n\nOur top 4:\n\nJonah Coleman U 56.5 rush yds\nJonathan Taylor U 19.5 rec yds\nLaquon Treadwell O 14.5 rec yds\nKC Concepcion U 46.5 rec yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nJonah Coleman U 56.5 rush yds: Our model projects 50.4 vs the 56.5 line, stayed under 56.5 in 4 of his last 4.\n\nJonathan Taylor U 19.5 rec yds: Our model projects 20.2 vs the 19.5 line.\n\nLaquon Treadwell O 14.5 rec yds: Our model projects 25 vs the 14.5 line, DAL allows the 7th most rec yds to WRs; cleared 14.5 in 5 of his last 5.\n\nKC Concepcion U 46.5 rec yds: Our model projects 47.3 vs the 46.5 line, CLE is implied for just 19.8; stayed under 46.5 in 3 of his last 5.\n\nDeep dive:\nJonah Coleman U 56.5 rush yds \u00b7 -111 (best price: DraftKings; line from 4 books)\nProjection 50.4 = half Sleeper (61.6), half our model (39.1), less 3%; season 33.5, last 3 44.7 per game.\nVolume: 8.2 carries/game \u2192 8.4 after CAR defense \u00d71.02, DEN implied 23.5 \u00d71.00, game script (favored 2.5) \u00d71.00.\nEfficiency: 4.3 yds/carry (steadied toward the league) \u00d7 CAR allows \u00d71.02 \u2192 4.4.\nChance: ours 69%, books' no-vig 50%, blended 56%; edge +6% at this price.\n\nJonathan Taylor U 19.5 rec yds \u00b7 -111 (best price: DraftKings; line from 3 books)\nProjection 20.2 = half Sleeper (15.2), half our model (25.2), less 3%; season 25.2, last 3 32 per game.\nVolume: 3.9 targets/game \u2192 3.9 after DAL defense \u00d70.98, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.\nEfficiency: 6.1 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.00 \u2192 6.1.\nChance: ours 64%, books' no-vig 50%, blended 54%; edge +4% at this price.\n\nLaquon Treadwell O 14.5 rec yds \u00b7 -113 (best price: FanDuel; line from 4 books)\nProjection 25 = half Sleeper (20.5), half our model (29.5), less 3%; season 26.9, last 3 19.3 per game.\nVolume: 3.6 targets/game \u2192 3.6 after DAL defense \u00d71.01, IND implied 23 \u00d71.00, game script (underdog 5.5) \u00d71.00.\nEfficiency: 7.7 yds/target (steadied toward the league) \u00d7 DAL allows \u00d71.01 \u2192 7.8.\nChance: ours 64%, books' no-vig 51%, blended 55%; edge +3% at this price.\n\nKC Concepcion U 46.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)\nProjection 47.3 = half Sleeper (44.9), half our model (49.6), less 3%; season 44, last 3 67.7 per game.\nVolume: 6.1 targets/game \u2192 5.9 after NO defense \u00d70.99, CLE implied 19.8 \u00d70.98, game script (underdog 3) \u00d71.00.\nEfficiency: 7.9 yds/target (steadied toward the league) \u00d7 NO allows \u00d71.00 \u2192 7.9.\nChance: ours 64%, books' no-vig 50%, blended 54%; edge +3% at this price.\n\nNote: Sunday 1 PM games: receiving and rushing yards only (2 credits a game). Tracked in the Sunday record, separate from the night-game record.\nNote: Locked about 11 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 1:45 AM ET from 108 prop sides across 7 game(s); prices are from that moment, so check your book before posting.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}

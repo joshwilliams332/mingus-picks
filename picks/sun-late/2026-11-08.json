@@ -1,0 +1,178 @@
+{
+ "date": "2026-11-08",
+ "season": 2026,
+ "week": 9,
+ "test": false,
+ "slate": "late",
+ "games": [
+  "2026_09_HOU_LAC",
+  "2026_09_LV_SF",
+  "2026_09_GB_NE",
+  "2026_09_ARI_SEA"
+ ],
+ "locked_at": "2026-11-08T06:45:22.647730+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_09_LV_SF-00-0033280-rec_yds",
+   "gid": "2026_09_LV_SF",
+   "week": 9,
+   "pid": "00-0033280",
+   "name": "Christian McCaffrey",
+   "team": "SF",
+   "opp": "LV",
+   "pos": "RB",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 41.5,
+   "price": -111,
+   "book": "DraftKings",
+   "books": 4,
+   "proj": 38.2,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.552,
+   "model": 0.677,
+   "market": 0.499,
+   "edge": 0.05,
+   "kickoff": "2026-11-08T16:05:00-05:00",
+   "why": "Our model projects 38.2 vs the 41.5 line, stayed under 41.5 in 3 of his last 5.",
+   "deep": [
+    "Christian McCaffrey U 41.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)",
+    "Projection 38.2 = half Sleeper (29.9), half our model (46.5), less 3%; season 35.9, last 3 43 per game.",
+    "Volume: 6.2 targets/game \u2192 6.9 after LV defense \u00d70.93, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00, Mike Evans out \u00d71.15.",
+    "Efficiency: 6.0 yds/target (steadied toward the league) \u00d7 LV allows \u00d71.06 \u2192 6.3.",
+    "Chance: ours 68%, books' no-vig 50%, blended 55%; edge +5% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_LV_SF-00-0041052-rush_yds",
+   "gid": "2026_09_LV_SF",
+   "week": 9,
+   "pid": "00-0041052",
+   "name": "Kaelon Black",
+   "team": "SF",
+   "opp": "LV",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 41.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 3,
+   "proj": 38.8,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.548,
+   "model": 0.664,
+   "market": 0.499,
+   "edge": 0.047,
+   "kickoff": "2026-11-08T16:05:00-05:00",
+   "why": "Our model projects 38.8 vs the 41.5 line, stayed under 41.5 in 4 of his last 5.",
+   "deep": [
+    "Kaelon Black U 41.5 rush yds \u00b7 -110 (best price: DraftKings; line from 3 books)",
+    "Projection 38.8 = half Sleeper (37.5), half our model (40), less 3%; season 33.3, last 3 37.7 per game.",
+    "Volume: 8.2 carries/game \u2192 8.8 after LV defense \u00d71.02, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00.",
+    "Efficiency: 4.2 yds/carry (steadied toward the league) \u00d7 LV allows \u00d71.03 \u2192 4.3.",
+    "Chance: ours 66%, books' no-vig 50%, blended 55%; edge +5% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_GB_NE-00-0036875-rush_yds",
+   "gid": "2026_09_GB_NE",
+   "week": 9,
+   "pid": "00-0036875",
+   "name": "Rhamondre Stevenson",
+   "team": "NE",
+   "opp": "GB",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 56.5,
+   "price": -115,
+   "book": "DraftKings",
+   "books": 5,
+   "proj": 50.9,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.558,
+   "model": 0.681,
+   "market": 0.505,
+   "edge": 0.043,
+   "kickoff": "2026-11-08T16:25:00-05:00",
+   "why": "Our model projects 50.9 vs the 56.5 line, stayed under 56.5 in 3 of his last 5.",
+   "deep": [
+    "Rhamondre Stevenson U 56.5 rush yds \u00b7 -115 (best price: DraftKings; line from 5 books)",
+    "Projection 50.9 = half Sleeper (49.3), half our model (52.5), less 3%; season 45.9, last 3 46.7 per game.",
+    "Volume: 12.4 carries/game \u2192 12.7 after GB defense \u00d71.01, NE implied 24 \u00d71.01, game script (favored 3.5) \u00d71.00.",
+    "Efficiency: 3.9 yds/carry (steadied toward the league) \u00d7 GB allows \u00d70.99 \u2192 3.9.",
+    "Chance: ours 68%, books' no-vig 50%, blended 56%; edge +4% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_ARI_SEA-00-0037263-rush_yds",
+   "gid": "2026_09_ARI_SEA",
+   "week": 9,
+   "pid": "00-0037263",
+   "name": "Tyler Allgeier",
+   "team": "ARI",
+   "opp": "SEA",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 51.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 2,
+   "proj": 51.3,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.543,
+   "model": 0.65,
+   "market": 0.498,
+   "edge": 0.038,
+   "kickoff": "2026-11-08T16:25:00-05:00",
+   "why": "Our model projects 51.3 vs the 51.5 line, SEA allows the 6th fewest rush yds to RBs; ARI is implied for just 15.5; stayed under 51.5 in 4 of his last 5.",
+   "deep": [
+    "Tyler Allgeier U 51.5 rush yds \u00b7 -110 (best price: DraftKings; line from 2 books)",
+    "Projection 51.3 = half Sleeper (50.7), half our model (51.9), less 3%; season 40.4, last 3 68 per game.",
+    "Volume: 9.3 carries/game \u2192 10.5 after SEA defense \u00d71.00, ARI implied 15.5 \u00d70.96, game script (underdog 8.5) \u00d71.00, Bam Knight out \u00d71.17.",
+    "Efficiency: 4.8 yds/carry (steadied toward the league) \u00d7 SEA allows \u00d70.97 \u2192 4.7.",
+    "Chance: ours 65%, books' no-vig 50%, blended 54%; edge +4% at this price."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nChristian McCaffrey U 41.5 rec yds\nKaelon Black U 41.5 rush yds\nRhamondre Stevenson U 56.5 rush yds\nTyler Allgeier U 51.5 rush yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Christian McCaffrey U 41.5 rec yds: Our model projects 38.2 vs the 41.5 line, stayed under 41.5 in 3 of his last 5.",
+   "Kaelon Black U 41.5 rush yds: Our model projects 38.8 vs the 41.5 line, stayed under 41.5 in 4 of his last 5.",
+   "Rhamondre Stevenson U 56.5 rush yds: Our model projects 50.9 vs the 56.5 line, stayed under 56.5 in 3 of his last 5.",
+   "Tyler Allgeier U 51.5 rush yds: Our model projects 51.3 vs the 51.5 line, SEA allows the 6th fewest rush yds to RBs; ARI is implied for just 15.5; stayed under 51.5 in 4 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Sunday 4 PM post \u00b7 Sun 11/8 \u00b7 4 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Sunday 4 PM post \u00b7 Sun 11/8 \u00b7 4 picks</h2><p style=\"color:#555;margin:0 0 16px\">Copy, paste, post. Long-press a box to copy it.</p><h3 style=\"margin:0 0 6px\">Post</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nChristian McCaffrey U 41.5 rec yds\nKaelon Black U 41.5 rush yds\nRhamondre Stevenson U 56.5 rush yds\nTyler Allgeier U 51.5 rush yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Thread replies</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Christian McCaffrey U 41.5 rec yds: Our model projects 38.2 vs the 41.5 line, stayed under 41.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Kaelon Black U 41.5 rush yds: Our model projects 38.8 vs the 41.5 line, stayed under 41.5 in 4 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Rhamondre Stevenson U 56.5 rush yds: Our model projects 50.9 vs the 56.5 line, stayed under 56.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Tyler Allgeier U 51.5 rush yds: Our model projects 51.3 vs the 51.5 line, SEA allows the 6th fewest rush yds to RBs; ARI is implied for just 15.5; stayed under 51.5 in 4 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive (for you, not for posting)</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Christian McCaffrey U 41.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)</b><div style=\"margin-top:4px;color:#333\">Projection 38.2 = half Sleeper (29.9), half our model (46.5), less 3%; season 35.9, last 3 43 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 6.2 targets/game \u2192 6.9 after LV defense \u00d70.93, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00, Mike Evans out \u00d71.15.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 6.0 yds/target (steadied toward the league) \u00d7 LV allows \u00d71.06 \u2192 6.3.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 68%, books&#x27; no-vig 50%, blended 55%; edge +5% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Kaelon Black U 41.5 rush yds \u00b7 -110 (best price: DraftKings; line from 3 books)</b><div style=\"margin-top:4px;color:#333\">Projection 38.8 = half Sleeper (37.5), half our model (40), less 3%; season 33.3, last 3 37.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 8.2 carries/game \u2192 8.8 after LV defense \u00d71.02, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 4.2 yds/carry (steadied toward the league) \u00d7 LV allows \u00d71.03 \u2192 4.3.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 66%, books&#x27; no-vig 50%, blended 55%; edge +5% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Rhamondre Stevenson U 56.5 rush yds \u00b7 -115 (best price: DraftKings; line from 5 books)</b><div style=\"margin-top:4px;color:#333\">Projection 50.9 = half Sleeper (49.3), half our model (52.5), less 3%; season 45.9, last 3 46.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 12.4 carries/game \u2192 12.7 after GB defense \u00d71.01, NE implied 24 \u00d71.01, game script (favored 3.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 3.9 yds/carry (steadied toward the league) \u00d7 GB allows \u00d70.99 \u2192 3.9.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 68%, books&#x27; no-vig 50%, blended 56%; edge +4% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Tyler Allgeier U 51.5 rush yds \u00b7 -110 (best price: DraftKings; line from 2 books)</b><div style=\"margin-top:4px;color:#333\">Projection 51.3 = half Sleeper (50.7), half our model (51.9), less 3%; season 40.4, last 3 68 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 9.3 carries/game \u2192 10.5 after SEA defense \u00d71.00, ARI implied 15.5 \u00d70.96, game script (underdog 8.5) \u00d71.00, Bam Knight out \u00d71.17.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 4.8 yds/carry (steadied toward the league) \u00d7 SEA allows \u00d70.97 \u2192 4.7.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 65%, books&#x27; no-vig 50%, blended 54%; edge +4% at this price.</div></div><h3 style=\"margin:16px 0 6px\">For you, not for posting</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Sunday 4 PM games: receiving and rushing yards only (2 credits a game). Tracked in the Sunday record, separate from the night-game record.</li><li>Locked about 14 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 1:45 AM ET from 64 prop sides across 4 game(s); prices are from that moment, so check your book before posting.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nChristian McCaffrey U 41.5 rec yds\nKaelon Black U 41.5 rush yds\nRhamondre Stevenson U 56.5 rush yds\nTyler Allgeier U 51.5 rush yds\n\nSeason: 3-3 (-0.3u) \u00b7 why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nChristian McCaffrey U 41.5 rec yds: Our model projects 38.2 vs the 41.5 line, stayed under 41.5 in 3 of his last 5.\n\nKaelon Black U 41.5 rush yds: Our model projects 38.8 vs the 41.5 line, stayed under 41.5 in 4 of his last 5.\n\nRhamondre Stevenson U 56.5 rush yds: Our model projects 50.9 vs the 56.5 line, stayed under 56.5 in 3 of his last 5.\n\nTyler Allgeier U 51.5 rush yds: Our model projects 51.3 vs the 51.5 line, SEA allows the 6th fewest rush yds to RBs; ARI is implied for just 15.5; stayed under 51.5 in 4 of his last 5.\n\nDeep dive:\nChristian McCaffrey U 41.5 rec yds \u00b7 -111 (best price: DraftKings; line from 4 books)\nProjection 38.2 = half Sleeper (29.9), half our model (46.5), less 3%; season 35.9, last 3 43 per game.\nVolume: 6.2 targets/game \u2192 6.9 after LV defense \u00d70.93, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00, Mike Evans out \u00d71.15.\nEfficiency: 6.0 yds/target (steadied toward the league) \u00d7 LV allows \u00d71.06 \u2192 6.3.\nChance: ours 68%, books' no-vig 50%, blended 55%; edge +5% at this price.\n\nKaelon Black U 41.5 rush yds \u00b7 -110 (best price: DraftKings; line from 3 books)\nProjection 38.8 = half Sleeper (37.5), half our model (40), less 3%; season 33.3, last 3 37.7 per game.\nVolume: 8.2 carries/game \u2192 8.8 after LV defense \u00d71.02, SF implied 30.5 \u00d71.04, game script (favored 9.5) \u00d71.00.\nEfficiency: 4.2 yds/carry (steadied toward the league) \u00d7 LV allows \u00d71.03 \u2192 4.3.\nChance: ours 66%, books' no-vig 50%, blended 55%; edge +5% at this price.\n\nRhamondre Stevenson U 56.5 rush yds \u00b7 -115 (best price: DraftKings; line from 5 books)\nProjection 50.9 = half Sleeper (49.3), half our model (52.5), less 3%; season 45.9, last 3 46.7 per game.\nVolume: 12.4 carries/game \u2192 12.7 after GB defense \u00d71.01, NE implied 24 \u00d71.01, game script (favored 3.5) \u00d71.00.\nEfficiency: 3.9 yds/carry (steadied toward the league) \u00d7 GB allows \u00d70.99 \u2192 3.9.\nChance: ours 68%, books' no-vig 50%, blended 56%; edge +4% at this price.\n\nTyler Allgeier U 51.5 rush yds \u00b7 -110 (best price: DraftKings; line from 2 books)\nProjection 51.3 = half Sleeper (50.7), half our model (51.9), less 3%; season 40.4, last 3 68 per game.\nVolume: 9.3 carries/game \u2192 10.5 after SEA defense \u00d71.00, ARI implied 15.5 \u00d70.96, game script (underdog 8.5) \u00d71.00, Bam Knight out \u00d71.17.\nEfficiency: 4.8 yds/carry (steadied toward the league) \u00d7 SEA allows \u00d70.97 \u2192 4.7.\nChance: ours 65%, books' no-vig 50%, blended 54%; edge +4% at this price.\n\nNote: Sunday 4 PM games: receiving and rushing yards only (2 credits a game). Tracked in the Sunday record, separate from the night-game record.\nNote: Locked about 14 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 1:45 AM ET from 64 prop sides across 4 game(s); prices are from that moment, so check your book before posting.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}

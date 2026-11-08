@@ -1,0 +1,111 @@
+{
+ "date": "2026-11-08",
+ "season": 2026,
+ "week": 9,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_09_TB_CHI"
+ ],
+ "locked_at": "2026-11-08T06:45:22.647730+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_09_TB_CHI-00-0040126-rec",
+   "gid": "2026_09_TB_CHI",
+   "week": 9,
+   "pid": "00-0040126",
+   "name": "Colston Loveland",
+   "team": "CHI",
+   "opp": "TB",
+   "pos": "TE",
+   "stat": "rec",
+   "side": "u",
+   "line": 5.5,
+   "price": -124,
+   "book": "DraftKings",
+   "books": 5,
+   "proj": 4.8,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.584,
+   "model": 0.703,
+   "market": 0.533,
+   "edge": 0.055,
+   "kickoff": "2026-11-08T20:20:00-05:00",
+   "why": "Our model projects 4.8 vs the 5.5 line.",
+   "deep": [
+    "Colston Loveland U 5.5 catches \u00b7 -124 (best price: DraftKings; line from 5 books)",
+    "Projection 4.8 = half Sleeper (4.2), half our model (5.5), less 3%; season 4.1, last 3 6.7 per game.",
+    "Volume: 7.4 targets/game \u2192 7.7 after TB defense \u00d71.02, CHI implied 26.8 \u00d71.02, game script (favored 6) \u00d71.00.",
+    "Efficiency: 68% catch rate (steadied toward the league) \u00d7 TB allows \u00d70.99 \u2192 68%.",
+    "Chance: ours 70%, books' no-vig 53%, blended 58%; edge +5% at this price."
+   ]
+  },
+  {
+   "id": "2026_09_TB_CHI-00-0038129-rec_yds",
+   "gid": "2026_09_TB_CHI",
+   "week": 9,
+   "pid": "00-0038129",
+   "name": "Cade Otton",
+   "team": "TB",
+   "opp": "CHI",
+   "pos": "TE",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 31.5,
+   "price": -115,
+   "book": "DraftKings",
+   "books": 2,
+   "proj": 30.2,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.554,
+   "model": 0.661,
+   "market": 0.508,
+   "edge": 0.036,
+   "kickoff": "2026-11-08T20:20:00-05:00",
+   "why": "Our model projects 30.2 vs the 31.5 line, stayed under 31.5 in 3 of his last 5.",
+   "deep": [
+    "Cade Otton U 31.5 rec yds \u00b7 -115 (best price: DraftKings; line from 2 books)",
+    "Projection 30.2 = half Sleeper (35.3), half our model (25.1), less 3%; season 26.6, last 3 9.7 per game.",
+    "Volume: 3.7 targets/game \u2192 3.5 after CHI defense \u00d70.96, TB implied 20.8 \u00d70.99, game script (underdog 6) \u00d71.00.",
+    "Efficiency: 6.6 yds/target (steadied toward the league) \u00d7 CHI allows \u00d71.02 \u2192 6.7.",
+    "Chance: ours 66%, books' no-vig 51%, blended 55%; edge +4% at this price."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 TB @ CHI\n\nOur top 2:\n\nColston Loveland U 5.5 catches (-124)\nCade Otton U 31.5 rec yds (-115)\n\nGraded after the game, wins and losses. Why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Colston Loveland U 5.5 catches: Our model projects 4.8 vs the 5.5 line.",
+   "Cade Otton U 31.5 rec yds: Our model projects 30.2 vs the 31.5 line, stayed under 31.5 in 3 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 SNF post \u00b7 Sun 11/8 \u00b7 2 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">SNF post \u00b7 Sun 11/8 \u00b7 2 picks</h2><p style=\"color:#555;margin:0 0 16px\">Copy, paste, post. Long-press a box to copy it.</p><h3 style=\"margin:0 0 6px\">Post</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 TB @ CHI\n\nOur top 2:\n\nColston Loveland U 5.5 catches (-124)\nCade Otton U 31.5 rec yds (-115)\n\nGraded after the game, wins and losses. Why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Thread replies</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Colston Loveland U 5.5 catches: Our model projects 4.8 vs the 5.5 line.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Cade Otton U 31.5 rec yds: Our model projects 30.2 vs the 31.5 line, stayed under 31.5 in 3 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive (for you, not for posting)</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Colston Loveland U 5.5 catches \u00b7 -124 (best price: DraftKings; line from 5 books)</b><div style=\"margin-top:4px;color:#333\">Projection 4.8 = half Sleeper (4.2), half our model (5.5), less 3%; season 4.1, last 3 6.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 7.4 targets/game \u2192 7.7 after TB defense \u00d71.02, CHI implied 26.8 \u00d71.02, game script (favored 6) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 68% catch rate (steadied toward the league) \u00d7 TB allows \u00d70.99 \u2192 68%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 70%, books&#x27; no-vig 53%, blended 58%; edge +5% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Cade Otton U 31.5 rec yds \u00b7 -115 (best price: DraftKings; line from 2 books)</b><div style=\"margin-top:4px;color:#333\">Projection 30.2 = half Sleeper (35.3), half our model (25.1), less 3%; season 26.6, last 3 9.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 3.7 targets/game \u2192 3.5 after CHI defense \u00d70.96, TB implied 20.8 \u00d70.99, game script (underdog 6) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 6.6 yds/target (steadied toward the league) \u00d7 CHI allows \u00d71.02 \u2192 6.7.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 66%, books&#x27; no-vig 51%, blended 55%; edge +4% at this price.</div></div><h3 style=\"margin:16px 0 6px\">For you, not for posting</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked about 19 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 1:45 AM ET from 36 prop sides across 1 game(s); prices are from that moment, so check your book before posting.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 TB @ CHI\n\nOur top 2:\n\nColston Loveland U 5.5 catches (-124)\nCade Otton U 31.5 rec yds (-115)\n\nGraded after the game, wins and losses. Why \ud83d\udc47\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nColston Loveland U 5.5 catches: Our model projects 4.8 vs the 5.5 line.\n\nCade Otton U 31.5 rec yds: Our model projects 30.2 vs the 31.5 line, stayed under 31.5 in 3 of his last 5.\n\nDeep dive:\nColston Loveland U 5.5 catches \u00b7 -124 (best price: DraftKings; line from 5 books)\nProjection 4.8 = half Sleeper (4.2), half our model (5.5), less 3%; season 4.1, last 3 6.7 per game.\nVolume: 7.4 targets/game \u2192 7.7 after TB defense \u00d71.02, CHI implied 26.8 \u00d71.02, game script (favored 6) \u00d71.00.\nEfficiency: 68% catch rate (steadied toward the league) \u00d7 TB allows \u00d70.99 \u2192 68%.\nChance: ours 70%, books' no-vig 53%, blended 58%; edge +5% at this price.\n\nCade Otton U 31.5 rec yds \u00b7 -115 (best price: DraftKings; line from 2 books)\nProjection 30.2 = half Sleeper (35.3), half our model (25.1), less 3%; season 26.6, last 3 9.7 per game.\nVolume: 3.7 targets/game \u2192 3.5 after CHI defense \u00d70.96, TB implied 20.8 \u00d70.99, game script (underdog 6) \u00d71.00.\nEfficiency: 6.6 yds/target (steadied toward the league) \u00d7 CHI allows \u00d71.02 \u2192 6.7.\nChance: ours 66%, books' no-vig 51%, blended 55%; edge +4% at this price.\n\nNote: Locked about 19 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 1:45 AM ET from 36 prop sides across 1 game(s); prices are from that moment, so check your book before posting.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}
