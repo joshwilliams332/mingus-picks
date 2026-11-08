@@ -61,10 +61,11 @@ OPP_WORD = {"att": "pass attempts", "car": "carries", "tgt": "targets"}
 DVP_KEYS = list(STAT) + ["att", "car", "tgt"]
 CREDIT_RESERVE = 10        # never pull if fewer than this would be left
 NIGHT_HOUR = 19            # kickoff at 7 PM ET or later = a night game
-LOCK_BEFORE_MIN = 240      # MNF / Saturday night picks lock on the first run within 4 hours of kickoff
-# Earlier locks (Josh, Nov 3, 2026: lines and picks out earlier so there's more time with them):
-THU_LOCK_HOUR = 9          # Thursday night games lock from 9 AM ET that morning
+LOCK_BEFORE_MIN = 240      # a lock this close to kickoff gets no "locked early" note
+# Earlier locks (Josh, Nov 3 and Nov 8, 2026: lines and picks out earlier so there's more time with them):
+MORNING_LOCK_HOUR = 9      # Thursday, Monday and Saturday night games lock from 9 AM ET that morning
 SUNDAY_LOCK_HOUR = 19      # every Sunday game (1 PM, 4 PM and the night game) locks from 7 PM ET Saturday
+HEADSUP_BEFORE_MIN = 80    # inactives come out ~90 min before kickoff; the Sunday-night update reads them 80 min before
 SUNDAY_EMAIL_BY = 23.5     # Saturday 11:30 PM ET: the Sunday email goes out with whatever has locked by then
 RECORD_START_WEEK = 9      # Week 8 night games are a test run, emailed but not counted (Josh, Oct 29, 2026)
 # Sunday daytime slates (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM ET games, "for tracking", emailed 9 AM
@@ -846,14 +847,12 @@ def sunday_record(store, stats_rows, season):
 
 
 def lock_opens(games):
-    """When a slate's picks may lock: every Sunday game from 7 PM ET Saturday, Thursday night games from 9 AM ET that
-    day, anything else (MNF, Saturday night) within 4 hours of the first kickoff."""
+    """When a slate's picks may lock: every Sunday game from 7 PM ET Saturday; any other night game (Thursday, Monday,
+    late-season Saturday) from 9 AM ET that morning."""
     k = kickoff(games[0])
     if k.weekday() == 6:
         return datetime(k.year, k.month, k.day, SUNDAY_LOCK_HOUR, tzinfo=ET) - timedelta(days=1)
-    if k.weekday() == 3 and is_night(games[0]):
-        return datetime(k.year, k.month, k.day, THU_LOCK_HOUR, tzinfo=ET)
-    return k - timedelta(minutes=LOCK_BEFORE_MIN)
+    return min(datetime(k.year, k.month, k.day, MORNING_LOCK_HOUR, tzinfo=ET), k - timedelta(minutes=LOCK_BEFORE_MIN))
 
 
 def lock(data, store, now, api, force=False, slate="night", day=None):
@@ -1278,6 +1277,119 @@ def sunday_results(data, store, now, day):
     return {"day": day, "state": "done", "new": True, "record": rec}
 
 
+# ---------------------------------------------------------------- Sunday-night update (inactives)
+
+def espn_out(status):
+    s = (status or "").lower()
+    return s == "out" or "reserve" in s or "suspen" in s or s == "inactive"
+
+
+def espn_injuries(day, games, fetch=fetch_json):
+    """{(team, normalized name): (ESPN status, position)} from ESPN's game summaries for these games (game-day statuses:
+    players ruled inactive for injury show as Out; healthy scratches aren't listed)."""
+    sb = fetch(f"{ESPN}/scoreboard?dates={day.replace('-', '')}")
+    want = {frozenset((g["home"], g["away"])) for g in games}
+    out = {}
+    for ev in sb.get("events") or []:
+        comp = (ev.get("competitions") or [{}])[0]
+        teams = frozenset(ESPN_TEAM.get(c["team"]["abbreviation"].upper(), c["team"]["abbreviation"].upper())
+                          for c in comp.get("competitors") or [])
+        if teams not in want:
+            continue
+        for side in fetch(f"{ESPN}/summary?event={ev['id']}").get("injuries") or []:
+            abbr = ((side.get("team") or {}).get("abbreviation") or "").upper()
+            team = ESPN_TEAM.get(abbr, abbr)
+            for i in side.get("injuries") or []:
+                a = i.get("athlete") or {}
+                out[(team, norm_name(a.get("displayName")))] = (i.get("status") or "", ((a.get("position") or {}).get("abbreviation") or ""))
+    return out
+
+
+OPP_NOUN = {"rec_yds": "targets", "rec": "targets", "rush_yds": "carries"}
+
+
+def headsup(data, store, now, slate, fetch=fetch_json):
+    """Sunday-night update (Josh, Nov 8, 2026: "a check on its own ... don't send anything if there's nothing to say"):
+    once inactives are out (HEADSUP_BEFORE_MIN before kickoff), who's ruled out among players with posted props and what
+    it means for each locked pick. Written once to picks/headsup/<day>-<slate>.json; it only carries an email when
+    something changed (a pick affected or a player with a prop ruled out). Locked picks never change."""
+    day = et_date(now)
+    doc = read(picks_dir(store, slate) / f"{day}.json")
+    file = Path(store) / "picks" / "headsup" / f"{day}-{slate}.json"
+    if not doc:
+        return {"day": day, "state": "none"}
+    if file.exists():
+        return {"day": day, "state": "done"}
+    games = sorted((data.game[g] for g in doc.get("games", []) if g in data.game), key=kickoff)
+    if not games:
+        return {"day": day, "state": "none"}
+    first, last = kickoff(games[0]), kickoff(games[-1])
+    opens = min(last - timedelta(minutes=HEADSUP_BEFORE_MIN), first - timedelta(minutes=10))
+    if now < opens:
+        return {"day": day, "state": "waiting", "why": f"reads inactives from {time_label(opens)}"}
+    if now >= first:
+        return {"day": day, "state": "missed", "why": "the game started before the update ran"}
+    try:
+        espn = espn_injuries(day, games, fetch)
+    except Exception as e:
+        return {"day": day, "state": "waiting", "why": f"couldn't reach ESPN ({e})"}
+    # players with posted props in this slate (their lines are what inactives move)
+    prop_players = {}
+    for g in games:
+        for r in (read(Path(store) / "odds" / "props" / f"{g['id']}.json") or {}).get("rows", []):
+            pl = data.by_id.get(r.get("pid"))
+            if pl:
+                prop_players[pl["id"]] = pl
+    site_status = lambda pl: ((pl.get("injury") or {}).get("status") or "")
+    espn_of = lambda pl: espn.get((pl["team"], norm_name(pl["name"])), ("", ""))
+    ruled_out = [pl for pl in prop_players.values() if espn_out(espn_of(pl)[0])]
+    cleared = [pl for pl in prop_players.values()
+               if site_status(pl) in ("Questionable", "Doubtful") and espn_of(pl)[0].lower() == "active"]
+    lines, affected = [], 0
+    for pk in doc.get("picks", []):
+        st = espn.get((pk["team"], norm_name(pk["name"])), ("", ""))[0]
+        mates = [pl for pl in ruled_out if pl["team"] == pk["team"] and pl["id"] != pk["pid"]]
+        if espn_out(st):
+            lines.append(f"⚠️ {short(pk)}: {pk['name']} is ruled out. Graded as a void.")
+            affected += 1
+        elif mates:
+            names = ", ".join(f"{m['name']} ({m['pos']})" for m in mates)
+            noun = OPP_NOUN.get(pk["stat"])
+            if noun and any(m["pos"] in ("WR", "TE", "RB") for m in mates):
+                lean = "helps the over" if pk["side"] == "o" else "works against the under"
+                lines.append(f"⚠️ {short(pk)}: teammate {names} out. More {noun} could go his way ({lean}).")
+            else:
+                lines.append(f"⚠️ {short(pk)}: teammate {names} out.")
+            affected += 1
+        elif st in ("Questionable", "Doubtful"):
+            lines.append(f"❔ {short(pk)}: still listed {st.lower()} on ESPN. Check before kickoff.")
+            affected += 1
+        else:
+            lines.append(f"✅ {short(pk)}: active, no new outs on his team.")
+    label = SLATES[slate][2] if slate in SLATES else slot_label(games[0])
+    by_team = lambda pls: [f"{t}: " + ", ".join(f"{p['name']} ({p['pos']})" for p in pls if p["team"] == t)
+                           for t in sorted({p["team"] for p in pls})]
+    sections = [("Our picks", lines or ["No picks locked for this slate."]),
+                ("Ruled out (players with posted props)", by_team(ruled_out) or ["Nobody with a posted prop."]),
+                ("Cleared to play (were questionable or doubtful)", by_team(cleared) or ["Nobody new."])]
+    notes = [f"From ESPN's game-day injury statuses at {time_label(now)}. Healthy scratches aren't on that list.",
+             "Locked picks don't change: a pick whose player is inactive is graded as a void. Lines move after inactives, "
+             "so check your book before adding anything.", FOOT]
+    changed = bool(affected or ruled_out)
+    title = (f"{label} update · {day_label(day)} · "
+             + (f"{affected} pick{'s' if affected != 1 else ''} to check" if affected else "players ruled out"))
+    html = (f'<div style="font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px">'
+            f'<h2 style="margin:0 0 10px">{escape(title)}</h2>'
+            + "".join(f'<h3 style="margin:14px 0 6px">{escape(h)}</h3><ul style="padding-left:18px;margin:0">'
+                      + "".join(f"<li>{escape(x)}</li>" for x in xs) + "</ul>" for h, xs in sections)
+            + f'<p style="color:#666;font-size:13px;margin-top:16px">{"<br>".join(escape(x) for x in notes)}</p></div>')
+    text = "\n".join([title, ""] + [y for h, xs in sections for y in (h, *[f"- {x}" for x in xs], "")] + notes)
+    write(file, {"date": day, "slate": slate, "written_at": now.isoformat(), "affected": affected, "changed": changed,
+                 "ruled_out": [p["id"] for p in ruled_out], "cleared": [p["id"] for p in cleared],
+                 **({"email": {"subject": f"🏈 {title}", "html": html, "text": text}} if changed else {})})
+    return {"day": day, "state": "done", "new": True, "changed": changed, "affected": affected}
+
+
 def load_stats(season, path=None):
     """nflverse weekly player stats (regular season) for grading; [] if it can't be loaded."""
     try:
@@ -1331,6 +1443,8 @@ def main(argv=None):
               "tomorrow": {"day": tomorrow, **nxt},
               "sunday_email": sunday_preview(data, a.store, now),
               "sunday_results": sunday_results(data, a.store, now, sday),
+              "night_update": (headsup(data, a.store, now, "night") if sday == et_date(now) and not a.no_odds
+                               else {"state": "none"}),
               "credits": (api.usage if api else read(Path(a.store) / "odds" / "usage.json", {}))}
     write(Path(a.store) / "picks" / "status.json", status)
     for slate, v in sun.items():

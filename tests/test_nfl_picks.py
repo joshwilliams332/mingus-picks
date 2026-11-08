@@ -304,8 +304,8 @@ class LockAndGrade(unittest.TestCase):
         self.assertEqual(opens("2026-11-08", "13:00"), "Sat 19:00")     # every Sunday game: Saturday night
         self.assertEqual(opens("2026-11-08", "16:25"), "Sat 19:00")
         self.assertEqual(opens("2026-11-08", "20:20"), "Sat 19:00")
-        self.assertEqual(opens("2026-11-09", "20:15"), "Mon 16:15")     # MNF: 4 hours before
-        self.assertEqual(opens("2026-12-19", "20:00"), "Sat 16:00")     # late-season Saturday night: 4 hours before
+        self.assertEqual(opens("2026-11-09", "20:15"), "Mon 09:00")     # MNF: Monday morning
+        self.assertEqual(opens("2026-12-19", "20:00"), "Sat 09:00")     # late-season Saturday night: that morning
 
     def test_no_night_games(self):
         self.assertEqual(N.lock(self.data, self.store, self.at("17:00", "2026-11-10"), FakeAPI(None))["state"], "no-games")
@@ -517,3 +517,63 @@ class SundayResults(unittest.TestCase):
         self.assertIn("1-800-GAMBLER", text)
         self.assertEqual(N.sunday_results(self.data, self.store, now, "2026-11-08")["state"], "done")
         self.assertEqual(N.sunday_results(self.data, self.store, now, None)["state"], "none")
+
+
+def espn_injury_fake(phi=(), was=()):
+    sb = {"events": [{"id": "e1", "competitions": [{"competitors": [
+        {"team": {"abbreviation": "WSH"}}, {"team": {"abbreviation": "PHI"}}]}]}]}
+    side = lambda abbr, rows: {"team": {"abbreviation": abbr}, "injuries": [
+        {"status": st, "athlete": {"displayName": name, "position": {"abbreviation": pos}}} for name, pos, st in rows]}
+    summ = {"injuries": [side("PHI", phi), side("WSH", was)]}
+    return lambda url: sb if "scoreboard" in url else summ
+
+
+class HeadsUp(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.data = make_data(Path(self.tmp.name))
+        wr = {"id": "WR1", "name": "A.J. Brown", "pos": "WR", "team": "PHI", "injury": {"status": "Questionable"}, "log": []}
+        self.data.by_id["WR1"] = wr
+        self.store = Path(self.tmp.name) / "store"
+        self.pick = {"id": "a", "gid": "2026_09_PHI_WAS", "pid": "TE1", "name": "Dallas Goedert", "team": "PHI", "opp": "WAS",
+                     "week": 9, "stat": "rec_yds", "side": "o", "line": 45.5, "price": -110}
+        N.write(self.store / "picks" / "2026-11-08.json", {"season": 2026, "week": 9, "test": False, "slate": "night",
+                                                           "games": ["2026_09_PHI_WAS"], "picks": [self.pick]})
+        N.write(self.store / "odds" / "props" / "2026_09_PHI_WAS.json", {"rows": [
+            {"pid": "TE1", "stat": "rec_yds"}, {"pid": "WR1", "stat": "rec_yds"}, {"pid": "QB1", "stat": "pass_yds"}]})
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def at(self, hhmm):
+        return datetime.fromisoformat(f"2026-11-08T{hhmm}").replace(tzinfo=ET)
+
+    def doc(self):
+        return json.loads((self.store / "picks" / "headsup" / "2026-11-08-night.json").read_text())
+
+    def test_waits_for_inactives_then_writes_once(self):
+        fake = espn_injury_fake()
+        self.assertEqual(N.headsup(self.data, self.store, self.at("18:30"), "night", fake)["state"], "waiting")
+        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertEqual((r["state"], r["affected"], r["changed"]), ("done", 0, False))
+        self.assertNotIn("email", self.doc())                   # nothing to say: no email
+        self.assertEqual(N.headsup(self.data, self.store, self.at("19:30"), "night", fake)["state"], "done")
+
+    def test_teammate_out_and_cleared_players(self):
+        fake = espn_injury_fake(phi=[("A.J. Brown", "WR", "Out")], was=[("Jayden Daniels", "QB", "Active")])
+        r = N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertEqual((r["affected"], r["changed"]), (1, True))
+        self.assertIn("SNF update", self.doc()["email"]["subject"])
+        self.assertIn("1-800-GAMBLER", self.doc()["email"]["text"])
+        text = self.doc()["email"]["text"]
+        self.assertIn("teammate A.J. Brown (WR) out. More targets could go his way (helps the over)", text)
+        self.assertIn("PHI: A.J. Brown (WR)", text)
+
+    def test_pick_player_out_is_a_void(self):
+        fake = espn_injury_fake(phi=[("Dallas Goedert", "TE", "Out")])
+        N.headsup(self.data, self.store, self.at("19:05"), "night", fake)
+        self.assertIn("Graded as a void", self.doc()["email"]["text"])
+
+    def test_too_late_or_nothing_locked(self):
+        self.assertEqual(N.headsup(self.data, self.store, self.at("20:30"), "night", espn_injury_fake())["state"], "missed")
+        self.assertEqual(N.headsup(self.data, self.store, self.at("12:00"), "early", espn_injury_fake())["state"], "none")

@@ -27,8 +27,8 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   rebuilding). Night games only (kickoff 7 PM ET+: TNF, SNF, MNF, late-season Saturdays), Josh's choice so football
   uses little of the Odds API key it shares with Hoop Lab. Props pulled once per night game (4 markets: pass / rush /
   rec yds, receptions; 4 credits; event list free; never pulls below `CREDIT_RESERVE`), on the first run after
-  `lock_opens()` (Josh, Nov 3: lines and picks out earlier): TNF from 9 AM ET Thursday, every Sunday game (1 PM, 4 PM
-  and SNF) from 7 PM ET Saturday, MNF / Saturday night within 4 h of kickoff; into `data` branch
+  `lock_opens()` (Josh, Nov 3 and 8: lines and picks out earlier): every Sunday game (1 PM, 4 PM and SNF) from 7 PM ET
+  Saturday; TNF, MNF and late-season Saturday night games from 9 AM ET that morning; into `data` branch
   `odds/props/<game id>.json`. Files are named by the game's date (a Saturday-night lock writes Sunday's file). Picks lock once into `picks/YYYY-MM-DD.json` (never
   rewritten). Same rules as Hoop Lab: chance = 30% projection + 70% books' no-vig consensus at the most-posted line,
   skip if they differ by 20+ points, >= 54% and >= 3% edge at the best price, prices -200 to +180, one per player, up to
@@ -57,10 +57,12 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   night, `picks/YYYY-MM-DD-results.json` (that night's graded picks + season record, written once; Josh wanted results
   the next morning like Hoop Lab, not just weekly). `week-NN-recap.json` is written once a week's night games are all graded; `record.json` holds the season record. Week 8 is a test run
   (`RECORD_START_WEEK = 9`): emailed, graded, marked TEST, not counted. Every post carries the 21+ line.
-  Delivery (Josh, Nov 3: one email per window, nothing else): scheduled Claude tasks email Josh
-  (joshwilliams332@comcast.net) TNF picks ~9:47 AM Thu, Sunday's picks (all slates) ~7:47 PM Sat, MNF / Saturday night
-  picks 6:00 PM, night-game results 8:41 AM Fri and Tue, and Sunday's results (all slates, unofficial) after the night
-  game; they only fetch `picks/` from the `data` branch and send it as written. No model
+  Delivery (Josh, Nov 3 and 8: one email per window, nothing else): scheduled Claude tasks email Josh
+  (joshwilliams332@comcast.net) TNF / MNF / Saturday night picks ~9:47 AM that morning, Sunday's picks (all slates)
+  ~7:47 PM Sat, a Sunday-night update ~7:07 PM only if inactives changed something (`headsup(..., "night")`,
+  `picks/headsup/<day>-night.json`, email only when `changed`), night-game results 8:41 AM Fri and Tue, and Sunday's
+  results (all slates, unofficial) after the night game; they only fetch `picks/` from the `data` branch and send it as
+  written. GitHub has never started this repo's scheduled runs (Nov 3-8; push and "Run workflow" work), see Open threads. No model
   backtest exists yet (no historical lines); the public record is the test.
 - **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, "for tracking"; same script,
   `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, "late" = 4-6:59 PM; both lock Saturday night
@@ -93,3 +95,8 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
 - Odds API key: `ODDS_API_KEY` repo secret, the same free key Hoop Lab uses (500 credits/month shared). Night games
   only ≈ 50-60 credits/month. Hoop Lab's budget spends whatever is left, so it should hold back ~60/month for football.
   If Josh upgrades ($30/month = 20,000 credits), all slates and a pre-kickoff closing-line pull become affordable.
+
+## Open threads
+- **Scheduled runs don't fire** (Nov 3-8, 2026): no `schedule` run has ever started in this repo (check runs on main show
+  only push runs), while Mingus Football's schedules run daily. The YAML is valid. Josh's PR merge (a web commit touching
+  the crons) didn't fix it. Until it's fixed, runs only happen on a push to the picks code or "Run workflow".
