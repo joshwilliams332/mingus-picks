@@ -781,7 +781,7 @@ def slate_post(games, picks, season, test):
     def build(with_prices):
         return "\n".join([head, "", f"Our top {len(picks)}:" if len(picks) > 1 else "Our pick:", "",
                           *[short(p) + (f" ({price_txt(p['price'])})" if with_prices else "") for p in picks], "",
-                          f"Season: {record_txt(season)} · why 👇" if rec else "Graded after the game, wins and losses. Why 👇",
+                          f"Season: {record_txt(season)}" if rec else "Graded after the game, wins and losses.",
                           "", FOOT])
     main = build(True)
     if post_length(main) > 280:
@@ -793,14 +793,13 @@ def email_html(title, post, notes, test, deep=None):
     box = lambda t: (f'<pre style="white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;'
                      f'border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px">{escape(t)}</pre>')
     banner = ('<p style="background:#fff4d6;border:1px solid #f0d58a;border-radius:8px;padding:8px 12px;margin:0 0 14px">'
-              '<b>Test run.</b> Week 8 is a dry run: these picks are graded but not counted in the record, and not for posting.</p>') if test else ""
-    replies = f'<h3 style="margin:0 0 6px">Thread replies</h3>{"".join(box(r) for r in post["replies"])}' if post["replies"] else ""
-    note_html = (f'<h3 style="margin:16px 0 6px">For you, not for posting</h3><ul style="color:#444;padding-left:18px;margin:0">'
+              '<b>Test run.</b> Week 8 is a dry run: these picks are graded but not counted in the record.</p>') if test else ""
+    replies = f'<h3 style="margin:0 0 6px">Why</h3>{"".join(box(r) for r in post["replies"])}' if post["replies"] else ""
+    note_html = (f'<h3 style="margin:16px 0 6px">Notes</h3><ul style="color:#444;padding-left:18px;margin:0">'
                  f'{"".join(f"<li>{escape(n)}</li>" for n in notes)}</ul>') if notes else ""
     return (f'<div style="font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px">'
             f'<h2 style="margin:0 0 4px">{escape(title)}</h2>{banner}'
-            f'<p style="color:#555;margin:0 0 16px">Copy, paste, post. Long-press a box to copy it.</p>'
-            f'<h3 style="margin:0 0 6px">Post</h3>{box(post["main"])}{replies}{deep_html(deep)}{note_html}'
+            f'<h3 style="margin:12px 0 6px">Picks</h3>{box(post["main"])}{replies}{deep_html(deep)}{note_html}'
             f'<p style="color:#888;font-size:13px;margin-top:18px">From {BRAND}\'s picks job. '
             f'<a href="{SITE}/games.html">This week\'s games</a></p></div>')
 
@@ -811,11 +810,11 @@ def deep_html(deep):
     cards = "".join('<div style="border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px">'
                     f'<b>{escape(d[0])}</b>' + "".join(f'<div style="margin-top:4px;color:#333">{escape(x)}</div>' for x in d[1:]) + "</div>"
                     for d in deep)
-    return f'<h3 style="margin:16px 0 6px">Deep dive (for you, not for posting)</h3>{cards}'
+    return f'<h3 style="margin:16px 0 6px">Deep dive</h3>{cards}'
 
 
 def email_text(post, notes, test, deep=None):
-    return "\n".join([*(["TEST RUN: not counted, not for posting.", ""] if test else []), post["main"], "",
+    return "\n".join([*(["TEST RUN: not counted.", ""] if test else []), post["main"], "",
                       *[x for r in post["replies"] for x in (r, "")],
                       *(["Deep dive:"] + [x for d in deep for x in (*d, "")] if deep else []), *[f"Note: {n}" for n in notes]])
 
@@ -923,14 +922,14 @@ def lock(data, store, now, api, force=False, slate="night", day=None):
                         + ".")
     notes = day_note + [
         f"Locked {time_label(now)} from {n_cands} prop sides across {sum(s['rows'] and 1 or 0 for s in snaps.values())} game(s); "
-        "prices are from that moment, so check your book before posting.",
+        "prices are from that moment, so check your book; lines may have moved.",
         "Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped "
         "(usually news we can't see).",
         "Projection = our matchup model (opportunities × efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.",
         "Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.",
         "This football model has no backtest against real lines yet; the public record is the test.",
     ]
-    title = f"{'TEST · ' if test else ''}{slot_label(pre[0])} post · {day_label(day)} · " + (
+    title = f"{'TEST · ' if test else ''}{slot_label(pre[0])} picks · {day_label(day)} · " + (
         f"{len(picks)} pick{'s' if len(picks) != 1 else ''}" if picks else "no plays")
     write(file, {"date": day, "season": data.meta.get("season"), "week": pre[0]["week"], "test": test, "slate": slate,
                  "games": [g["id"] for g in pre], "locked_at": now.isoformat(), "settings": PICK, "picks": picks,
@@ -1193,7 +1192,7 @@ def sunday_preview(data, store, now):
         test = test or bool(doc.get("test"))
         sections.append((name, doc["post"], [p["deep"] for p in doc.get("picks", []) if p.get("deep")]))
     notes = [
-        "Locked Saturday night; prices are from that moment, so check your book before posting.",
+        "Locked Saturday night; prices are from that moment, so check your book; lines may have moved.",
         "1 PM and 4 PM picks are rushing and receiving yards only and count in the Sunday record; the night game counts in the "
         "night-game record.",
         "Inactives come out about 90 minutes before each kickoff, after these locked. Locked picks don't change: a pick "
@@ -1206,14 +1205,14 @@ def sunday_preview(data, store, now):
     html = "".join(
         f'<h2 style="margin:22px 0 6px;border-top:2px solid #111;padding-top:12px">{escape(nm)}</h2>'
         + ("<p style=\"color:#555\">Not locked yet.</p>" if post is None else
-           f'<h3 style="margin:0 0 6px">Post</h3>{box_html(post["main"])}'
-           + (f'<h3 style="margin:0 0 6px">Thread replies</h3>{"".join(box_html(r) for r in post["replies"])}' if post["replies"] else "")
+           f'<h3 style="margin:0 0 6px">Picks</h3>{box_html(post["main"])}'
+           + (f'<h3 style="margin:0 0 6px">Why</h3>{"".join(box_html(r) for r in post["replies"])}' if post["replies"] else "")
            + deep_html(deep))
         for nm, post, deep in sections)
     html = (f'<div style="font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px">'
             f'<h1 style="font-size:22px;margin:0 0 4px">{escape(title)}</h1>'
-            f'<p style="color:#555;margin:0 0 8px">One post per time slot. Copy, paste, post. Long-press a box to copy it.</p>{html}'
-            f'<h3 style="margin:16px 0 6px">For you, not for posting</h3><ul style="color:#444;padding-left:18px;margin:0">'
+            f'<p style="color:#555;margin:0 0 8px">Split by time slot.</p>{html}'
+            f'<h3 style="margin:16px 0 6px">Notes</h3><ul style="color:#444;padding-left:18px;margin:0">'
             f'{"".join(f"<li>{escape(x)}</li>" for x in notes)}</ul>'
             f'<p style="color:#888;font-size:13px;margin-top:18px">From {BRAND}\'s picks job. '
             f'<a href="{SITE}/games.html">This week\'s games</a></p></div>')
@@ -1266,10 +1265,10 @@ def sunday_results(data, store, now, day):
              "1 PM and 4 PM picks count in the Sunday record; the night game counts in the night-game record."]
     html = (f'<div style="font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px">'
             f'<h1 style="font-size:22px;margin:0 0 4px">{escape(title)}</h1>'
-            f'<p style="color:#555;margin:0 0 8px">One post per time slot. Copy, paste, post. Long-press a box to copy it.</p>'
+            f'<p style="color:#555;margin:0 0 8px">Split by time slot.</p>'
             + "".join(f'<h2 style="margin:22px 0 6px;border-top:2px solid #111;padding-top:12px">{escape(nm)}</h2>{box_html(post)}'
                       for nm, post in sections)
-            + f'<h3 style="margin:16px 0 6px">For you, not for posting</h3><ul style="color:#444;padding-left:18px;margin:0">'
+            + f'<h3 style="margin:16px 0 6px">Notes</h3><ul style="color:#444;padding-left:18px;margin:0">'
             f'{"".join(f"<li>{escape(x)}</li>" for x in notes)}</ul></div>')
     text = "\n".join([title, ""] + [y for nm, post in sections for y in (f"===== {nm} =====", post, "")] + [f"Note: {x}" for x in notes])
     write(file, {"date": day, "written_at": now.isoformat(), "unofficial": True, "record": tot,

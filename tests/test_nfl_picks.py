@@ -320,7 +320,7 @@ class LockAndGrade(unittest.TestCase):
         self.assertLessEqual(len(doc["picks"]), N.PICK["per_game"])
         self.assertIn("1-800-GAMBLER", doc["post"]["main"])
         self.assertLessEqual(N.post_length(doc["post"]["main"]), 280)
-        self.assertTrue(doc["email"]["subject"].startswith("🏈 SNF post"))
+        self.assertTrue(doc["email"]["subject"].startswith("🏈 SNF picks"))
         if doc["picks"]:
             self.assertIn("Deep dive", doc["email"]["html"])
             self.assertTrue(all(len(f"{N.short(p)}: {p['why']}") <= 280 for p in doc["picks"]))
