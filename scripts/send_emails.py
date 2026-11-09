@@ -21,6 +21,14 @@ from email.message import EmailMessage
 from pathlib import Path
 
 DAY = re.compile(r"^(\d{4}-\d{2}-\d{2})(-results)?$")
+FOOT = "For entertainment. 21+ · Gamble responsibly · 1-800-GAMBLER"
+SETUP_EMAIL = {   # sent once, on the first run with the secrets
+    "subject": "🏈 Mingus Picks emails are on",
+    "text": "GitHub can send your picks emails now. From here on, each new picks or results file is emailed once, "
+            f"straight from the picks job.\n\n{FOOT}",
+    "html": "<p>GitHub can send your picks emails now. From here on, each new picks or results file is emailed once, "
+            f'straight from the picks job.</p><p style="color:#666;font-size:13px">{FOOT}</p>',
+}
 
 
 def due(store):
@@ -50,8 +58,9 @@ def send_new(store, send, to):
     files = due(store)
     if not log.exists():
         log.parent.mkdir(parents=True, exist_ok=True)
+        send(to, SETUP_EMAIL)       # proves the Gmail secrets work, without resending old weeks
         log.write_text(json.dumps({"sent": [p for p, _ in files]}, indent=1))
-        return []
+        return ["setup check"]
     sent = set(json.loads(log.read_text()).get("sent", []))
     done = []
     for path, doc in files:
