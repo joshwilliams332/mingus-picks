@@ -31,15 +31,17 @@ class SendEmails(unittest.TestCase):
 
     def test_first_run_marks_old_files_without_sending(self):
         put(self.store, "picks/2026-11-05.json", "TNF picks")
-        self.assertEqual(S.send_new(self.store, self.send, "j@x"), [])
-        self.assertEqual(self.outbox, [])
+        self.assertEqual(S.send_new(self.store, self.send, "j@x"), ["setup check"])
+        self.assertEqual(self.outbox, [("j@x", "🏈 Mingus Picks emails are on")])     # TNF picks not resent
+        self.outbox.clear()
         put(self.store, "picks/2026-11-09.json", "MNF picks")
         self.assertEqual(S.send_new(self.store, self.send, "j@x"), ["picks/2026-11-09.json"])
         self.assertEqual(self.outbox, [("j@x", "MNF picks")])
         self.assertEqual(S.send_new(self.store, self.send, "j@x"), [])      # never twice
 
     def test_one_email_per_window(self):
-        S.send_new(self.store, self.send, "j@x")                            # first run: nothing yet
+        S.send_new(self.store, self.send, "j@x")                            # first run: the setup check only
+        self.outbox.clear()
         put(self.store, "picks/2026-11-15.json", "SNF picks")               # Sunday night: in the Sunday email instead
         put(self.store, "picks/sun-early/2026-11-15.json", "1 PM picks")    # slate files: in the Sunday email
         put(self.store, "picks/sunday/2026-11-15.json", "Sunday picks")
