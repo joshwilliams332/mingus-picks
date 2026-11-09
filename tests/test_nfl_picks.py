@@ -637,3 +637,8 @@ class WhyLine(unittest.TestCase):
         w = N.why_line(c)
         self.assertIn("gives the under a 64% chance", w)
         self.assertNotIn("projects 20.2 vs the 19.5 line", w)
+
+    def test_quotes_his_typical_game(self):
+        c = {"row": {"stat": "rec_yds", "line": 19.5}, "side": "u", "model": 0.64, "player": {"pos": "RB", "team": "IND"},
+             "proj": {"mean": 20.2, "median": 15.1, "parts": {}, "vals": [12, 9, 50, 14, 11]}}
+        self.assertTrue(N.why_line(c).startswith("Our model's typical game for him: 15.1 vs the 19.5 line (64% for the under)"))
