@@ -1,4 +1,4 @@
-name: NFL night picks
+name: Mingus Picks
 
 # Locks Mingus Sports' NFL night-game picks (TNF, SNF, MNF, late-season Saturdays) and the Sunday 1 PM / 4 PM
 # slates (picks/sun-early/, picks/sun-late/, one Sunday record) before kickoff, grades them after,
@@ -79,6 +79,14 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: python3 scripts/nfl_picks.py --data livedata --store store | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Email new picks and results
+        # Gmail app password (Josh, Nov 9, 2026: GitHub sends the emails instead of scheduled Claude tasks). Each file is
+        # sent once (picks/sent.json); without the secrets this step does nothing.
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python3 scripts/send_emails.py store | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Save to the data branch
         run: |
           cd store
