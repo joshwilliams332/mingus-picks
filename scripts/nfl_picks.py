@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mingus Football night-game best bets: locked before kickoff, graded after, emailed to Josh.
 
-Runs in .github/workflows/nfl-picks.yml (never in the site deploy). It reads the site's data (players.json,
+Runs in .github/workflows/mingus-picks.yml (never in the site deploy). It reads the site's data (players.json,
 games.json, teams.json, meta.json from the live site, or a local folder), pulls player props from The Odds API for
 night games only (kickoff 7 PM ET or later: TNF, SNF, MNF, late-season Saturdays), picks the best few, and writes
 them to the store, which the workflow keeps on the `data` branch. Nothing here posts anywhere: a scheduled Claude

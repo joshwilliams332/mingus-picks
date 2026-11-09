@@ -23,7 +23,7 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
 
 ## Picks system (moved from Mingus Football's notes)
 - **Night-game best bets** (`scripts/nfl_picks.py`, tested in `tests/test_nfl_picks.py`, run by
-  `.github/workflows/nfl-picks.yml`, separate from the deploy; it downloads the live site's data JSON instead of
+  `.github/workflows/mingus-picks.yml`, separate from the deploy; it downloads the live site's data JSON instead of
   rebuilding). Night games only (kickoff 7 PM ET+: TNF, SNF, MNF, late-season Saturdays), Josh's choice so football
   uses little of the Odds API key it shares with Hoop Lab. Props pulled once per night game (4 markets: pass / rush /
   rec yds, receptions; 4 credits; event list free; never pulls below `CREDIT_RESERVE`), on the first run after
@@ -57,12 +57,14 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   night, `picks/YYYY-MM-DD-results.json` (that night's graded picks + season record, written once; Josh wanted results
   the next morning like Hoop Lab, not just weekly). `week-NN-recap.json` is written once a week's night games are all graded; `record.json` holds the season record. Week 8 is a test run
   (`RECORD_START_WEEK = 9`): emailed, graded, marked TEST, not counted. Every post carries the 21+ line.
-  Delivery (Josh, Nov 3 and 8: one email per window, nothing else): scheduled Claude tasks email Josh
-  (joshwilliams332@comcast.net) TNF / MNF / Saturday night picks ~9:47 AM that morning, Sunday's picks (all slates)
-  ~7:47 PM Sat, a Sunday-night update ~7:07 PM only if inactives changed something (`headsup(..., "night")`,
-  `picks/headsup/<day>-night.json`, email only when `changed`), night-game results 8:41 AM Fri and Tue, and Sunday's
-  results (all slates, unofficial) after the night game; they only fetch `picks/` from the `data` branch and send it as
-  written. GitHub has never started this repo's scheduled runs (Nov 3-8; push and "Run workflow" work), see Open threads. No model
+  Delivery (Josh, Nov 3, 8 and 9: one email per window, sent by GitHub, no Claude tasks): the job's "Email new picks
+  and results" step (`scripts/send_emails.py`, tested in `tests/test_send_emails.py`) emails Josh each new file once
+  through Gmail SMTP (secrets `SMTP_USER` = the Gmail address, `SMTP_PASS` = its app password, `EMAIL_TO`); sent paths
+  are kept in `picks/sent.json` (the first run marks existing files as sent). Emailed: night picks `picks/<day>.json`
+  (Thursday / Monday / Saturday, ~9 AM that morning), Sunday picks `picks/sunday/<Sunday>.json` (Saturday night), the
+  Sunday-night update `picks/headsup/<day>-night.json` (~7 PM, only when `changed`), Sunday results
+  `picks/sunday/<day>-results.json` (after the night game) and night results `picks/<day>-results.json` (next morning).
+  Sunday-dated night files are skipped (they're in the Sunday emails); slate and `-quick` files aren't emailed. No model
   backtest exists yet (no historical lines); the public record is the test.
 - **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, "for tracking"; same script,
   `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, "late" = 4-6:59 PM; both lock Saturday night
@@ -97,6 +99,7 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   If Josh upgrades ($30/month = 20,000 credits), all slates and a pre-kickoff closing-line pull become affordable.
 
 ## Open threads
-- **Scheduled runs don't fire** (Nov 3-8, 2026): no `schedule` run has ever started in this repo (check runs on main show
-  only push runs), while Mingus Football's schedules run daily. The YAML is valid. Josh's PR merge (a web commit touching
-  the crons) didn't fix it. Until it's fixed, runs only happen on a push to the picks code or "Run workflow".
+- **Scheduled runs didn't fire** (Nov 3-9, 2026): no `schedule` run ever started under the old file name `nfl-picks.yml`
+  (only push runs), while Mingus Football's schedules run daily; the YAML was valid. Renamed to `mingus-picks.yml` on
+  Nov 9 so GitHub registers it fresh. If scheduled runs still don't show up, ask GitHub Support; until then runs only
+  happen on a push (main or a `run/<time>` branch) or "Run workflow".
