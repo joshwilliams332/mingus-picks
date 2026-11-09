@@ -90,8 +90,11 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   only, no prices. Each graded pick gets `close` and `clv` (+ = the line moved our way: up for an over, down for an
   under); results files carry a `clv` summary, `picks/clv.json` the season's, and the results emails (incl. the Sunday
   one) a line about it. Never blocks grading. Week 9 Sunday check: beat the close 4 of 10, matched 5, avg +0.5.
-- **Injury openings:** `openings()` only counts a new absence (he played in the team's last game); reserve-list
-  players are Out in the site data since Nov 9 (Mingus Football `reserve_status`).
+- **Team-first volume** (Nov 9, 2026; Mingus Football `team_first`, settings version 3): volume blends his own
+  recent average with the team's recent volume x his share among teammates who may play (not Out / Doubtful /
+  reserve, missed at most one team game); weights pass 0.25, carries 0.5, targets 0.5. This replaced `openings()`:
+  a ruled-out teammate leaves the share split, `parts.f_inj` / `parts.out` still show the effect for the why line.
+  Backtest 2016-2025 multi Brier 0.2130 -> 0.2117 (all 10 seasons better), 2026 0.2113 -> 0.2109.
 
 - **Ten-season retune** (Nov 9, 2026; Mingus Football PR #41): model defaults = `SETTINGS_VERSION` 2 (per-stat league
   pull `RATE_PAD_BY`, tighter matchup caps, new spreads); an older `model/settings.json` is ignored. `projection()`
