@@ -470,6 +470,57 @@ class LockAndGrade(unittest.TestCase):
         self.assertEqual(N.locked_days(dir_), ["2026-11-08"])      # results files aren't mistaken for locked nights
         self.assertEqual(N.night_results(self.data, self.store, rows, self.at("10:00", "2026-11-09"))["state"], "done")
 
+    def test_results_carry_the_closing_line(self):
+        dir_ = self.store / "picks"
+        pick = {"id": "a", "gid": "2026_09_PHI_WAS", "pid": "TE1", "name": "Dallas Goedert", "team": "PHI", "opp": "WAS", "week": 9,
+                "stat": "rec_yds", "side": "o", "line": 45.5, "price": -110}
+        N.write(dir_ / "2026-11-08.json", {"season": 2026, "week": 9, "test": False, "games": ["2026_09_PHI_WAS"], "picks": [pick]})
+        real = N.closing_lines
+        N.closing_lines = lambda doc, season: {"a": {"line": 48.5, "open": 44.5}}
+        try:
+            N.night_results(self.data, self.store, stats_rows(9, [("TE1", "PHI", {"receiving_yards": 60})]), self.at("09:30", "2026-11-09"))
+        finally:
+            N.closing_lines = real
+        doc = json.loads((dir_ / "2026-11-08-results.json").read_text())
+        self.assertEqual(doc["results"][0]["clv"], 3.0)                  # over at 45.5, closed 48.5: beat it by 3
+        self.assertEqual(doc["clv"]["beat"], 1)
+        self.assertIn("beat it on 1 of 1", doc["email"]["text"])
+        self.assertEqual(json.loads((dir_ / "clv.json").read_text())["n"], 1)
+        self.assertNotIn("Closing line", doc["post"]["main"])            # a note for Josh, not part of the post
+
+
+class ClosingLines(unittest.TestCase):
+    def test_lines_matched_by_espn_id_and_stat(self):
+        files = {
+            f"{N.NFL_LAB}/weeks/2026-2-09.json": [{"id": "2026_09_PHI_WAS", "eid": "401"}],
+            f"{N.NFL_LAB}/props/401.json": [{"eid": "77", "stat": "rec_yds", "line": 42.5, "open": 46.5},
+                                            {"eid": "77", "stat": "rec", "line": 4.5, "open": 4.5}],
+        }
+        doc = {"week": 9, "games": ["2026_09_PHI_WAS"], "picks": [
+            {"id": "a", "pid": "TE1", "stat": "rec_yds", "side": "u", "line": 45.5},
+            {"id": "b", "pid": "NOPE", "stat": "rec_yds", "side": "o", "line": 30.5}]}
+        close = N.closing_lines(doc, 2026, fetch=files.get, ids={"TE1": "77"})
+        self.assertEqual(close, {"a": {"line": 42.5, "open": 46.5}})     # the unknown player is left out
+        self.assertEqual(N.clv(doc["picks"][0], close["a"]), 3.0)        # under at 45.5, closed 42.5: beat it by 3
+        self.assertEqual(N.clv({"side": "o", "line": 45.5}, close["a"]), -3.0)
+
+    def test_summary(self):
+        c = N.clv_summary([{"clv": 2}, {"clv": 0}, {"clv": -1}, {"status": "void"}])
+        self.assertEqual(c, {"n": 3, "beat": 1, "same": 1, "worse": 1, "avg": 0.33})
+        self.assertIn("beat it on 1 of 3, matched it on 1", N.clv_text(c))
+
+
+class Openings(unittest.TestCase):
+    def test_only_new_absences_open_volume(self):
+        with tempfile.TemporaryDirectory() as d:
+            data = make_data(Path(d))
+            ir = {"id": "WR9", "name": "IR Receiver", "pos": "WR", "team": "PHI", "injury": {"status": "Out", "reserve": True},
+                  "log": [{"week": w, "team": "PHI", "tgt": 8} for w in (1, 2, 3)]}
+            data.players.append(ir)
+            self.assertEqual(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt"), (1.0, []))
+            ir["log"] = [{"week": w, "team": "PHI", "tgt": 8} for w in range(1, 9)]      # played last game: a new absence
+            self.assertGreater(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt")[0], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
