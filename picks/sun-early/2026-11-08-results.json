@@ -1,0 +1,56 @@
+{
+ "date": "2026-11-08",
+ "season": 2026,
+ "week": 9,
+ "test": false,
+ "graded_at": "2026-11-09T17:19:58.316253+00:00",
+ "record": {
+  "w": 1,
+  "l": 3,
+  "p": 0,
+  "v": 0,
+  "profit": -2.099
+ },
+ "season_record": {
+  "w": 7,
+  "l": 7,
+  "p": 0,
+  "v": 0,
+  "profit": -0.7
+ },
+ "results": [
+  {
+   "id": "2026_09_DEN_CAR-00-0041496-rush_yds",
+   "status": "loss",
+   "actual": 57,
+   "profit": -1
+  },
+  {
+   "id": "2026_09_DAL_IND-00-0036223-rec_yds",
+   "status": "win",
+   "actual": 18,
+   "profit": 0.901
+  },
+  {
+   "id": "2026_09_DAL_IND-00-0032951-rec_yds",
+   "status": "loss",
+   "actual": 0,
+   "profit": -1
+  },
+  {
+   "id": "2026_09_CLE_NO-00-0041547-rec_yds",
+   "status": "loss",
+   "actual": 85,
+   "profit": -1
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 \u274c Sunday 1 PM results (7 games): 1-3 (-2.1u).\n\n\u274c Jonah Coleman U 56.5 rush yds (57)\n\u2705 Jonathan Taylor U 19.5 rec yds (18)\n\u274c Laquon Treadwell O 14.5 rec yds (0)\n\u274c KC Concepcion U 46.5 rec yds (85)\n\nSundays: 7-7 (-0.7u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Sunday 1 PM results \u00b7 Sun 11/8 \u00b7 1-3 (-2.1u)",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Sunday 1 PM results \u00b7 Sun 11/8 \u00b7 1-3 (-2.1u)</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 \u274c Sunday 1 PM results (7 games): 1-3 (-2.1u).\n\n\u274c Jonah Coleman U 56.5 rush yds (57)\n\u2705 Jonathan Taylor U 19.5 rec yds (18)\n\u274c Laquon Treadwell O 14.5 rec yds (0)\n\u274c KC Concepcion U 46.5 rec yds (85)\n\nSundays: 7-7 (-0.7u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Graded from nflverse box scores. A player who didn&#x27;t play is a void, like the sportsbooks do it.</li><li>The Sunday record (1 PM + 4 PM games) is kept separate from the night-game record.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 \u274c Sunday 1 PM results (7 games): 1-3 (-2.1u).\n\n\u274c Jonah Coleman U 56.5 rush yds (57)\n\u2705 Jonathan Taylor U 19.5 rec yds (18)\n\u274c Laquon Treadwell O 14.5 rec yds (0)\n\u274c KC Concepcion U 46.5 rec yds (85)\n\nSundays: 7-7 (-0.7u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Graded from nflverse box scores. A player who didn't play is a void, like the sportsbooks do it.\nNote: The Sunday record (1 PM + 4 PM games) is kept separate from the night-game record."
+ }
+}

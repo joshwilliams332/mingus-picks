@@ -1,0 +1,45 @@
+{
+ "date": "2026-11-09",
+ "season": 2026,
+ "week": 9,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_09_BUF_MIN"
+ ],
+ "locked_at": "2026-11-09T17:19:58.316253+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 BUF @ MIN\n\nNothing cleared our bar at tonight's prices. No plays is a play.\n\nSeason: 2-0 (+1.7u)\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 MNF picks \u00b7 Mon 11/9 \u00b7 no plays",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">MNF picks \u00b7 Mon 11/9 \u00b7 no plays</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 BUF @ MIN\n\nNothing cleared our bar at tonight&#x27;s prices. No plays is a play.\n\nSeason: 2-0 (+1.7u)\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked about 8 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 12:19 PM ET from 26 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 BUF @ MIN\n\nNothing cleared our bar at tonight's prices. No plays is a play.\n\nSeason: 2-0 (+1.7u)\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Locked about 8 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 12:19 PM ET from 26 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}
