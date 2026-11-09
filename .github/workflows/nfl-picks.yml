@@ -9,32 +9,33 @@ name: NFL night picks
 
 on:
   schedule:
-    # Thursday morning (Josh, Nov 3, 2026: lines and picks out earlier): TNF picks lock from 9 AM ET, every 30 min
-    # 8:05-11:35 AM EST / 9:05 AM-12:35 PM EDT. Pulls landing before 10:37 AM show on NFL Lab's 10:37 AM run.
-    - cron: "5,35 13-16 * * 4"
+    # Night-game mornings, Mon/Thu/Sat (Josh, Nov 3 and 8, 2026: lines and picks out earlier): the night game locks
+    # from 9 AM ET, every 30 min 8:05-11:35 AM EST / 9:05 AM-12:35 PM EDT. Pulls before 10:37 AM show on NFL Lab's run.
+    - cron: "5,35 13-16 * * 1,4,6"
     # Saturday night: every Sunday game (1 PM, 4 PM, night) locks from 7 PM ET Saturday and one Sunday email is written
     # (picks/sunday/), every 30 min Sat 7:10-11:40 PM EST / 8:10 PM-12:40 AM EDT (Sunday 00-04 UTC).
     - cron: "10,40 0-4 * * 0"
-    # Game-day afternoons Thu/Sat/Sun/Mon, every 30 min 3:15-6:45 PM EST: MNF and Saturday night games lock within
-    # 4 hours of kickoff; on Sundays these also grade the 1 PM games from ESPN's box scores.
+    # Game-day afternoons Thu/Sat/Sun/Mon, every 30 min 3:15-6:45 PM EST: a fallback lock for night games the morning
+    # runs missed; on Sundays these also grade the 1 PM games from ESPN's box scores.
     # Thursday runs are a fallback if the morning runs were skipped. GitHub often starts scheduled runs late.
     - cron: "15,45 20-23 * * 0,1,4,6"
     # Sunday late morning, every 30 min 10:15 AM-2:45 PM EST: a fallback lock for any Sunday slate that couldn't lock
     # Saturday night.
     - cron: "15,45 15-19 * * 0"
-    # Sunday night (Mon 00-05 UTC), every 15 min 7:05 PM-12:50 AM EST: grade the 4 PM and night games from ESPN's box
-    # scores and write the one Sunday results email (picks/sunday/<day>-results.json) once the night game is final.
+    # Sunday night (Mon 00-05 UTC), every 15 min 7:05 PM-12:50 AM EST: the night-game update (~7 PM, inactives; only
+    # emailed if something changed), then grade the 4 PM and night games from ESPN's box scores and write the one Sunday
+    # results email (picks/sunday/<day>-results.json) once the night game is final.
     # GitHub skips or delays scheduled runs on busy Sunday nights, so there are plenty of chances.
     - cron: "5,20,35,50 0-5 * * 1"
     # Grading, the morning after night games (Fri, Sun, Mon, Tue), once nflverse has the box scores: 4:30 / 7:30 /
     # 10:30 AM / 1:30 PM EST. The 7:30 run lands before the 8:41 AM results email (which also waits up to an hour).
     - cron: "30 9,12,15,18 * * 0,1,2,5"
   workflow_dispatch:
-  # Also run when the picks code itself changes on main (e.g. right after merging), so a change can lock that night's
-  # picks without waiting for the schedule. Commits to the `data` branch don't trigger this.
+  # Also run on any push to main (e.g. right after merging), and on a push of a `run/<time>` branch: GitHub has never
+  # started this repo's scheduled runs (Nov 3-8, 2026), so the scheduled Claude email tasks start the job by pushing an
+  # empty commit to a new run/ branch, which the job deletes when it's done. Commits to `data` don't trigger this.
   push:
-    branches: [main]
-    paths: ["scripts/nfl_picks.py", ".github/workflows/nfl-picks.yml"]
+    branches: [main, "run/**"]
 
 permissions:
   contents: write
@@ -87,3 +88,6 @@ jobs:
           if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
           git commit -q -m "Picks update $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -q origin data || (git pull -q --rebase origin data && git push -q origin data)
+      - name: Delete the trigger branch
+        if: always() && startsWith(github.ref_name, 'run/')
+        run: git push -q origin --delete "${{ github.ref_name }}" || true
