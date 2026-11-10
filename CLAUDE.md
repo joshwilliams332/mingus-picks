@@ -93,6 +93,11 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
 - **Injury openings:** `openings()` only counts a new absence (he played in the team's last game); reserve-list
   players are Out in the site data since Nov 9 (Mingus Football `reserve_status`).
 
+- **Ten-season retune** (Nov 9, 2026; Mingus Football PR #41): model defaults = `SETTINGS_VERSION` 2 (per-stat league
+  pull `RATE_PAD_BY`, tighter matchup caps, new spreads); an older `model/settings.json` is ignored. `projection()`
+  returns `median` (his typical game, the middle of the range: right 50-52% of the time on 2016-2025, while a skewed
+  stat's mean runs ~10% high); the why line quotes it ("Our model's typical game for him: 15.1 vs the 19.5 line").
+
 ## Other pieces
 - **Prop tool** (`scripts/prop_tool/`, `.github/workflows/prop-tool.yml`): the over/under tool page, rebuilt into the data
   branch `tool/prop-tool.html`; a scheduled Claude task republishes it to Josh's private artifact "Mingus Prop Model"
