@@ -138,7 +138,7 @@ class Projection(unittest.TestCase):
             p = N.projection(data, data.by_id["TE1"], "rec_yds", data.game["2026_09_PHI_WAS"], 9)
             x = p["parts"]
             self.assertEqual(p["source"], "Mingus model")
-            self.assertAlmostEqual(p["mean"], x["vol"] * x["eff"] * N.MEAN_ADJ["rec_yds"], delta=0.2)
+            self.assertAlmostEqual(p["mean"], x["vol"] * x["eff"] * N.MEAN_ADJ["rec_yds"], delta=0.5)   # parts are rounded
             self.assertGreater(x["f_def_vol"], 1)                 # WAS gives TEs lots of targets...
             self.assertLessEqual(x["f_def_vol"], N.DEF_CAP[1])    # ...capped
             self.assertLess(x["f_imp"], 1)                        # PHI's 21 implied is below the week's average
@@ -152,10 +152,10 @@ class Projection(unittest.TestCase):
                     "log": log(range(1, 9), "NYG", tgt=8, rec=5, rec_yds=60)}
             data.players.append(mate)
             data.by_id["WR9"] = mate
-            boost, names = N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt")
-            self.assertGreater(boost, 1)
-            self.assertLessEqual(boost, 1.25)
-            self.assertEqual(names, ["Out Receiver"])
+            data._team = None
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertGreater(t["vol"], t["vol_all"])
+            self.assertEqual(t["out"], ["Out Receiver"])
 
     def test_sleeper_blended_when_present(self):
         with tempfile.TemporaryDirectory() as d:
@@ -517,9 +517,12 @@ class Openings(unittest.TestCase):
             ir = {"id": "WR9", "name": "IR Receiver", "pos": "WR", "team": "PHI", "injury": {"status": "Out", "reserve": True},
                   "log": [{"week": w, "team": "PHI", "tgt": 8} for w in (1, 2, 3)]}
             data.players.append(ir)
-            self.assertEqual(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt"), (1.0, []))
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertEqual((t["vol"], t["out"]), (t["vol_all"], []))
             ir["log"] = [{"week": w, "team": "PHI", "tgt": 8} for w in range(1, 9)]      # played last game: a new absence
-            self.assertGreater(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt")[0], 1)
+            data._team = None
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertGreater(t["vol"], t["vol_all"])
 
 
 if __name__ == "__main__":
