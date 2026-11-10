@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-10T07:36:37.634945+00:00",
+ "checked": "2026-11-10T07:37:16.060348+00:00",
  "today": "2026-11-10",
  "odds_key": true,
  "lock": {
@@ -9,9 +9,7 @@
  },
  "recap": {
   "week": 9,
-  "state": "done",
-  "new": true,
-  "record": "2-0 (+1.7u)"
+  "state": "done"
  },
  "results": {
   "day": "2026-11-08",
