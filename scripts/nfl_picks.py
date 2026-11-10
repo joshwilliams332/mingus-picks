@@ -358,14 +358,23 @@ def team_context(data, team, game):
 
 def openings(data, player, game, opp_key):
     """Volume freed up by teammates ruled out (Out / Doubtful) who've been getting the same kind of work.
-    Returns (boost factor, [names]). Only 60% of their volume is assumed to move, spread over who's left by share."""
+    Returns (boost factor, [names]). Only 60% of their volume is assumed to move, spread over who's left by share.
+    Only a new absence counts (he played in his team's last game): someone out longer, like a player on injured reserve
+    (Out in the site data since Nov 9, 2026), is already missing from the games the others' averages come from."""
     if opp_key == "att":
         return 1.0, []
     mates = [p for p in data.players if p["team"] == player["team"] and p["id"] != player["id"] and p["pos"] in ("RB", "WR", "TE", "QB")]
+    def mine(p):
+        return [e for e in p["log"] if e["week"] < game["week"] and (e.get("team") or p["team"]) == p["team"]]
     def recent(p):
-        log = [e for e in p["log"] if e["week"] < game["week"] and (e.get("team") or p["team"]) == p["team"]][-3:]
+        log = mine(p)[-3:]
         return statistics.mean(e.get(opp_key) or 0 for e in log) if log else 0
-    out = [p for p in mates if (p.get("injury") or {}).get("status") in ("Out", "Doubtful") and recent(p) >= (4 if opp_key == "tgt" else 6)]
+    team_last = max((e["week"] for p in mates + [player] for e in mine(p)), default=None)
+    def new_absence(p):
+        log = mine(p)
+        return bool(log) and log[-1]["week"] == team_last
+    out = [p for p in mates if (p.get("injury") or {}).get("status") in ("Out", "Doubtful") and new_absence(p)
+           and recent(p) >= (4 if opp_key == "tgt" else 6)]
     if not out:
         return 1.0, []
     missing = sum(recent(p) for p in out)
@@ -1019,6 +1028,15 @@ def night_results(data, store, stats_rows, now, slate="night"):
             out = {"day": day, "state": "pending", "why": "nflverse hasn't published the box score yet"}
             continue
         test = bool(doc.get("test"))
+        try:
+            close = closing_lines(doc, season)
+        except Exception as e:                      # free feed; never blocks grading
+            print(f"closing lines unavailable: {e}")
+            close = {}
+        for p, g in rows:
+            if p["id"] in close:
+                g["close"] = close[p["id"]]
+                g["clv"] = clv(p, close[p["id"]])
         s = summarize([g for _, g in rows])
         season_s = None if test else (sunday_record(store, stats_rows, season) if day_ else season_record(dir_, stats_rows, season))
         mark = {"win": "✅", "loss": "❌"}
@@ -1040,11 +1058,17 @@ def night_results(data, store, stats_rows, now, slate="night"):
             notes.append("Week 8 is a test run: this result isn't counted in the record. The record starts with Week 9.")
         if day_:
             notes.append("The Sunday record (1 PM + 4 PM games) is kept separate from the night-game record.")
+        c = clv_summary([g for _, g in rows])
+        notes.append(clv_text(c) + " Beating the closing line is the best sign of a real edge; wins and losses take "
+                     "hundreds of picks to mean anything." if c else "Closing line: not available for these picks.")
         title = f"{'TEST · ' if test else ''}{slot} results · {day_label(day)} · {s['w']}-{s['l']}{'-' + str(s['p']) if s['p'] else ''} ({units(s['profit'])})"
         write(file, {"date": day, "season": season, "week": doc.get("week"), "test": test, "graded_at": now.isoformat(),
-                     "record": s, "season_record": season_s, "results": [{"id": p["id"], **g} for p, g in rows], "post": post,
+                     "record": s, "season_record": season_s, "clv": c, "results": [{"id": p["id"], **g} for p, g in rows],
+                     "post": post,
                      "email": {"subject": f"🏈 {title}", "html": email_html(title, post, notes, test), "text": email_text(post, notes, test)}})
         out = {"day": day, "state": "done", "new": True, "record": record_txt(s)}
+        if not test:
+            season_clv(store, season)
     return out
 
 
@@ -1060,6 +1084,80 @@ def fetch_json(url):
     req = urllib.request.Request(url, headers={"User-Agent": "mingus-picks", "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+# ---------------------------------------------------------------- closing line value (free)
+
+NFL_LAB = "https://raw.githubusercontent.com/joshwilliams332/nba-research/data/nfl/espn"
+ROSTER_CSV = "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_{season}.csv"
+
+
+def fetch_text(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "mingus-picks"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return r.read().decode("utf-8")
+
+
+def espn_ids(season, fetch=fetch_text):
+    """nflverse player id -> ESPN athlete id, from nflverse's season roster."""
+    return {r["gsis_id"]: r["espn_id"] for r in csv.DictReader(io.StringIO(fetch(ROSTER_CSV.format(season=season))))
+            if r.get("gsis_id") and r.get("espn_id")}
+
+
+def closing_lines(doc, season, fetch=fetch_json, ids=None):
+    """DraftKings' last line before kickoff for each pick, from the prop lines NFL Lab (nba-research) saves from ESPN's
+    free odds feed (no Odds API credits; lines only, no prices). Josh, Nov 9, 2026: track closing line value, the
+    fastest honest test of whether the picks have an edge. {pick id: {"line", "open"}}; missing players are left out."""
+    week = doc.get("week")
+    games = {g["id"]: g["eid"] for g in fetch(f"{NFL_LAB}/weeks/{season}-2-{week:02d}.json") or []}
+    ids = ids if ids is not None else espn_ids(season)
+    lines = {}
+    for gid in doc.get("games", []):
+        if gid not in games:
+            continue
+        for r in fetch(f"{NFL_LAB}/props/{games[gid]}.json") or []:
+            lines[(r["eid"], r["stat"])] = {"line": r["line"], "open": r.get("open")}
+    out = {}
+    for p in doc.get("picks", []):
+        hit = lines.get((ids.get(p["pid"]), p["stat"]))
+        if hit:
+            out[p["id"]] = hit
+    return out
+
+
+def clv(pick, close):
+    """How far the closing line moved in the pick's favor (+ = beat the close): an over is better when the line went up
+    after we took it, an under when it went down."""
+    move = close["line"] - pick["line"]
+    return round(move if pick["side"] == "o" else -move, 2) + 0.0      # + 0.0: no "-0" when the line didn't move
+
+
+def clv_summary(results):
+    rs = [r for r in results if r.get("clv") is not None]
+    if not rs:
+        return None
+    return {"n": len(rs), "beat": sum(r["clv"] > 0 for r in rs), "same": sum(r["clv"] == 0 for r in rs),
+            "worse": sum(r["clv"] < 0 for r in rs), "avg": round(sum(r["clv"] for r in rs) / len(rs), 2)}
+
+
+def clv_text(c, who="these picks"):
+    matched = f", matched it on {c['same']}" if c["same"] else ""
+    return (f"Closing line (DraftKings, last line before kickoff): {who} beat it on {c['beat']} of {c['n']}"
+            f"{matched}; average move {c['avg']:+g} in our favor.")
+
+
+def season_clv(store, season):
+    """Every graded pick's closing-line result this season (night games and Sunday slates), to picks/clv.json."""
+    rows = []
+    for dir_ in (Path(store) / "picks", *(Path(store) / "picks" / SLATES[s][1] for s in SLATES)):
+        for f in sorted(dir_.glob("*-results.json")):
+            d = read(f, {})
+            if d.get("season") == season and not d.get("test"):
+                rows += d.get("results", [])
+    c = clv_summary(rows)
+    if c:
+        write(Path(store) / "picks" / "clv.json", {"season": season, **c})
+    return c
 
 
 def espn_box(summary):
@@ -1266,7 +1364,17 @@ def sunday_results(data, store, now, day):
         sections.append((slate_name(sl, games) if games else sl, quick[sl]["post"]["main"]))
     rec = f"{tot['w']}-{tot['l']}{'-' + str(tot['p']) if tot['p'] else ''}"
     title = f"Sunday results (unofficial) · {day_label(day)} · {rec} ({units(tot['profit'])})"
-    notes = ["Unofficial: graded from ESPN's box scores right after the games. The official grades (nflverse stats) and the "
+    clv_rows = []
+    for sl, d in docs:
+        try:
+            close = closing_lines(d, d.get("season") or int(day[:4]))
+        except Exception as e:                      # free feed; never blocks the email
+            print(f"closing lines unavailable: {e}")
+            close = {}
+        clv_rows += [{"clv": clv(p, close[p["id"]])} for p in d["picks"] if p["id"] in close]
+    c = clv_summary(clv_rows)
+    notes = ([clv_text(c, "Sunday's picks") + " Beating the closing line is the best sign of a real edge."] if c else []) + [
+             "Unofficial: graded from ESPN's box scores right after the games. The official grades (nflverse stats) and the "
              "records update tomorrow morning; stat corrections can change a close one.",
              "1 PM and 4 PM picks count in the Sunday record; the night game counts in the night-game record."]
     html = (f'<div style="font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px">'

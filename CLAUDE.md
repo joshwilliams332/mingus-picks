@@ -83,6 +83,16 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   per slot) after the night game; emailed ~11:47 PM ET. The records still come from nflverse the next morning, with no
   separate email.
 
+- **Closing line value** (Josh, Nov 9, 2026: the fastest honest test of an edge; free, no Odds API credits):
+  `closing_lines()` reads DraftKings' last line before kickoff from the prop lines NFL Lab saves from ESPN
+  (nba-research `data` branch `nfl/espn/weeks/<season>-2-<week>.json` maps our game ids to ESPN events,
+  `nfl/espn/props/<event>.json` has `{eid, stat, line, open}`; players matched by nflverse roster `espn_id`). Lines
+  only, no prices. Each graded pick gets `close` and `clv` (+ = the line moved our way: up for an over, down for an
+  under); results files carry a `clv` summary, `picks/clv.json` the season's, and the results emails (incl. the Sunday
+  one) a line about it. Never blocks grading. Week 9 Sunday check: beat the close 4 of 10, matched 5, avg +0.5.
+- **Injury openings:** `openings()` only counts a new absence (he played in the team's last game); reserve-list
+  players are Out in the site data since Nov 9 (Mingus Football `reserve_status`).
+
 ## Other pieces
 - **Prop tool** (`scripts/prop_tool/`, `.github/workflows/prop-tool.yml`): the over/under tool page, rebuilt into the data
   branch `tool/prop-tool.html`; a scheduled Claude task republishes it to Josh's private artifact "Mingus Prop Model"
