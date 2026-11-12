@@ -1,0 +1,111 @@
+{
+ "date": "2026-11-12",
+ "season": 2026,
+ "week": 10,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_10_WAS_NYG"
+ ],
+ "locked_at": "2026-11-12T23:06:24.019564+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_10_WAS_NYG-00-0041040-rec_yds",
+   "gid": "2026_10_WAS_NYG",
+   "week": 10,
+   "pid": "00-0041040",
+   "name": "Antonio Williams",
+   "team": "WAS",
+   "opp": "NYG",
+   "pos": "WR",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 37.5,
+   "price": -112,
+   "book": "BetOnline.ag",
+   "books": 5,
+   "proj": 34.5,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.557,
+   "model": 0.685,
+   "market": 0.502,
+   "edge": 0.053,
+   "kickoff": "2026-11-12T20:15:00-05:00",
+   "why": "Our model's typical game for him: 26.3 vs the 37.5 line (68% for the under), NYG allows the 7th fewest rec yds to WRs; stayed under 37.5 in 3 of his last 5.",
+   "deep": [
+    "Antonio Williams U 37.5 rec yds \u00b7 -112 (best price: BetOnline.ag; line from 5 books)",
+    "Projection 34.5 = half Sleeper (30.4), half our model (38.6), less 3%; season 35.5, last 3 43 per game.",
+    "Volume: 5.2 targets/game \u2192 5.1 after NYG defense \u00d71.01, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.",
+    "Efficiency: 7.5 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.1.",
+    "Chance: ours 68%, books' no-vig 50%, blended 56%; edge +5% at this price."
+   ]
+  },
+  {
+   "id": "2026_10_WAS_NYG-00-0037809-rec_yds",
+   "gid": "2026_10_WAS_NYG",
+   "week": 10,
+   "pid": "00-0037809",
+   "name": "Chig Okonkwo",
+   "team": "WAS",
+   "opp": "NYG",
+   "pos": "TE",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 36.5,
+   "price": -109,
+   "book": "DraftKings",
+   "books": 3,
+   "proj": 36.8,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.541,
+   "model": 0.649,
+   "market": 0.494,
+   "edge": 0.037,
+   "kickoff": "2026-11-12T20:15:00-05:00",
+   "why": "Our model's typical game for him: 27.1 vs the 36.5 line (65% for the under), NYG allows the 6th fewest rec yds to TEs.",
+   "deep": [
+    "Chig Okonkwo U 36.5 rec yds \u00b7 -109 (best price: DraftKings; line from 3 books)",
+    "Projection 36.8 = half Sleeper (31.9), half our model (41.8), less 3%; season 39.8, last 3 52.7 per game.",
+    "Volume: 5.4 targets/game \u2192 5.4 after NYG defense \u00d71.02, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.",
+    "Efficiency: 7.6 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.2.",
+    "Chance: ours 65%, books' no-vig 49%, blended 54%; edge +4% at this price."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 TNF \u00b7 WAS @ NYG\n\nOur top 2:\n\nAntonio Williams U 37.5 rec yds (-112)\nChig Okonkwo U 36.5 rec yds (-109)\n\nSeason: 2-0 (+1.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Antonio Williams U 37.5 rec yds: Our model's typical game for him: 26.3 vs the 37.5 line (68% for the under), NYG allows the 7th fewest rec yds to WRs; stayed under 37.5 in 3 of his last 5.",
+   "Chig Okonkwo U 36.5 rec yds: Our model's typical game for him: 27.1 vs the 36.5 line (65% for the under), NYG allows the 6th fewest rec yds to TEs."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 TNF picks \u00b7 Thu 11/12 \u00b7 2 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">TNF picks \u00b7 Thu 11/12 \u00b7 2 picks</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 TNF \u00b7 WAS @ NYG\n\nOur top 2:\n\nAntonio Williams U 37.5 rec yds (-112)\nChig Okonkwo U 36.5 rec yds (-109)\n\nSeason: 2-0 (+1.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Antonio Williams U 37.5 rec yds: Our model&#x27;s typical game for him: 26.3 vs the 37.5 line (68% for the under), NYG allows the 7th fewest rec yds to WRs; stayed under 37.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Chig Okonkwo U 36.5 rec yds: Our model&#x27;s typical game for him: 27.1 vs the 36.5 line (65% for the under), NYG allows the 6th fewest rec yds to TEs.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Antonio Williams U 37.5 rec yds \u00b7 -112 (best price: BetOnline.ag; line from 5 books)</b><div style=\"margin-top:4px;color:#333\">Projection 34.5 = half Sleeper (30.4), half our model (38.6), less 3%; season 35.5, last 3 43 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 5.2 targets/game \u2192 5.1 after NYG defense \u00d71.01, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 7.5 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.1.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 68%, books&#x27; no-vig 50%, blended 56%; edge +5% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Chig Okonkwo U 36.5 rec yds \u00b7 -109 (best price: DraftKings; line from 3 books)</b><div style=\"margin-top:4px;color:#333\">Projection 36.8 = half Sleeper (31.9), half our model (41.8), less 3%; season 39.8, last 3 52.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 5.4 targets/game \u2192 5.4 after NYG defense \u00d71.02, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 7.6 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.2.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 65%, books&#x27; no-vig 49%, blended 54%; edge +4% at this price.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked 6:06 PM ET from 30 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 TNF \u00b7 WAS @ NYG\n\nOur top 2:\n\nAntonio Williams U 37.5 rec yds (-112)\nChig Okonkwo U 36.5 rec yds (-109)\n\nSeason: 2-0 (+1.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nAntonio Williams U 37.5 rec yds: Our model's typical game for him: 26.3 vs the 37.5 line (68% for the under), NYG allows the 7th fewest rec yds to WRs; stayed under 37.5 in 3 of his last 5.\n\nChig Okonkwo U 36.5 rec yds: Our model's typical game for him: 27.1 vs the 36.5 line (65% for the under), NYG allows the 6th fewest rec yds to TEs.\n\nDeep dive:\nAntonio Williams U 37.5 rec yds \u00b7 -112 (best price: BetOnline.ag; line from 5 books)\nProjection 34.5 = half Sleeper (30.4), half our model (38.6), less 3%; season 35.5, last 3 43 per game.\nVolume: 5.2 targets/game \u2192 5.1 after NYG defense \u00d71.01, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.\nEfficiency: 7.5 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.1.\nChance: ours 68%, books' no-vig 50%, blended 56%; edge +5% at this price.\n\nChig Okonkwo U 36.5 rec yds \u00b7 -109 (best price: DraftKings; line from 3 books)\nProjection 36.8 = half Sleeper (31.9), half our model (41.8), less 3%; season 39.8, last 3 52.7 per game.\nVolume: 5.4 targets/game \u2192 5.4 after NYG defense \u00d71.02, WAS implied 19 \u00d70.98, game script (underdog 2.5) \u00d71.00.\nEfficiency: 7.6 yds/target (steadied toward the league) \u00d7 NYG allows \u00d70.95 \u2192 7.2.\nChance: ours 65%, books' no-vig 49%, blended 54%; edge +4% at this price.\n\nNote: Locked 6:06 PM ET from 30 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}
