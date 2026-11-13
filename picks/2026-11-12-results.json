@@ -1,0 +1,61 @@
+{
+ "date": "2026-11-12",
+ "season": 2026,
+ "week": 10,
+ "test": false,
+ "graded_at": "2026-11-13T17:19:28.523043+00:00",
+ "record": {
+  "w": 1,
+  "l": 1,
+  "p": 0,
+  "v": 0,
+  "profit": -0.083
+ },
+ "season_record": {
+  "w": 3,
+  "l": 1,
+  "p": 0,
+  "v": 0,
+  "profit": 1.593
+ },
+ "clv": {
+  "n": 2,
+  "beat": 0,
+  "same": 2,
+  "worse": 0,
+  "avg": 0.0
+ },
+ "results": [
+  {
+   "id": "2026_10_WAS_NYG-00-0041040-rec_yds",
+   "status": "loss",
+   "actual": 42,
+   "profit": -1,
+   "close": {
+    "line": 37.5,
+    "open": 44.5
+   },
+   "clv": 0.0
+  },
+  {
+   "id": "2026_10_WAS_NYG-00-0037809-rec_yds",
+   "status": "win",
+   "actual": 24,
+   "profit": 0.917,
+   "close": {
+    "line": 36.5,
+    "open": 40.5
+   },
+   "clv": 0.0
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 \u274c TNF results (WAS @ NYG): 1-1 (-0.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\nSeason: 3-1 (+1.6u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 TNF results \u00b7 Thu 11/12 \u00b7 1-1 (-0.1u)",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">TNF results \u00b7 Thu 11/12 \u00b7 1-1 (-0.1u)</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 \u274c TNF results (WAS @ NYG): 1-1 (-0.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\nSeason: 3-1 (+1.6u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Graded from nflverse box scores. A player who didn&#x27;t play is a void, like the sportsbooks do it.</li><li>Closing line (DraftKings, last line before kickoff): these picks beat it on 0 of 2, matched it on 2; average move +0 in our favor. Beating the closing line is the best sign of a real edge; wins and losses take hundreds of picks to mean anything.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 \u274c TNF results (WAS @ NYG): 1-1 (-0.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\nSeason: 3-1 (+1.6u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Graded from nflverse box scores. A player who didn't play is a void, like the sportsbooks do it.\nNote: Closing line (DraftKings, last line before kickoff): these picks beat it on 0 of 2, matched it on 2; average move +0 in our favor. Beating the closing line is the best sign of a real edge; wins and losses take hundreds of picks to mean anything."
+ }
+}
