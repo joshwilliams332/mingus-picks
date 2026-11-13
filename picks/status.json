@@ -1,20 +1,21 @@
 {
- "checked": "2026-11-12T23:06:24.019564+00:00",
+ "checked": "2026-11-13T03:26:10.034297+00:00",
  "today": "2026-11-12",
  "odds_key": true,
  "lock": {
   "day": "2026-11-12",
   "state": "locked",
-  "why": "2 pick(s) locked",
-  "new": true
+  "why": "already locked"
  },
  "recap": {
-  "week": 9,
-  "state": "done"
+  "week": 10,
+  "state": "waiting",
+  "why": "the week's night games aren't all played yet"
  },
  "results": {
-  "day": "2026-11-08",
-  "state": "done"
+  "day": "2026-11-12",
+  "state": "pending",
+  "why": "nflverse hasn't published the box score yet"
  },
  "sunday": {
   "early": {
