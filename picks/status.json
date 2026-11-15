@@ -1,12 +1,11 @@
 {
- "checked": "2026-11-15T06:18:59.171303+00:00",
+ "checked": "2026-11-15T07:06:38.829510+00:00",
  "today": "2026-11-15",
  "odds_key": true,
  "lock": {
   "day": "2026-11-15",
   "state": "locked",
-  "why": "2 pick(s) locked",
-  "new": true
+  "why": "already locked"
  },
  "recap": {
   "week": 10,
@@ -14,40 +13,43 @@
   "why": "the week's night games aren't all played yet"
  },
  "results": {
-  "day": "2026-11-12",
-  "state": "done"
+  "day": "2026-11-15",
+  "state": "waiting",
+  "why": "tonight's games haven't been played"
  },
  "sunday": {
   "early": {
    "results": {
-    "day": "2026-11-08",
-    "state": "done"
+    "day": "2026-11-15",
+    "state": "waiting",
+    "why": "tonight's games haven't been played"
    },
    "lock": {
     "day": "2026-11-15",
     "state": "locked",
-    "why": "5 pick(s) locked",
-    "new": true
+    "why": "already locked"
    },
    "quick": {
     "day": "2026-11-15",
-    "state": "none"
+    "state": "waiting",
+    "why": "games not played yet"
    }
   },
   "late": {
    "results": {
-    "day": "2026-11-08",
-    "state": "done"
+    "day": "2026-11-15",
+    "state": "waiting",
+    "why": "tonight's games haven't been played"
    },
    "lock": {
     "day": "2026-11-15",
     "state": "locked",
-    "why": "2 pick(s) locked",
-    "new": true
+    "why": "already locked"
    },
    "quick": {
     "day": "2026-11-15",
-    "state": "none"
+    "state": "waiting",
+    "why": "games not played yet"
    }
   }
  },
@@ -71,9 +73,7 @@
  },
  "sunday_email": {
   "day": "2026-11-15",
-  "state": "done",
-  "new": true,
-  "picks": 9
+  "state": "done"
  },
  "sunday_results": {
   "day": "2026-11-15",
