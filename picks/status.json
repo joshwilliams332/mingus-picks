@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-15T16:30:06.384453+00:00",
+ "checked": "2026-11-15T20:23:21.112310+00:00",
  "today": "2026-11-15",
  "odds_key": true,
  "lock": {
@@ -21,8 +21,8 @@
   "early": {
    "results": {
     "day": "2026-11-15",
-    "state": "waiting",
-    "why": "tonight's games haven't been played"
+    "state": "pending",
+    "why": "nflverse hasn't published the box score yet"
    },
    "lock": {
     "day": "2026-11-15",
@@ -32,7 +32,7 @@
    "quick": {
     "day": "2026-11-15",
     "state": "waiting",
-    "why": "games not played yet"
+    "why": "not every game is final on ESPN yet"
    }
   },
   "late": {
