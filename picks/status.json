@@ -1,11 +1,12 @@
 {
- "checked": "2026-11-14T23:57:09.571531+00:00",
- "today": "2026-11-14",
+ "checked": "2026-11-15T06:18:59.171303+00:00",
+ "today": "2026-11-15",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-14",
-  "state": "no-games",
-  "why": "no night games on Sat 11/14"
+  "day": "2026-11-15",
+  "state": "locked",
+  "why": "2 pick(s) locked",
+  "new": true
  },
  "recap": {
   "week": 10,
@@ -23,12 +24,14 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-14",
-    "state": "no-games",
-    "why": "no Sunday 1 PM games on Sat 11/14"
+    "day": "2026-11-15",
+    "state": "locked",
+    "why": "5 pick(s) locked",
+    "new": true
    },
    "quick": {
-    "state": "skipped"
+    "day": "2026-11-15",
+    "state": "none"
    }
   },
   "late": {
@@ -37,48 +40,55 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-14",
-    "state": "no-games",
-    "why": "no Sunday 4 PM games on Sat 11/14"
+    "day": "2026-11-15",
+    "state": "locked",
+    "why": "2 pick(s) locked",
+    "new": true
    },
    "quick": {
-    "state": "skipped"
+    "day": "2026-11-15",
+    "state": "none"
    }
   }
  },
  "tomorrow": {
-  "day": "2026-11-15",
+  "day": "2026-11-16",
   "early": {
-   "day": "2026-11-15",
-   "state": "waiting",
-   "why": "locks from Sat 11/14 7 PM ET"
+   "day": "2026-11-16",
+   "state": "no-games",
+   "why": "no Sunday 1 PM games on Mon 11/16"
   },
   "late": {
-   "day": "2026-11-15",
-   "state": "waiting",
-   "why": "locks from Sat 11/14 7 PM ET"
+   "day": "2026-11-16",
+   "state": "no-games",
+   "why": "no Sunday 4 PM games on Mon 11/16"
   },
   "night": {
-   "day": "2026-11-15",
+   "day": "2026-11-16",
    "state": "waiting",
-   "why": "locks from Sat 11/14 7 PM ET"
+   "why": "locks from Mon 11/16 9 AM ET"
   }
  },
  "sunday_email": {
   "day": "2026-11-15",
-  "state": "waiting",
-  "why": "0 of 3 Sunday slates locked"
+  "state": "done",
+  "new": true,
+  "picks": 9
  },
  "sunday_results": {
-  "state": "none"
+  "day": "2026-11-15",
+  "state": "waiting",
+  "why": "0 of 3 slates graded"
  },
  "night_update": {
-  "state": "none"
+  "day": "2026-11-15",
+  "state": "waiting",
+  "why": "reads inactives from 7 PM ET"
  },
  "credits": {
-  "remaining": 313,
-  "used": 187,
+  "remaining": 270,
+  "used": 230,
   "last_cost": 4,
-  "checked": "2026-11-12T23:06:24+00:00"
+  "checked": "2026-11-15T06:19:02+00:00"
  }
 }

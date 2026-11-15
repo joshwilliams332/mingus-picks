@@ -1,0 +1,111 @@
+{
+ "date": "2026-11-15",
+ "season": 2026,
+ "week": 10,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_10_PIT_CIN"
+ ],
+ "locked_at": "2026-11-15T06:18:59.171303+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_10_PIT_CIN-00-0041489-rec_yds",
+   "gid": "2026_10_PIT_CIN",
+   "week": 10,
+   "pid": "00-0041489",
+   "name": "Germie Bernard",
+   "team": "PIT",
+   "opp": "CIN",
+   "pos": "WR",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 49.5,
+   "price": -105,
+   "book": "BetMGM",
+   "books": 4,
+   "proj": 48.3,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.544,
+   "model": 0.661,
+   "market": 0.494,
+   "edge": 0.062,
+   "kickoff": "2026-11-15T20:20:00-05:00",
+   "why": "Our model's typical game for him: 36 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.",
+   "deep": [
+    "Germie Bernard U 49.5 rec yds \u00b7 -105 (best price: BetMGM; line from 4 books)",
+    "Projection 48.3 = half Sleeper (49.4), half our model (47.1), less 3%; season 40.6, last 3 48 per game.",
+    "Volume: 6.2 targets/game \u2192 6.2 after CIN defense \u00d70.99, PIT implied 23 \u00d71.00, game script (underdog 3.5) \u00d71.00.",
+    "Efficiency: 7.3 yds/target (steadied toward the league) \u00d7 CIN allows \u00d70.99 \u2192 7.2.",
+    "Chance: ours 66%, books' no-vig 49%, blended 54%; edge +6% at this price."
+   ]
+  },
+  {
+   "id": "2026_10_PIT_CIN-00-0036900-rec",
+   "gid": "2026_10_PIT_CIN",
+   "week": 10,
+   "pid": "00-0036900",
+   "name": "Ja'Marr Chase",
+   "team": "CIN",
+   "opp": "PIT",
+   "pos": "WR",
+   "stat": "rec",
+   "side": "u",
+   "line": 7.5,
+   "price": -105,
+   "book": "DraftKings",
+   "books": 5,
+   "proj": 7.0,
+   "source": "Sleeper + Mingus model",
+   "prob": 0.542,
+   "model": 0.668,
+   "market": 0.488,
+   "edge": 0.059,
+   "kickoff": "2026-11-15T20:20:00-05:00",
+   "why": "Our model's typical game for him: 5.6 vs the 7.5 line (67% for the under), stayed under 7.5 in 3 of his last 5.",
+   "deep": [
+    "Ja'Marr Chase U 7.5 catches \u00b7 -105 (best price: DraftKings; line from 5 books)",
+    "Projection 7 = half Sleeper (6.2), half our model (7.8), less 3%; season 6.6, last 3 8.7 per game.",
+    "Volume: 10 targets/game \u2192 10.5 after PIT defense \u00d71.02, CIN implied 26.5 \u00d71.02, game script (favored 3.5) \u00d71.00.",
+    "Efficiency: 70% catch rate (steadied toward the league) \u00d7 PIT allows \u00d70.99 \u2192 70%.",
+    "Chance: ours 67%, books' no-vig 49%, blended 54%; edge +6% at this price."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 PIT @ CIN\n\nOur top 2:\n\nGermie Bernard U 49.5 rec yds (-105)\nJa'Marr Chase U 7.5 catches (-105)\n\nSeason: 3-1 (+1.6u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Germie Bernard U 49.5 rec yds: Our model's typical game for him: 36 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.",
+   "Ja'Marr Chase U 7.5 catches: Our model's typical game for him: 5.6 vs the 7.5 line (67% for the under), stayed under 7.5 in 3 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 SNF picks \u00b7 Sun 11/15 \u00b7 2 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">SNF picks \u00b7 Sun 11/15 \u00b7 2 picks</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 PIT @ CIN\n\nOur top 2:\n\nGermie Bernard U 49.5 rec yds (-105)\nJa&#x27;Marr Chase U 7.5 catches (-105)\n\nSeason: 3-1 (+1.6u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Germie Bernard U 49.5 rec yds: Our model&#x27;s typical game for him: 36 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Ja&#x27;Marr Chase U 7.5 catches: Our model&#x27;s typical game for him: 5.6 vs the 7.5 line (67% for the under), stayed under 7.5 in 3 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Germie Bernard U 49.5 rec yds \u00b7 -105 (best price: BetMGM; line from 4 books)</b><div style=\"margin-top:4px;color:#333\">Projection 48.3 = half Sleeper (49.4), half our model (47.1), less 3%; season 40.6, last 3 48 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 6.2 targets/game \u2192 6.2 after CIN defense \u00d70.99, PIT implied 23 \u00d71.00, game script (underdog 3.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 7.3 yds/target (steadied toward the league) \u00d7 CIN allows \u00d70.99 \u2192 7.2.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 66%, books&#x27; no-vig 49%, blended 54%; edge +6% at this price.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Ja&#x27;Marr Chase U 7.5 catches \u00b7 -105 (best price: DraftKings; line from 5 books)</b><div style=\"margin-top:4px;color:#333\">Projection 7 = half Sleeper (6.2), half our model (7.8), less 3%; season 6.6, last 3 8.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 10 targets/game \u2192 10.5 after PIT defense \u00d71.02, CIN implied 26.5 \u00d71.02, game script (favored 3.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 70% catch rate (steadied toward the league) \u00d7 PIT allows \u00d70.99 \u2192 70%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 67%, books&#x27; no-vig 49%, blended 54%; edge +6% at this price.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked about 19 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 1:18 AM ET from 42 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.</li><li>Our chance = 30% our projection + 70% the books&#x27; no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can&#x27;t see).</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 PIT @ CIN\n\nOur top 2:\n\nGermie Bernard U 49.5 rec yds (-105)\nJa'Marr Chase U 7.5 catches (-105)\n\nSeason: 3-1 (+1.6u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nGermie Bernard U 49.5 rec yds: Our model's typical game for him: 36 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.\n\nJa'Marr Chase U 7.5 catches: Our model's typical game for him: 5.6 vs the 7.5 line (67% for the under), stayed under 7.5 in 3 of his last 5.\n\nDeep dive:\nGermie Bernard U 49.5 rec yds \u00b7 -105 (best price: BetMGM; line from 4 books)\nProjection 48.3 = half Sleeper (49.4), half our model (47.1), less 3%; season 40.6, last 3 48 per game.\nVolume: 6.2 targets/game \u2192 6.2 after CIN defense \u00d70.99, PIT implied 23 \u00d71.00, game script (underdog 3.5) \u00d71.00.\nEfficiency: 7.3 yds/target (steadied toward the league) \u00d7 CIN allows \u00d70.99 \u2192 7.2.\nChance: ours 66%, books' no-vig 49%, blended 54%; edge +6% at this price.\n\nJa'Marr Chase U 7.5 catches \u00b7 -105 (best price: DraftKings; line from 5 books)\nProjection 7 = half Sleeper (6.2), half our model (7.8), less 3%; season 6.6, last 3 8.7 per game.\nVolume: 10 targets/game \u2192 10.5 after PIT defense \u00d71.02, CIN implied 26.5 \u00d71.02, game script (favored 3.5) \u00d71.00.\nEfficiency: 70% catch rate (steadied toward the league) \u00d7 PIT allows \u00d70.99 \u2192 70%.\nChance: ours 67%, books' no-vig 49%, blended 54%; edge +6% at this price.\n\nNote: Locked about 19 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 1:18 AM ET from 42 prop sides across 1 game(s); prices are from that moment, so check your book; lines may have moved.\nNote: Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped (usually news we can't see).\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}
