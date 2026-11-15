@@ -138,7 +138,7 @@ class Projection(unittest.TestCase):
             p = N.projection(data, data.by_id["TE1"], "rec_yds", data.game["2026_09_PHI_WAS"], 9)
             x = p["parts"]
             self.assertEqual(p["source"], "Mingus model")
-            self.assertAlmostEqual(p["mean"], x["vol"] * x["eff"] * N.MEAN_ADJ["rec_yds"], delta=0.2)
+            self.assertAlmostEqual(p["mean"], x["vol"] * x["eff"] * N.MEAN_ADJ["rec_yds"], delta=0.5)   # parts are rounded
             self.assertGreater(x["f_def_vol"], 1)                 # WAS gives TEs lots of targets...
             self.assertLessEqual(x["f_def_vol"], N.DEF_CAP[1])    # ...capped
             self.assertLess(x["f_imp"], 1)                        # PHI's 21 implied is below the week's average
@@ -152,10 +152,10 @@ class Projection(unittest.TestCase):
                     "log": log(range(1, 9), "NYG", tgt=8, rec=5, rec_yds=60)}
             data.players.append(mate)
             data.by_id["WR9"] = mate
-            boost, names = N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt")
-            self.assertGreater(boost, 1)
-            self.assertLessEqual(boost, 1.25)
-            self.assertEqual(names, ["Out Receiver"])
+            data._team = None
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertGreater(t["vol"], t["vol_all"])
+            self.assertEqual(t["out"], ["Out Receiver"])
 
     def test_sleeper_blended_when_present(self):
         with tempfile.TemporaryDirectory() as d:
@@ -273,13 +273,88 @@ class Touchdowns(unittest.TestCase):
         self.assertEqual(N.fair_price(0.6), -150)
 
 
-class LockAndGrade(unittest.TestCase):
+class EspnLines(unittest.TestCase):
+    """Lines only (Josh, Nov 15, 2026): DraftKings' lines from NFL Lab's saved ESPN feed, no prices, no Odds API."""
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.data = make_data(Path(self.tmp.name))
         self.store = Path(self.tmp.name) / "store"
+        self.lines, N.LINES = N.LINES, "espn"
+        self.game = self.data.game["2026_09_PHI_WAS"]
+        proj = N.projection(self.data, self.data.by_id["TE1"], "rec_yds", self.game, 9)
+        # a line where our model gives the over about 66%: inside the 63-70% window
+        self.line = next(x + 0.5 for x in range(10, 90) if N.chance_over(proj, x + 0.5) <= 0.665)
+        self.calls = []
 
     def tearDown(self):
+        N.LINES = self.lines
+        self.tmp.cleanup()
+
+    def fetch(self, line):
+        def f(url):
+            self.calls.append(url)
+            if url.endswith("/weeks/2026-2-09.json"):
+                return [{"id": "2026_09_PHI_WAS", "eid": "E1"}]
+            if url.endswith("/props/E1.json"):
+                return [{"eid": "111", "stat": "rec_yds", "line": line + 3, "open": line + 3, "at": "2026-11-07T10:00Z"},
+                        {"eid": "111", "stat": "rec_yds", "line": line, "open": line + 3, "at": "2026-11-07T20:00Z"},
+                        {"eid": "222", "stat": "pass_yds", "line": 900.5, "open": 900.5, "at": "2026-11-07T20:00Z"}]
+            return None
+        return f
+
+    def lock(self, line, api=None):
+        return N.lock(self.data, self.store, self.at("19:05"), api, day="2026-11-08", fetch=self.fetch(line),
+                      ids={"TE1": "111", "QB1": "222"})
+
+    def at(self, hhmm, day="2026-11-07"):
+        return datetime.fromisoformat(f"{day}T{hhmm}").replace(tzinfo=ET)
+
+    def test_rows_take_the_latest_line(self):
+        rows = {r["stat"]: r for r in N.espn_rows(self.data, self.game, 2026, self.fetch(40.5), {"TE1": "111", "QB1": "222"})}
+        self.assertEqual((rows["rec_yds"]["line"], rows["rec_yds"]["open"], rows["rec_yds"]["over"]), (40.5, 43.5, None))
+        self.assertEqual(rows["pass_yds"]["name"], "Jayden Daniels")
+
+    def test_locks_without_the_odds_api(self):
+        api = FakeAPI(event_odds())
+        self.assertEqual(self.lock(self.line, api)["state"], "locked")
+        self.assertEqual(api.calls, [])                                      # no credits spent
+        doc = json.loads((self.store / "picks" / "2026-11-08.json").read_text())
+        pick = next(p for p in doc["picks"] if p["pid"] == "TE1")
+        self.assertEqual((pick["side"], pick["line"], pick["priced"], pick["price"]), ("o", self.line, False, -110))
+        self.assertTrue(-125 <= pick["play_to"] <= -105)
+        self.assertNotIn("pass_yds", [p["stat"] for p in doc["picks"]])     # a 99%+ under is skipped (missing news)
+        self.assertIn(f"(to {N.price_txt(pick['play_to'])})", doc["post"]["main"])
+        self.assertIn("check the price in DraftKings", doc["email"]["html"])
+        self.assertIn("1-800-GAMBLER", doc["post"]["main"])
+        self.assertTrue((self.store / "odds" / "espn" / "2026_09_PHI_WAS.json").exists())
+        self.assertFalse((self.store / "odds" / "props").exists())
+
+    def test_too_sure_is_skipped(self):
+        self.assertEqual(self.lock(10.5)["state"], "locked")                # model ~100% over: something's off
+        doc = json.loads((self.store / "picks" / "2026-11-08.json").read_text())
+        self.assertEqual([p for p in doc["picks"] if p["pid"] == "TE1"], [])
+
+    def test_no_lines_yet_waits(self):
+        r = N.lock(self.data, self.store, self.at("19:05"), None, day="2026-11-08", fetch=lambda url: None, ids={})
+        self.assertEqual(r["state"], "no-props")
+        self.assertFalse((self.store / "picks" / "2026-11-08.json").exists())
+
+    def test_play_to(self):
+        self.assertEqual(N.play_to(0.5396), -110)
+        self.assertEqual(N.play_to(0.56), -120)
+        self.assertEqual(N.play_to(0.45), 130)
+
+
+class LockAndGrade(unittest.TestCase):
+    """The priced Odds API path (off while LINES = "espn", kept for when credits allow)."""
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.data = make_data(Path(self.tmp.name))
+        self.store = Path(self.tmp.name) / "store"
+        self.lines, N.LINES = N.LINES, "odds_api"
+
+    def tearDown(self):
+        N.LINES = self.lines
         self.tmp.cleanup()
 
     def at(self, hhmm, day="2026-11-08"):
@@ -517,9 +592,12 @@ class Openings(unittest.TestCase):
             ir = {"id": "WR9", "name": "IR Receiver", "pos": "WR", "team": "PHI", "injury": {"status": "Out", "reserve": True},
                   "log": [{"week": w, "team": "PHI", "tgt": 8} for w in (1, 2, 3)]}
             data.players.append(ir)
-            self.assertEqual(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt"), (1.0, []))
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertEqual((t["vol"], t["out"]), (t["vol_all"], []))
             ir["log"] = [{"week": w, "team": "PHI", "tgt": 8} for w in range(1, 9)]      # played last game: a new absence
-            self.assertGreater(N.openings(data, data.by_id["TE1"], data.game["2026_09_PHI_WAS"], "tgt")[0], 1)
+            data._team = None
+            t = N.team_first(data, data.by_id["TE1"], 9, "tgt")
+            self.assertGreater(t["vol"], t["vol_all"])
 
 
 if __name__ == "__main__":

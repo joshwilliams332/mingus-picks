@@ -11,7 +11,8 @@ task emails the ready-to-post text to Josh, who posts it himself.
     store/picks/YYYY-MM-DD-results.json  that night's picks graded, the morning after (written once)
     store/picks/week-NN-recap.json       a week's night picks graded, + season record (written once)
     store/picks/status.json              what the last run did (read by the email tasks)
-    store/odds/props/<game id>.json      the props snapshot each pick was made from (one pull per game)
+    store/odds/espn/<game id>.json       DraftKings' lines each pick was made from (ESPN's free feed, no prices; LINES = "espn")
+    store/odds/props/<game id>.json      the priced Odds API snapshot (one pull per game; LINES = "odds_api", off since Nov 15)
     store/odds/usage.json                Odds API credits left (from the response headers)
 
 Credits: 1 per market per game (every player's line comes back in that one call), so 4 per night game. Listing
@@ -75,6 +76,10 @@ RECORD_START_WEEK = 9      # Week 8 night games are a test run, emailed but not 
 DAY_MARKETS = ("player_rush_yds", "player_reception_yds")
 DAY_RECORD_START_WEEK = 8
 DAY_MAX_PICKS = 5          # a slate's best 5 by edge (still at most 2 a game), like Hoop Lab's daily 5
+# Lines source (Josh, Nov 15, 2026: the Odds API key is basketball's for now). "espn": DraftKings' lines from ESPN's free
+# feed, saved by NFL Lab (nba-research data branch nfl/espn/), no prices; "odds_api": the priced pulls (needs credits).
+LINES = "espn"
+ASSUMED_PRICE = -110       # lines only: each side is treated as -110 at DraftKings' line (a book sets its line near 50/50)
 # slate -> (kickoff hours ET [from, to), folder under picks/, label). Both lock Saturday night (SUNDAY_LOCK_HOUR).
 SLATES = {
     "early": ((12, 16), "sun-early", "Sunday 1 PM"),
@@ -108,7 +113,7 @@ VOL_HALF_LIFE = 4          # games
 RATE_HALF_LIFE = 6         # games
 RATE_PAD = 20              # opportunities of league-average efficiency blended in
 RATE_PAD_BY = {"pass_yds": 100, "rec:TE": 50}   # per stat (or "stat:position"); others use RATE_PAD (Nov 9 retune)
-SETTINGS_VERSION = 2       # Mingus Football's model/settings.json from an older version is ignored (defaults kept)
+SETTINGS_VERSION = 3       # Mingus Football's model/settings.json from an older version is ignored (defaults kept)
 DEF_VOL_STRENGTH = 0.25
 DEF_EFF_STRENGTH = 0.25
 DEF_CAP = (0.95, 1.05)
@@ -119,6 +124,11 @@ PRIOR_WEIGHT = 12  # the spread estimate counts the typical spread as this many 
 MEAN_ADJ = {"pass_yds": 1.06 * 0.93, "rush_yds": 1.06, "rec_yds": 1.06, "rec": 1.06}
 SPREAD_ADJ = 1.225
 SKEWED = {"rush_yds", "rec_yds", "rec"}
+# Team first (Nov 9, 2026): blend his own recent volume with his team's recent volume x his share of it among the
+# teammates who may play (not Out / Doubtful / reserve, played in one of the team's last two games). Weight by type:
+TEAM_FIRST = {"att": 0.25, "car": 0.5, "tgt": 0.5}
+TEAM_HALF_LIFE = 16        # games, for the team's volume (team volume is steady; his share moves)
+TEAM_GAP = 1               # a teammate counts if he's missed at most this many of the team's games since his last
 
 
 # ---------------------------------------------------------------- small helpers
@@ -232,6 +242,19 @@ class Data:
         self.game = {g["id"]: g for g in self.games}
         self.full_name = {abbr: f"{t['city']} {t['nickname']}" for abbr, t in self.teams.items()}
         self._dvp = None
+        self._team = None
+
+    def team_totals(self):
+        """{(team, week): {"att", "car", "tgt"}}: every QB / RB / WR / TE game summed, by the team he played for."""
+        if self._team is None:
+            self._team = {}
+            for p in self.players:
+                if p["pos"] in ("QB", "RB", "WR", "TE"):
+                    for e in p["log"]:
+                        t = self._team.setdefault((e.get("team") or p["team"], e["week"]), {"att": 0, "car": 0, "tgt": 0})
+                        for k in t:
+                            t[k] += e.get(k) or 0
+        return self._team
 
     def dvp(self):
         """Per game allowed by each defense to each position: {team: {pos: {stat: per game}}}, and league averages."""
@@ -344,6 +367,36 @@ def parse_props(event_odds, data, game):
     return sorted(rows, key=lambda r: (r["team"], r["name"], r["stat"]))
 
 
+def espn_rows(data, game, season, fetch=None, ids=None):
+    """DraftKings' current lines for one game from NFL Lab's saved ESPN feed, as rows like parse_props() but without
+    prices: {pid, name, team, pos, stat, line, open, at, book: "DraftKings", books: 1}. None if the game isn't there."""
+    fetch = fetch or fetch_json
+    games = {g["id"]: g["eid"] for g in fetch(f"{NFL_LAB}/weeks/{season}-2-{game['week']:02d}.json") or []}
+    if game["id"] not in games:
+        return None
+    raw = fetch(f"{NFL_LAB}/props/{games[game['id']]}.json") or []
+    ids = ids if ids is not None else espn_ids(season)
+    by_espn = {}
+    for p in data.players:
+        e = ids.get(p["id"])
+        if e and p["team"] in (game["home"], game["away"]) and p["pos"] in ("QB", "RB", "WR", "TE"):
+            by_espn[str(e)] = p
+    latest = {}
+    for r in raw:
+        p = by_espn.get(str(r.get("eid")))
+        if p and r.get("stat") in STAT and r.get("line") is not None:
+            k = (p["id"], r["stat"])
+            if k not in latest or (r.get("at") or "") >= (latest[k].get("at") or ""):
+                latest[k] = r
+    rows = []
+    for (pid, stat), r in latest.items():
+        p = data.by_id[pid]
+        rows.append({"pid": pid, "name": p["name"], "team": p["team"], "pos": p["pos"], "stat": stat, "line": r["line"],
+                     "open": r.get("open"), "at": r.get("at"), "over": None, "under": None,
+                     "book_o": "DraftKings", "book_u": "DraftKings", "fair_o": None, "fair_u": None, "books": 1})
+    return sorted(rows, key=lambda r: (r["team"], r["name"], r["stat"]))
+
+
 # ---------------------------------------------------------------- our projection
 
 def team_context(data, team, game):
@@ -358,30 +411,42 @@ def team_context(data, team, game):
     return {"implied": imp, "avg": statistics.mean(imps) if imps else None, "rank": rank, "of": len(imps), "fav_by": fav_by}
 
 
-def openings(data, player, game, opp_key):
-    """Volume freed up by teammates ruled out (Out / Doubtful) who've been getting the same kind of work.
-    Returns (boost factor, [names]). Only 60% of their volume is assumed to move, spread over who's left by share.
-    Only a new absence counts (he played in his team's last game): someone out longer, like a player on injured reserve
-    (Out in the site data since Nov 9, 2026), is already missing from the games the others' averages come from."""
-    if opp_key == "att":
-        return 1.0, []
-    mates = [p for p in data.players if p["team"] == player["team"] and p["id"] != player["id"] and p["pos"] in ("RB", "WR", "TE", "QB")]
-    def mine(p):
-        return [e for e in p["log"] if e["week"] < game["week"] and (e.get("team") or p["team"]) == p["team"]]
-    def recent(p):
-        log = mine(p)[-3:]
-        return statistics.mean(e.get(opp_key) or 0 for e in log) if log else 0
-    team_last = max((e["week"] for p in mates + [player] for e in mine(p)), default=None)
-    def new_absence(p):
-        log = mine(p)
-        return bool(log) and log[-1]["week"] == team_last
-    out = [p for p in mates if (p.get("injury") or {}).get("status") in ("Out", "Doubtful") and new_absence(p)
-           and recent(p) >= (4 if opp_key == "tgt" else 6)]
-    if not out:
-        return 1.0, []
-    missing = sum(recent(p) for p in out)
-    active = recent(player) + sum(recent(p) for p in mates if p not in out)
-    return (min(1.25, 1 + 0.6 * missing / active) if active else 1.0), [p["name"] for p in out]
+def team_first(data, player, week, ok):
+    """Team-first volume (see TEAM_FIRST): his team's recent per-game attempts / carries / targets x his recent share of
+    them, re-scaled among the teammates who may play this game. Returns {"vol", "vol_all", "out"} or None (no history):
+    vol_all is the same without leaving out the teammates ruled out, so vol / vol_all is the injury opening, and out
+    names the ruled-out teammates who had been getting this work. Mirrors project() in scripts/backtest/engine.py."""
+    tot, team = data.team_totals(), player["team"]
+    tw = sorted(w for (t, w) in tot if t == team and w < week)
+    def shares(log):
+        return [(e.get(ok) or 0) / tot[(e.get("team") or team, e["week"])][ok] for e in log
+                if tot.get((e.get("team") or team, e["week"]), {}).get(ok)]
+    def wmean(xs, hl):
+        w = decay_weights(len(xs), hl)
+        return sum(a * b for a, b in zip(w, xs)) / sum(w)
+    mine = shares([e for e in player["log"] if e["week"] < week])
+    if not tw or not mine:
+        return None
+    mine = wmean(mine, VOL_HALF_LIFE)
+    if not mine:
+        return None
+    playing, ruled_out, out = 0.0, 0.0, []
+    for p in data.players:
+        if p["team"] != team or p["id"] == player["id"] or p["pos"] not in ("QB", "RB", "WR", "TE"):
+            continue
+        here = [e for e in p["log"] if (e.get("team") or team) == team and e["week"] < week]
+        sh = shares(here)
+        if not sh or sum(1 for w in tw if w > here[-1]["week"]) > TEAM_GAP:
+            continue
+        x = wmean(sh, VOL_HALF_LIFE)
+        if (p.get("injury") or {}).get("status") in ("Out", "Doubtful"):
+            ruled_out += x
+            if x >= 0.1:
+                out.append(p["name"])
+        else:
+            playing += x
+    team_vol = wmean([tot[(team, w)][ok] for w in tw], TEAM_HALF_LIFE)
+    return {"vol": team_vol * mine / (mine + playing), "vol_all": team_vol * mine / (mine + playing + ruled_out), "out": out}
 
 
 def model_settings():
@@ -389,17 +454,18 @@ def model_settings():
     return {"vol": "exp", "hl": VOL_HALF_LIFE, "rate_hl": RATE_HALF_LIFE, "K": RATE_PAD, "Ks": dict(RATE_PAD_BY), "ds": DEF_VOL_STRENGTH,
             "de": DEF_EFF_STRENGTH, "cap": round(DEF_CAP[1] - 1, 4), "is": IMP_STRENGTH, "sc": SCRIPT_PER_POINT,
             "c": round(MEAN_ADJ["rec_yds"], 4), "cs": {k: round(v / MEAN_ADJ["rec_yds"], 4) for k, v in MEAN_ADJ.items() if abs(v - MEAN_ADJ["rec_yds"]) > 1e-9},
-            "k": SPREAD_ADJ, "cv": dict(PRIOR_CV), "pw": PRIOR_WEIGHT, "skew": sorted(SKEWED)}
+            "k": SPREAD_ADJ, "cv": dict(PRIOR_CV), "pw": PRIOR_WEIGHT, "skew": sorted(SKEWED),
+            "tfa": TEAM_FIRST["att"], "tfc": TEAM_FIRST["car"], "tft": TEAM_FIRST["tgt"], "thl": TEAM_HALF_LIFE, "tgap": TEAM_GAP}
 
 
 def apply_settings(store):
     """Use the settings the weekly model review adopted (store/model/settings.json on the data branch), if any.
     The file holds the engine's format plus a note of when and why it was adopted; anything missing keeps the default."""
     global VOL_HALF_LIFE, RATE_HALF_LIFE, RATE_PAD, RATE_PAD_BY, DEF_VOL_STRENGTH, DEF_EFF_STRENGTH, DEF_CAP, IMP_STRENGTH
-    global SCRIPT_PER_POINT, MEAN_ADJ, SPREAD_ADJ, PRIOR_CV, PRIOR_WEIGHT, SKEWED
+    global SCRIPT_PER_POINT, MEAN_ADJ, SPREAD_ADJ, PRIOR_CV, PRIOR_WEIGHT, SKEWED, TEAM_FIRST, TEAM_HALF_LIFE, TEAM_GAP
     doc = read(Path(store) / "model" / "settings.json")
     P = (doc or {}).get("settings")
-    if not P or (doc.get("version") or 1) < SETTINGS_VERSION:    # older than these defaults: keep the defaults
+    if not P or (doc.get("version") or 1) < SETTINGS_VERSION:    # older than the code's defaults: keep the defaults
         return None
     RATE_PAD_BY = dict(P.get("Ks") or {})
     VOL_HALF_LIFE = P.get("hl", VOL_HALF_LIFE)
@@ -418,6 +484,9 @@ def apply_settings(store):
     PRIOR_WEIGHT = P.get("pw", PRIOR_WEIGHT)
     if "skew" in P:
         SKEWED = set(P["skew"])
+    TEAM_FIRST = {k: P.get(f"tf{k[0]}", v) for k, v in TEAM_FIRST.items()}
+    TEAM_HALF_LIFE = P.get("thl", TEAM_HALF_LIFE)
+    TEAM_GAP = P.get("tgap", TEAM_GAP)
     return doc
 
 
@@ -430,11 +499,11 @@ def projection(data, player, stat, game, week):
     """Our expected value and spread for a player's stat in this game, or None without enough history.
 
     The Mingus model: opportunities x efficiency, with the settings tuned on 2021-2025 (see VOL_HALF_LIFE).
-      Opportunities (his pass attempts, carries or targets): a recency-weighted average (4-game half-life), then
+      Opportunities (his pass attempts, carries or targets): a recency-weighted average (4-game half-life), blended
+        with team first (TEAM_FIRST: the team's volume x his share among teammates who may play), then
         x the defense: how many of those it allows to his position vs the league (quarter strength, 0.9-1.1)
         x the game: the team's implied points vs the week's average (quarter strength, 0.9-1.1)
-        x injury openings: a share of the work teammates ruled out leave behind (see openings(); not backtested,
-          since past injury reports aren't in the data).
+        (injury openings come through the share: teammates ruled out leave it, see team_first()).
       Efficiency (yards per attempt / carry / target, or catch rate): his recency-weighted rate (6-game half-life)
         steadied toward the position's league rate (counted as 20 opportunities).
     Times MEAN_ADJ (calibration). When the site has Sleeper's projection for the stat, the mean is half Sleeper, half
@@ -457,8 +526,17 @@ def projection(data, player, stat, game, week):
     f_imp = adj(ctx["implied"] / ctx["avg"], IMP_STRENGTH) if ctx["implied"] and ctx["avg"] else 1.0
     lean = max(-0.06, min(0.06, SCRIPT_PER_POINT * ctx["fav_by"]))
     f_script = 1 + lean if ok == "car" else 1 - lean if ok in ("att", "tgt") else 1.0
-    f_inj, out_names = openings(data, player, game, ok)
-    vol = vol_base * f_def_vol * f_imp * f_script * f_inj
+    tf, team = TEAM_FIRST.get(ok, 0), None
+    if tf:
+        team = team_first(data, player, week, ok)
+    if team:
+        # Injury openings come through the share: teammates ruled out drop out of it (backtested 2016-2025 with the
+        # weekly injury reports, Nov 9, 2026; the old separate openings() boost added nothing on top).
+        f_inj, out_names = team["vol"] / team["vol_all"], team["out"]
+        vol_base = tf * team["vol"] + (1 - tf) * vol_base
+    else:
+        f_inj, out_names = 1.0, []
+    vol = vol_base * f_def_vol * f_imp * f_script
 
     wr = decay_weights(len(vals), RATE_HALF_LIFE)
     w_val, w_opp = sum(w * v for w, v in zip(wr, vals)), sum(w * o for w, o in zip(wr, opps))
@@ -491,7 +569,7 @@ def projection(data, player, stat, game, week):
             "parts": {"opp_key": ok, "vol_base": round(vol_base, 1), "vol": round(vol, 1), "eff": round(eff, 3 if stat == "rec" else 2),
                       "rate": round(rate, 3 if stat == "rec" else 2), "f_def_vol": round(f_def_vol, 3), "f_imp": round(f_imp, 3),
                       "f_script": round(f_script, 3), "f_inj": round(f_inj, 3), "f_def_eff": round(f_def_eff, 3),
-                      "mean_adj": MEAN_ADJ[stat], "mingus": round(mingus, 1), "sleeper": sleeper, "out": out_names,
+                      "mean_adj": MEAN_ADJ[stat], "mingus": round(mingus, 1), "sleeper": sleeper, "out": out_names, "team_vol": round(team["vol"], 1) if team else None,
                       "share3": round(statistics.mean(shares), 3) if shares else None},
             "ctx": ctx}
 
@@ -582,6 +660,14 @@ def fair_price(p):
     return round(-100 * p / (1 - p)) if p >= 0.5 else round(100 * (1 - p) / p)
 
 
+def play_to(prob):
+    """The worst American price that still clears PICK["min_edge"] at this chance (rounded to 5), e.g. -115."""
+    dec = (1 + PICK["min_edge"]) / prob                        # decimal odds needed
+    if dec >= 2:
+        return int(5 * round(100 * (dec - 1) / 5))
+    return int(-5 * round(100 / (dec - 1) / 5))
+
+
 def injured(player):
     inj = player.get("injury") or {}
     return (inj.get("status") or "") in PICK["skip_status"]
@@ -595,23 +681,29 @@ def candidates(data, game, rows):
         pos_ok = next((pos for _, (k, _, _, pos) in MARKETS.items() if k == r["stat"]), set())
         if not p or p["pos"] not in pos_ok or injured(p):
             continue
-        if r["books"] < PICK["min_books"]:
+        priced = r.get("over") is not None or r.get("under") is not None
+        if priced and r["books"] < PICK["min_books"]:
             continue
         proj = projection(data, p, r["stat"], game, game["week"])
         if not proj or proj["parts"]["vol_base"] < PICK["min_volume"][proj["parts"]["opp_key"]]:
             continue
         for side in ("o", "u"):
-            price = r["over"] if side == "o" else r["under"]
-            if price is None or not (PICK["price_range"][0] <= price <= PICK["price_range"][1]):
-                continue
             model = chance_over(proj, r["line"]) if side == "o" else 1 - chance_over(proj, r["line"])
-            market = r["fair_o"] if side == "o" else r["fair_u"]
+            if priced:
+                price = r["over"] if side == "o" else r["under"]
+                if price is None or not (PICK["price_range"][0] <= price <= PICK["price_range"][1]):
+                    continue
+                market = r["fair_o"] if side == "o" else r["fair_u"]
+            else:
+                # Lines only: DraftKings sets its line near 50/50, so the market is taken as even at -110; the same rule
+                # then picks sides our model gives about 63-70%, and play_to says the worst price still worth it.
+                price, market = ASSUMED_PRICE, 0.5
             if abs(model - market) > PICK["max_gap"]:
                 continue
             prob = PICK["model_weight"] * model + (1 - PICK["model_weight"]) * market
             edge = prob * (1 + payout(price)) - 1
             out.append({"row": r, "player": p, "proj": proj, "side": side, "price": price, "model": model,
-                        "market": market, "prob": prob, "edge": edge})
+                        "market": market, "prob": prob, "edge": edge, "priced": priced, "play_to": play_to(prob)})
     return out
 
 
@@ -693,15 +785,20 @@ def deep_dive(c):
     rate_word = {"pass_yds": "yds/attempt", "rush_yds": "yds/carry", "rec_yds": "yds/target", "rec": "catch rate"}[r["stat"]]
     fmt_rate = (lambda v: f"{v:.0%}") if r["stat"] == "rec" else (lambda v: f"{v:.1f}")
     adj = [f"{proj['opp']} defense ×{x['f_def_vol']:.2f}", f"{p['team']} implied {ctx['implied']:g} ×{x['f_imp']:.2f}" if ctx.get("implied") else None,
-           f"game script ({'favored' if ctx['fav_by'] > 0 else 'underdog' if ctx['fav_by'] < 0 else 'pick-em'} {abs(ctx['fav_by']):g}) ×{x['f_script']:.2f}",
-           f"{' + '.join(x['out'])} out ×{x['f_inj']:.2f}" if x["out"] else None]
+           f"game script ({'favored' if ctx['fav_by'] > 0 else 'underdog' if ctx['fav_by'] < 0 else 'pick-em'} {abs(ctx['fav_by']):g}) ×{x['f_script']:.2f}"]
+    # Injury openings are already inside vol_base (team first: ruled-out teammates leave the share split).
+    opening = f" (incl. {' + '.join(x['out'])} out: his share ×{x['f_inj']:.2f})" if x["out"] else ""
     lines = [
-        f"{short_pick(c)} · {price_txt(c['price'])} (best price: {r['book_o'] if c['side'] == 'o' else r['book_u']}; line from {r['books']} books)",
+        (f"{short_pick(c)} · {price_txt(c['price'])} (best price: {r['book_o'] if c['side'] == 'o' else r['book_u']}; line from {r['books']} books)"
+         if c.get("priced", True) else f"{short_pick(c)} · DraftKings line" + (f" (opened {r['open']:g})" if r.get("open") not in (None, r["line"]) else "")
+         + f"; worth it at {price_txt(c['play_to'])} or better"),
         f"Projection {proj['mean']:g}" + (f" = half Sleeper ({x['sleeper']:g}), half our model ({x['mingus']:g}), less 3%" if x["sleeper"] is not None else f" (our model, less 3% for calibration)") +
         f"; season {proj['season']:g}, last 3 {proj['last3']:g} per game.",
-        f"Volume: {x['vol_base']:g} {word}/game → {x['vol']:g} after " + ", ".join(a for a in adj if a) + ".",
+        f"Volume: {x['vol_base']:g} {word}/game{opening} → {x['vol']:g} after " + ", ".join(a for a in adj if a) + ".",
         f"Efficiency: {fmt_rate(x['rate'])} {rate_word} (steadied toward the league) × {proj['opp']} allows ×{x['f_def_eff']:.2f} → {fmt_rate(x['eff'])}.",
-        f"Chance: ours {c['model']:.0%}, books' no-vig {c['market']:.0%}, blended {c['prob']:.0%}; edge {c['edge']:+.0%} at this price.",
+        (f"Chance: ours {c['model']:.0%}, books' no-vig {c['market']:.0%}, blended {c['prob']:.0%}; edge {c['edge']:+.0%} at this price."
+         if c.get("priced", True) else
+         f"Chance: ours {c['model']:.0%}, DraftKings' line taken as 50/50, blended {c['prob']:.0%}; clears our bar at {price_txt(c['play_to'])} or better."),
     ]
     return lines
 
@@ -719,6 +816,7 @@ def to_pick(c, game, data=None):
         "stat": r["stat"], "side": c["side"], "line": r["line"], "price": c["price"],
         "book": r["book_o"] if c["side"] == "o" else r["book_u"], "books": r["books"],
         "proj": c["proj"]["mean"], "source": c["proj"]["source"],
+        "priced": c.get("priced", True), "play_to": c.get("play_to"),
         "prob": round(c["prob"], 3), "model": round(c["model"], 3), "market": round(c["market"], 3), "edge": round(c["edge"], 3),
         "kickoff": kickoff(game).isoformat(), "why": why_line(c, data), "deep": deep_dive(c),
     }
@@ -800,7 +898,8 @@ def slate_post(games, picks, season, test):
 
     def build(with_prices):
         return "\n".join([head, "", f"Our top {len(picks)}:" if len(picks) > 1 else "Our pick:", "",
-                          *[short(p) + (f" ({price_txt(p['price'])})" if with_prices else "") for p in picks], "",
+                          *[short(p) + ((f" ({price_txt(p['price'])})" if p.get("priced", True) else f" (to {price_txt(p['play_to'])})")
+                                        if with_prices else "") for p in picks], "",
                           f"Season: {record_txt(season)}" if rec else "Graded after the game, wins and losses.",
                           "", FOOT])
     main = build(True)
@@ -874,7 +973,59 @@ def lock_opens(games):
     return min(datetime(k.year, k.month, k.day, MORNING_LOCK_HOUR, tzinfo=ET), k - timedelta(minutes=LOCK_BEFORE_MIN))
 
 
-def lock(data, store, now, api, force=False, slate="night", day=None):
+def espn_snaps(data, store, games, now, fetch=None, ids=None):
+    """Lines-only snapshots for a slate from ESPN's free DraftKings lines (NFL Lab's saved feed), saved to
+    store/odds/espn/<game id>.json (the lines each pick was made from). {game id: snap}, games without lines left out."""
+    season = data.meta.get("season")
+    ids = ids if ids is not None else espn_ids(season)
+    snaps = {}
+    for g in games:
+        rows = espn_rows(data, g, season, fetch, ids)
+        if rows:
+            snaps[g["id"]] = {"game": g["id"], "source": "ESPN (DraftKings lines, no prices)", "pulled": now.isoformat(), "rows": rows}
+            write(Path(store) / "odds" / "espn" / f"{g['id']}.json", snaps[g["id"]])
+    return snaps
+
+
+def odds_api_snaps(data, store, games, now, api, markets):
+    """Priced snapshots from The Odds API (one pull per game, saved to store/odds/props/<game id>.json), or
+    {"state", "why"} when it can't pull. Off while LINES = "espn"."""
+    if api is None:
+        return {"state": "no-props", "why": "no Odds API key in this run"}
+    try:
+        events = api.events()
+    except Exception as e:  # network / key problem: say so, try again next run
+        return {"state": "no-props", "why": f"couldn't reach The Odds API ({e})"}
+    snaps = {}
+    for g in games:
+        snap_file = Path(store) / "odds" / "props" / f"{g['id']}.json"
+        snap = read(snap_file)
+        if snap is None:
+            ev = match_event(data, g, events)
+            if not ev:
+                continue
+            left = (api.usage or {}).get("remaining")
+            if left is not None and left - len(markets) < CREDIT_RESERVE:
+                if not snaps:
+                    return {"state": "no-credits", "why": f"only {left} Odds API credits left this month"}
+                break                                   # lock what we already pulled rather than nothing
+            try:
+                raw = api.props(ev["id"], list(markets))
+            except Exception as e:
+                return {"state": "no-props", "why": f"props pull failed ({e})"}
+            snap = {"game": g["id"], "event": ev["id"], "pulled": now.isoformat(), "rows": parse_props(raw, data, g)}
+            write(snap_file, snap)
+        snaps[g["id"]] = snap
+    return snaps
+
+
+def slate_rows(store, gid):
+    """The lines a game's picks were made from: the Odds API snapshot, else the ESPN one."""
+    return ((read(Path(store) / "odds" / "props" / f"{gid}.json") or read(Path(store) / "odds" / "espn" / f"{gid}.json") or {})
+            .get("rows", []))
+
+
+def lock(data, store, now, api, force=False, slate="night", day=None, fetch=None, ids=None):
     """Lock a slate's picks once (the night games, or a Sunday daytime slate: "early" = 1 PM games, "late" = 4 PM games)
     on the first run after lock_opens(). `day` is the games' ET date (default today; Saturday runs lock Sunday's)."""
     day_ = slate in SLATES
@@ -893,33 +1044,18 @@ def lock(data, store, now, api, force=False, slate="night", day=None):
     opens = lock_opens(pre)
     if not force and now < opens:
         return {"day": day, "state": "waiting", "why": f"locks from {day_label(et_date(opens))} {time_label(opens)}"}
-    if api is None:
-        return {"day": day, "state": "no-props", "why": "no Odds API key in this run"}
-
-    snaps = {}
-    try:
-        events = api.events()
-    except Exception as e:  # network / key problem: say so, try again next run
-        return {"day": day, "state": "no-props", "why": f"couldn't reach The Odds API ({e})"}
-    for g in pre:
-        snap_file = Path(store) / "odds" / "props" / f"{g['id']}.json"
-        snap = read(snap_file)
-        if snap is None:
-            ev = match_event(data, g, events)
-            if not ev:
-                continue
-            left = (api.usage or {}).get("remaining")
-            if left is not None and left - len(markets) < CREDIT_RESERVE:
-                if not snaps:
-                    return {"day": day, "state": "no-credits", "why": f"only {left} Odds API credits left this month"}
-                break                                   # lock what we already pulled rather than nothing
-            try:
-                raw = api.props(ev["id"], list(markets))
-            except Exception as e:
-                return {"day": day, "state": "no-props", "why": f"props pull failed ({e})"}
-            snap = {"game": g["id"], "event": ev["id"], "pulled": now.isoformat(), "rows": parse_props(raw, data, g)}
-            write(snap_file, snap)
-        snaps[g["id"]] = snap
+    lines_only = LINES == "espn"
+    if lines_only:
+        try:
+            snaps = espn_snaps(data, store, pre, now, fetch, ids)
+        except Exception as e:  # network problem: say so, try again next run
+            return {"day": day, "state": "no-props", "why": f"couldn't read DraftKings' lines from NFL Lab's ESPN feed ({e})"}
+        if not snaps:
+            return {"day": day, "state": "no-props", "why": "DraftKings' player lines aren't in ESPN's feed for this slate yet"}
+    else:
+        snaps = odds_api_snaps(data, store, pre, now, api, markets)
+        if "state" in snaps:
+            return {"day": day, **snaps}
     if not any(s["rows"] for s in snaps.values()):
         return {"day": day, "state": "no-props", "why": "the books haven't posted player props for this slate yet"}
 
@@ -933,18 +1069,26 @@ def lock(data, store, now, api, force=False, slate="night", day=None):
         picks = sorted(picks, key=lambda p: -p["edge"])[:DAY_MAX_PICKS]
     season = read(Path(store) / "picks" / ("sunday-record.json" if day_ else "record.json"), {}).get("season") if not test else None
     post = slate_post(pre, picks, season, test)
-    day_note = ([f"{SLATES[slate][2]} games: receiving and rushing yards only (2 credits a game). Tracked in the Sunday record, "
-                 "separate from the night-game record."] if day_ else [])
+    day_note = ([f"{SLATES[slate][2]} games: " + ("" if lines_only else "receiving and rushing yards only (2 credits a game). ")
+                 + "Tracked in the Sunday record, separate from the night-game record."] if day_ else [])
     hours = (kickoff(pre[0]) - now).total_seconds() / 3600
     if hours > LOCK_BEFORE_MIN / 60:
         day_note.append(f"Locked about {hours:.0f} hours before kickoff, before inactives come out (90 minutes before kickoff). "
                         "Locked picks don't change: a pick whose player ends up inactive is graded as a void"
                         + ".")
-    notes = day_note + [
+    lines_notes = [
+        f"Locked {time_label(now)} from DraftKings' lines ({n_cands} sides across {len(snaps)} game(s)) in ESPN's free feed. "
+        "No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it "
+        "(\"to -115\" = take it at -115 or better); lines may have moved since.",
+        "Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our "
+        "model at about 63-70%. Above 70% it was skipped (usually news we can't see). The record counts each pick at -110.",
+    ]
+    notes = day_note + (lines_notes if lines_only else [
         f"Locked {time_label(now)} from {n_cands} prop sides across {sum(s['rows'] and 1 or 0 for s in snaps.values())} game(s); "
         "prices are from that moment, so check your book; lines may have moved.",
         "Our chance = 30% our projection + 70% the books' no-vig price. Props where the two disagree by 20+ points were skipped "
         "(usually news we can't see).",
+    ]) + [
         "Projection = our matchup model (opportunities × efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.",
         "Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.",
         "This football model has no backtest against real lines yet; the public record is the test.",
@@ -1454,7 +1598,7 @@ def headsup(data, store, now, slate, fetch=fetch_json):
     # players with posted props in this slate (their lines are what inactives move)
     prop_players = {}
     for g in games:
-        for r in (read(Path(store) / "odds" / "props" / f"{g['id']}.json") or {}).get("rows", []):
+        for r in slate_rows(store, g["id"]):
             pl = data.by_id.get(r.get("pid"))
             if pl:
                 prop_players[pl["id"]] = pl
@@ -1540,7 +1684,7 @@ def main(argv=None):
     if adopted:
         print(f"  model settings from the weekly review: adopted {adopted.get('adopted_at', '?')}")
     key = os.environ.get("ODDS_API_KEY")
-    api = OddsAPI(key, a.store) if key and not a.no_odds else None
+    api = OddsAPI(key, a.store) if key and not a.no_odds and LINES == "odds_api" else None   # off while lines come from ESPN
     stats_rows = load_stats(data.meta.get("season"), a.stats)
     rc = recap(data, a.store, stats_rows, now)       # first, so tonight's email can show the latest record
     res = night_results(data, a.store, stats_rows, now)

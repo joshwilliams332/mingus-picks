@@ -21,6 +21,18 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   `odds/usage.json`, `tool/prop-tool.html`. File formats are relied on by NFL Lab (see the project doc
   `claude/plans/nfl-lab.md`); keep them stable or note changes in the football handoff.
 
+## Lines only, from ESPN (Josh, Nov 15, 2026: the Odds API key is basketball's for now)
+- `LINES = "espn"`: no Odds API pulls (no client is even created). Each lock reads DraftKings' current lines from the
+  feed NFL Lab saves from ESPN (nba-research `data` branch `nfl/espn/weeks/<season>-2-<WW>.json` -> ESPN event,
+  `nfl/espn/props/<event>.json` rows `{eid, stat, line, open, at}`, latest `at` wins; players matched by nflverse
+  roster `espn_id`) into `odds/espn/<game id>.json` (`odds/props/` is only for priced pulls). No prices.
+- Same pick rule with the market taken as 50/50 at the line and -110 (`ASSUMED_PRICE`): our model needs about 63-70%
+  for a side (over 70% = skipped, likely news we can't see). Each pick has `priced: false`, `price: -110` (the record
+  counts it at -110) and `play_to`, the worst price that still clears the 3% edge; posts show "(to -115)" and the
+  email says to check the price in DraftKings. All four stats on every slate (the Sunday two-stat limit was only
+  for credits). raw.githubusercontent.com is blocked from the cloud sandbox; Actions reaches it.
+- Back to priced pulls if credits return: `LINES = "odds_api"` (tests in `LockAndGrade` cover that path).
+
 ## Picks system (moved from Mingus Football's notes)
 - **Night-game best bets** (`scripts/nfl_picks.py`, tested in `tests/test_nfl_picks.py`, run by
   `.github/workflows/mingus-picks.yml`, separate from the deploy; it downloads the live site's data JSON instead of
@@ -90,8 +102,11 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   only, no prices. Each graded pick gets `close` and `clv` (+ = the line moved our way: up for an over, down for an
   under); results files carry a `clv` summary, `picks/clv.json` the season's, and the results emails (incl. the Sunday
   one) a line about it. Never blocks grading. Week 9 Sunday check: beat the close 4 of 10, matched 5, avg +0.5.
-- **Injury openings:** `openings()` only counts a new absence (he played in the team's last game); reserve-list
-  players are Out in the site data since Nov 9 (Mingus Football `reserve_status`).
+- **Team-first volume** (Nov 9, 2026; Mingus Football `team_first`, settings version 3): volume blends his own
+  recent average with the team's recent volume x his share among teammates who may play (not Out / Doubtful /
+  reserve, missed at most one team game); weights pass 0.25, carries 0.5, targets 0.5. This replaced `openings()`:
+  a ruled-out teammate leaves the share split, `parts.f_inj` / `parts.out` still show the effect for the why line.
+  Backtest 2016-2025 multi Brier 0.2130 -> 0.2117 (all 10 seasons better), 2026 0.2113 -> 0.2109.
 
 - **Ten-season retune** (Nov 9, 2026; Mingus Football PR #41): model defaults = `SETTINGS_VERSION` 2 (per-stat league
   pull `RATE_PAD_BY`, tighter matchup caps, new spreads); an older `model/settings.json` is ignored. `projection()`
