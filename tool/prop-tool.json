@@ -1,14 +1,16 @@
 {
- "week": 9,
- "built": "2026-11-03T23:39+00:00",
- "props": 375,
- "games": 15,
+ "week": 10,
+ "built": "2026-11-15T09:01+00:00",
+ "props": 335,
+ "games": 13,
  "stamp": {
-  "week": 9,
+  "week": 10,
   "scored": [
-   "8"
+   "10",
+   "8",
+   "9"
   ],
-  "changes": 1,
-  "props": 375
+  "changes": 3,
+  "props": 335
  }
 }
