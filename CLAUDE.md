@@ -32,6 +32,15 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   email says to check the price in DraftKings. All four stats on every slate (the Sunday two-stat limit was only
   for credits). raw.githubusercontent.com is blocked from the cloud sandbox; Actions reaches it.
 - Back to priced pulls if credits return: `LINES = "odds_api"` (tests in `LockAndGrade` cover that path).
+- **Line check** (Josh, Nov 15: "we'll be checking how well it projects over/under"): at lock, `mark_model()` saves the
+  model's lean on every saved DraftKings line (`row.model = {p_over, median}` in `odds/espn/`), not just picks.
+  `line_check()` grades them all from nflverse box scores into `picks/line-check.json` (lean hit rate and Brier by
+  confidence 50-55 / 55-60 / 60-65 / 65-70 / 70%+, by stat, and the 63-70% pick window); a line in the night results
+  emails and `status.json`. Pushes and players who didn't play are left out. Hit rate vs a line is not a win rate
+  (no prices; catch unders are often juiced). Backfill on Weeks 9-10 (Nov 15, injuries reset to each week's report,
+  logs cut to earlier weeks): 366 lines, lean hit 59% (overs 59% vs a 47% base rate, unders 60% vs 53%), Brier 0.250
+  (as sure as a coin: 70%+ leans hit only 62%, so it's overconfident); catches 63%, receiving 60%, rushing 50%,
+  passing 53%. Live scorecard starts with MNF 11/16.
 
 ## Picks system (moved from Mingus Football's notes)
 - **Night-game best bets** (`scripts/nfl_picks.py`, tested in `tests/test_nfl_picks.py`, run by
