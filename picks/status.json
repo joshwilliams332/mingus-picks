@@ -1,12 +1,11 @@
 {
- "checked": "2026-11-16T19:45:56.180780+00:00",
+ "checked": "2026-11-16T22:46:15.076084+00:00",
  "today": "2026-11-16",
  "odds_key": true,
  "lock": {
   "day": "2026-11-16",
   "state": "locked",
-  "why": "2 pick(s) locked",
-  "new": true
+  "why": "already locked"
  },
  "recap": {
   "week": 10,
@@ -14,8 +13,9 @@
   "why": "the week's night games aren't all played yet"
  },
  "results": {
-  "day": "2026-11-15",
-  "state": "done"
+  "day": "2026-11-16",
+  "state": "waiting",
+  "why": "tonight's games haven't been played"
  },
  "sunday": {
   "early": {
