@@ -1,0 +1,115 @@
+{
+ "date": "2026-11-16",
+ "season": 2026,
+ "week": 10,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_10_LAC_BAL"
+ ],
+ "locked_at": "2026-11-16T19:45:56.180780+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_10_LAC_BAL-00-0040727-rec",
+   "gid": "2026_10_LAC_BAL",
+   "week": 10,
+   "pid": "00-0040727",
+   "name": "Tre Harris",
+   "team": "LAC",
+   "opp": "BAL",
+   "pos": "WR",
+   "stat": "rec",
+   "side": "u",
+   "line": 3.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 3.1,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -120,
+   "prob": 0.559,
+   "model": 0.697,
+   "market": 0.5,
+   "edge": 0.067,
+   "kickoff": "2026-11-16T20:15:00-05:00",
+   "why": "Our model's typical game for him: 2.4 vs the 3.5 line (70% for the under), LAC is implied for just 17; stayed under 3.5 in 4 of his last 5.",
+   "deep": [
+    "Tre Harris U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better",
+    "Projection 3.1 = half Sleeper (3), half our model (3.1), less 3%; season 3, last 3 2.7 per game.",
+    "Volume: 4.9 targets/game \u2192 4.8 after BAL defense \u00d71.01, LAC implied 17 \u00d70.97, game script (underdog 4.5) \u00d71.00.",
+    "Efficiency: 61% catch rate (steadied toward the league) \u00d7 BAL allows \u00d71.01 \u2192 62%.",
+    "Chance: ours 70%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better."
+   ]
+  },
+  {
+   "id": "2026_10_LAC_BAL-00-0034975-rec",
+   "gid": "2026_10_LAC_BAL",
+   "week": 10,
+   "pid": "00-0034975",
+   "name": "Justice Hill",
+   "team": "BAL",
+   "opp": "LAC",
+   "pos": "RB",
+   "stat": "rec",
+   "side": "u",
+   "line": 2.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 2.3,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.554,
+   "model": 0.679,
+   "market": 0.5,
+   "edge": 0.057,
+   "kickoff": "2026-11-16T20:15:00-05:00",
+   "why": "Our model's typical game for him: 1.9 vs the 2.5 line (68% for the under), LAC allows the 6th fewest catches to RBs.",
+   "deep": [
+    "Justice Hill U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better",
+    "Projection 2.3 = half Sleeper (1.9), half our model (2.8), less 3%; season 2.2, last 3 3.3 per game.",
+    "Volume: 3.8 targets/game \u2192 3.7 after LAC defense \u00d70.99, BAL implied 21.5 \u00d70.99, game script (favored 4.5) \u00d71.00.",
+    "Efficiency: 74% catch rate (steadied toward the league) \u00d7 LAC allows \u00d70.95 \u2192 70%.",
+    "Chance: ours 68%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 LAC @ BAL\n\nOur top 2:\n\nTre Harris U 3.5 catches (to -120)\nJustice Hill U 2.5 catches (to -115)\n\nSeason: 4-2 (+1.5u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Tre Harris U 3.5 catches: Our model's typical game for him: 2.4 vs the 3.5 line (70% for the under), LAC is implied for just 17; stayed under 3.5 in 4 of his last 5.",
+   "Justice Hill U 2.5 catches: Our model's typical game for him: 1.9 vs the 2.5 line (68% for the under), LAC allows the 6th fewest catches to RBs."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 MNF picks \u00b7 Mon 11/16 \u00b7 2 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">MNF picks \u00b7 Mon 11/16 \u00b7 2 picks</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 LAC @ BAL\n\nOur top 2:\n\nTre Harris U 3.5 catches (to -120)\nJustice Hill U 2.5 catches (to -115)\n\nSeason: 4-2 (+1.5u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Tre Harris U 3.5 catches: Our model&#x27;s typical game for him: 2.4 vs the 3.5 line (70% for the under), LAC is implied for just 17; stayed under 3.5 in 4 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Justice Hill U 2.5 catches: Our model&#x27;s typical game for him: 1.9 vs the 2.5 line (68% for the under), LAC allows the 6th fewest catches to RBs.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Tre Harris U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better</b><div style=\"margin-top:4px;color:#333\">Projection 3.1 = half Sleeper (3), half our model (3.1), less 3%; season 3, last 3 2.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 4.9 targets/game \u2192 4.8 after BAL defense \u00d71.01, LAC implied 17 \u00d70.97, game script (underdog 4.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 61% catch rate (steadied toward the league) \u00d7 BAL allows \u00d71.01 \u2192 62%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 70%, DraftKings&#x27; line taken as 50/50, blended 56%; clears our bar at -120 or better.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Justice Hill U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 2.3 = half Sleeper (1.9), half our model (2.8), less 3%; season 2.2, last 3 3.3 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 3.8 targets/game \u2192 3.7 after LAC defense \u00d70.99, BAL implied 21.5 \u00d70.99, game script (favored 4.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 74% catch rate (steadied toward the league) \u00d7 LAC allows \u00d70.95 \u2192 70%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 68%, DraftKings&#x27; line taken as 50/50, blended 55%; clears our bar at -115 or better.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked about 5 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 2:45 PM ET from DraftKings&#x27; lines (30 sides across 1 game(s)) in ESPN&#x27;s free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (&quot;to -115&quot; = take it at -115 or better); lines may have moved since.</li><li>Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can&#x27;t see). The record counts each pick at -110.</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 MNF \u00b7 LAC @ BAL\n\nOur top 2:\n\nTre Harris U 3.5 catches (to -120)\nJustice Hill U 2.5 catches (to -115)\n\nSeason: 4-2 (+1.5u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nTre Harris U 3.5 catches: Our model's typical game for him: 2.4 vs the 3.5 line (70% for the under), LAC is implied for just 17; stayed under 3.5 in 4 of his last 5.\n\nJustice Hill U 2.5 catches: Our model's typical game for him: 1.9 vs the 2.5 line (68% for the under), LAC allows the 6th fewest catches to RBs.\n\nDeep dive:\nTre Harris U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better\nProjection 3.1 = half Sleeper (3), half our model (3.1), less 3%; season 3, last 3 2.7 per game.\nVolume: 4.9 targets/game \u2192 4.8 after BAL defense \u00d71.01, LAC implied 17 \u00d70.97, game script (underdog 4.5) \u00d71.00.\nEfficiency: 61% catch rate (steadied toward the league) \u00d7 BAL allows \u00d71.01 \u2192 62%.\nChance: ours 70%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better.\n\nJustice Hill U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better\nProjection 2.3 = half Sleeper (1.9), half our model (2.8), less 3%; season 2.2, last 3 3.3 per game.\nVolume: 3.8 targets/game \u2192 3.7 after LAC defense \u00d70.99, BAL implied 21.5 \u00d70.99, game script (favored 4.5) \u00d71.00.\nEfficiency: 74% catch rate (steadied toward the league) \u00d7 LAC allows \u00d70.95 \u2192 70%.\nChance: ours 68%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better.\n\nNote: Locked about 5 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 2:45 PM ET from DraftKings' lines (30 sides across 1 game(s)) in ESPN's free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (\"to -115\" = take it at -115 or better); lines may have moved since.\nNote: Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can't see). The record counts each pick at -110.\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}

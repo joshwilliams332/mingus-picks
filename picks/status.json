@@ -1,11 +1,12 @@
 {
- "checked": "2026-11-16T06:09:04.674497+00:00",
+ "checked": "2026-11-16T19:45:56.180780+00:00",
  "today": "2026-11-16",
  "odds_key": true,
  "lock": {
   "day": "2026-11-16",
-  "state": "waiting",
-  "why": "locks from Mon 11/16 9 AM ET"
+  "state": "locked",
+  "why": "2 pick(s) locked",
+  "new": true
  },
  "recap": {
   "week": 10,
@@ -14,9 +15,7 @@
  },
  "results": {
   "day": "2026-11-15",
-  "state": "done",
-  "new": true,
-  "record": "1-1 (-0.0u)"
+  "state": "done"
  },
  "sunday": {
   "early": {
@@ -30,16 +29,13 @@
     "why": "no Sunday 1 PM games on Mon 11/16"
    },
    "quick": {
-    "day": "2026-11-15",
-    "state": "done"
+    "state": "skipped"
    }
   },
   "late": {
    "results": {
     "day": "2026-11-15",
-    "state": "done",
-    "new": true,
-    "record": "2-0 (+1.8u)"
+    "state": "done"
    },
    "lock": {
     "day": "2026-11-16",
@@ -47,10 +43,7 @@
     "why": "no Sunday 4 PM games on Mon 11/16"
    },
    "quick": {
-    "day": "2026-11-15",
-    "state": "done",
-    "new": true,
-    "record": "2-0"
+    "state": "skipped"
    }
   }
  },
@@ -76,10 +69,7 @@
   "state": "none"
  },
  "sunday_results": {
-  "day": "2026-11-15",
-  "state": "done",
-  "new": true,
-  "record": "7-2"
+  "state": "none"
  },
  "night_update": {
   "state": "none"
