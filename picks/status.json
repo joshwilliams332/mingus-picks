@@ -1,11 +1,11 @@
 {
- "checked": "2026-11-15T23:58:40.813097+00:00",
- "today": "2026-11-15",
+ "checked": "2026-11-16T06:09:04.674497+00:00",
+ "today": "2026-11-16",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-15",
-  "state": "locked",
-  "why": "already locked"
+  "day": "2026-11-16",
+  "state": "waiting",
+  "why": "locks from Mon 11/16 9 AM ET"
  },
  "recap": {
   "week": 10,
@@ -14,8 +14,9 @@
  },
  "results": {
   "day": "2026-11-15",
-  "state": "waiting",
-  "why": "tonight's games haven't been played"
+  "state": "done",
+  "new": true,
+  "record": "1-1 (-0.0u)"
  },
  "sunday": {
   "early": {
@@ -24,9 +25,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-15",
-    "state": "locked",
-    "why": "already locked"
+    "day": "2026-11-16",
+    "state": "no-games",
+    "why": "no Sunday 1 PM games on Mon 11/16"
    },
    "quick": {
     "day": "2026-11-15",
@@ -36,52 +37,52 @@
   "late": {
    "results": {
     "day": "2026-11-15",
-    "state": "pending",
-    "why": "nflverse hasn't published the box score yet"
+    "state": "done",
+    "new": true,
+    "record": "2-0 (+1.8u)"
    },
    "lock": {
-    "day": "2026-11-15",
-    "state": "locked",
-    "why": "already locked"
+    "day": "2026-11-16",
+    "state": "no-games",
+    "why": "no Sunday 4 PM games on Mon 11/16"
    },
    "quick": {
     "day": "2026-11-15",
-    "state": "waiting",
-    "why": "not every game is final on ESPN yet"
+    "state": "done",
+    "new": true,
+    "record": "2-0"
    }
   }
  },
  "tomorrow": {
-  "day": "2026-11-16",
+  "day": "2026-11-17",
   "early": {
-   "day": "2026-11-16",
+   "day": "2026-11-17",
    "state": "no-games",
-   "why": "no Sunday 1 PM games on Mon 11/16"
+   "why": "no Sunday 1 PM games on Tue 11/17"
   },
   "late": {
-   "day": "2026-11-16",
+   "day": "2026-11-17",
    "state": "no-games",
-   "why": "no Sunday 4 PM games on Mon 11/16"
+   "why": "no Sunday 4 PM games on Tue 11/17"
   },
   "night": {
-   "day": "2026-11-16",
-   "state": "waiting",
-   "why": "locks from Mon 11/16 9 AM ET"
+   "day": "2026-11-17",
+   "state": "no-games",
+   "why": "no night games on Tue 11/17"
   }
  },
  "sunday_email": {
-  "day": "2026-11-15",
-  "state": "done"
+  "state": "none"
  },
  "sunday_results": {
   "day": "2026-11-15",
-  "state": "waiting",
-  "why": "1 of 3 slates graded"
+  "state": "done",
+  "new": true,
+  "record": "7-2"
  },
  "night_update": {
-  "day": "2026-11-15",
-  "state": "waiting",
-  "why": "reads inactives from 7 PM ET"
+  "state": "none"
  },
  "credits": {
   "remaining": 270,
