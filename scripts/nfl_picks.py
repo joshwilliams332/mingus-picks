@@ -1030,8 +1030,25 @@ def mark_model(data, store, games, snaps):
             p = data.by_id.get(r["pid"])
             proj = projection(data, p, r["stat"], g, g["week"]) if p else None
             if proj:
-                r["model"] = {"p_over": round(chance_over(proj, r["line"]), 3), "median": proj["median"]}
+                r["model"] = {"p_over": round(chance_over(proj, r["line"]), 3), "median": proj["median"],
+                              **source_chances(proj, r["line"])}
         write(Path(store) / "odds" / "espn" / f"{g['id']}.json", snap)
+
+
+def source_chances(proj, line):
+    """Chance of the over from our model alone and from Sleeper alone (when the blend has it), on the same scale and
+    spread as the blend, so line_check() can tell whether the 50/50 Sleeper mix helps (Josh, Nov 16)."""
+    x = proj["parts"]
+    if x.get("sleeper") is None:
+        return {}
+    base = (x["mingus"] + x["sleeper"]) / 2
+    if base <= 0:
+        return {}
+    out = {}
+    for key, val in (("p_ours", x["mingus"]), ("p_sleeper", x["sleeper"])):
+        k = val / base
+        out[key] = round(chance_over({**proj, "mean": proj["mean"] * k, "sd": proj["sd"] * k}, line), 3)
+    return out
 
 
 LINE_BINS = ((0.5, 0.55), (0.55, 0.6), (0.6, 0.65), (0.65, 0.7), (0.7, 1.01))
@@ -1058,8 +1075,12 @@ def line_check(data, store, stats_rows, season):
             res = grade(pick, stats_rows)
             if res["status"] in ("win", "loss"):
                 over = res["actual"] > r["line"]
-                rows.append({"week": g["week"], "stat": r["stat"], "conf": max(m["p_over"], 1 - m["p_over"]),
-                             "hit": res["status"] == "win", "brier": (m["p_over"] - over) ** 2})
+                row = {"week": g["week"], "stat": r["stat"], "conf": max(m["p_over"], 1 - m["p_over"]),
+                       "hit": res["status"] == "win", "brier": (m["p_over"] - over) ** 2}
+                if "p_ours" in m:       # the same line judged by each half of the blend
+                    for key in ("p_ours", "p_sleeper"):
+                        row[key] = ((m[key] >= 0.5) == over, (m[key] - over) ** 2)
+                rows.append(row)
     if not rows:
         return None
     def tally(rs):
@@ -1070,6 +1091,12 @@ def line_check(data, store, stats_rows, season):
            "by_conf": [{"from": a, "to": min(b, 1), **tally([r for r in rows if a <= r["conf"] < b])} for a, b in LINE_BINS],
            "by_stat": {st: tally([r for r in rows if r["stat"] == st]) for st in STAT if any(r["stat"] == st for r in rows)},
            "pick_window": tally([r for r in rows if 0.633 <= r["conf"] < 0.70])}
+    both = [r for r in rows if "p_ours" in r]
+    if both:                    # lines where Sleeper had a number: blend vs each half alone
+        n = len(both)
+        out["sources"] = {"n": n, **{name: {"pct": round(sum(r[k][0] if k else r["hit"] for r in both) / n, 3),
+                                             "brier": round(sum(r[k][1] if k else r["brier"] for r in both) / n, 4)}
+                                     for name, k in (("blend", None), ("ours", "p_ours"), ("sleeper", "p_sleeper"))}}
     write(Path(store) / "picks" / "line-check.json", out)
     return out
 
@@ -1080,7 +1107,13 @@ def line_check_text(c):
     n, hit = sum(b["n"] for b in strong), sum(b["hit"] for b in strong)
     txt = (f"Model vs every DraftKings line we saved ({c['n']} graded so far): its lean hit {c['pct']:.0%}"
            f" (Brier {c['brier']:.3f}; a coin is 0.250)")
-    return txt + (f"; leans of 60%+ hit {hit} of {n} ({hit / n:.0%})." if n else ".") + " 52.4% breaks even at -110."
+    txt += (f"; leans of 60%+ hit {hit} of {n} ({hit / n:.0%})." if n else ".") + " 52.4% breaks even at -110."
+    s = c.get("sources")
+    if s:
+        txt += (f" Same {s['n']} lines by source: our model alone {s['ours']['pct']:.0%}, Sleeper alone "
+                f"{s['sleeper']['pct']:.0%}, the 50/50 blend {s['blend']['pct']:.0%} (Brier {s['ours']['brier']:.3f} / "
+                f"{s['sleeper']['brier']:.3f} / {s['blend']['brier']:.3f}).")
+    return txt
 
 
 def slate_rows(store, gid):

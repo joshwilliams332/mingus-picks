@@ -40,7 +40,11 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   (no prices; catch unders are often juiced). Backfill on Weeks 9-10 (Nov 15, injuries reset to each week's report,
   logs cut to earlier weeks): 366 lines, lean hit 59% (overs 59% vs a 47% base rate, unders 60% vs 53%), Brier 0.250
   (as sure as a coin: 70%+ leans hit only 62%, so it's overconfident); catches 63%, receiving 60%, rushing 50%,
-  passing 53%. Live scorecard starts with MNF 11/16.
+  passing 53%. Live scorecard starts with the first lock after #11 merges.
+  Josh, Nov 16: also check whether the 50/50 Sleeper mix helps. When Sleeper has the stat, each line also saves
+  `p_ours` / `p_sleeper` (each half alone, same scale and spread as the blend, `source_chances()`), and
+  `line-check.json` `sources` compares blend vs ours vs Sleeper on those lines (hit % and Brier). If one half wins
+  over a few hundred lines, change the mix (MNF 11/16: Justice Hill U 2.5 came from Sleeper's 1.9; ours alone was 2.8).
 
 ## Picks system (moved from Mingus Football's notes)
 - **Night-game best bets** (`scripts/nfl_picks.py`, tested in `tests/test_nfl_picks.py`, run by
