@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-16T22:46:15.076084+00:00",
+ "checked": "2026-11-17T02:57:21.066874+00:00",
  "today": "2026-11-16",
  "odds_key": true,
  "lock": {
@@ -9,13 +9,13 @@
  },
  "recap": {
   "week": 10,
-  "state": "waiting",
-  "why": "the week's night games aren't all played yet"
+  "state": "pending",
+  "why": "nflverse hasn't published every game's player stats yet"
  },
  "results": {
   "day": "2026-11-16",
-  "state": "waiting",
-  "why": "tonight's games haven't been played"
+  "state": "pending",
+  "why": "nflverse hasn't published the box score yet"
  },
  "sunday": {
   "early": {
