@@ -1019,6 +1019,103 @@ def odds_api_snaps(data, store, games, now, api, markets):
     return snaps
 
 
+def mark_model(data, store, games, snaps):
+    """Our model's lean on every saved DraftKings line, frozen at lock (row["model"] = {p_over, median}), so
+    line_check() can grade the model against every line, not just the few picks."""
+    for g in games:
+        snap = snaps.get(g["id"])
+        if not snap:
+            continue
+        for r in snap["rows"]:
+            p = data.by_id.get(r["pid"])
+            proj = projection(data, p, r["stat"], g, g["week"]) if p else None
+            if proj:
+                r["model"] = {"p_over": round(chance_over(proj, r["line"]), 3), "median": proj["median"],
+                              **source_chances(proj, r["line"])}
+        write(Path(store) / "odds" / "espn" / f"{g['id']}.json", snap)
+
+
+def source_chances(proj, line):
+    """Chance of the over from our model alone and from Sleeper alone (when the blend has it), on the same scale and
+    spread as the blend, so line_check() can tell whether the 50/50 Sleeper mix helps (Josh, Nov 16)."""
+    x = proj["parts"]
+    if x.get("sleeper") is None:
+        return {}
+    base = (x["mingus"] + x["sleeper"]) / 2
+    if base <= 0:
+        return {}
+    out = {}
+    for key, val in (("p_ours", x["mingus"]), ("p_sleeper", x["sleeper"])):
+        k = val / base
+        out[key] = round(chance_over({**proj, "mean": proj["mean"] * k, "sd": proj["sd"] * k}, line), 3)
+    return out
+
+
+LINE_BINS = ((0.5, 0.55), (0.55, 0.6), (0.6, 0.65), (0.65, 0.7), (0.7, 1.01))
+
+
+def line_check(data, store, stats_rows, season):
+    """Our model vs every DraftKings line we saved (odds/espn/), graded from nflverse box scores: how often its lean
+    (over if p_over >= 50%) hit, by how sure it was and by stat, plus its Brier score (coin = 0.25). Pushes and
+    players who didn't play are left out. Written to picks/line-check.json; None until something is graded."""
+    rows = []
+    for f in sorted((Path(store) / "odds" / "espn").glob("*.json")):
+        snap = read(f, {})
+        g = data.game.get(snap.get("game"))
+        if not g or not str(g["id"]).startswith(str(season)):
+            continue
+        for r in snap.get("rows", []):
+            m = r.get("model")
+            if not m:
+                continue
+            side = "o" if m["p_over"] >= 0.5 else "u"
+            pick = {"stat": r["stat"], "week": g["week"], "team": r["team"], "pid": r["pid"], "line": r["line"],
+                    "side": side, "price": ASSUMED_PRICE,
+                    "opp": g["home"] if r["team"] == g["away"] else g["away"]}
+            res = grade(pick, stats_rows)
+            if res["status"] in ("win", "loss"):
+                over = res["actual"] > r["line"]
+                row = {"week": g["week"], "stat": r["stat"], "conf": max(m["p_over"], 1 - m["p_over"]),
+                       "hit": res["status"] == "win", "brier": (m["p_over"] - over) ** 2}
+                if "p_ours" in m:       # the same line judged by each half of the blend
+                    for key in ("p_ours", "p_sleeper"):
+                        row[key] = ((m[key] >= 0.5) == over, (m[key] - over) ** 2)
+                rows.append(row)
+    if not rows:
+        return None
+    def tally(rs):
+        n = len(rs)
+        return {"n": n, "hit": sum(r["hit"] for r in rs), "pct": round(sum(r["hit"] for r in rs) / n, 3) if n else None,
+                "brier": round(sum(r["brier"] for r in rs) / n, 4) if n else None}
+    out = {"season": season, "weeks": sorted({r["week"] for r in rows}), **tally(rows),
+           "by_conf": [{"from": a, "to": min(b, 1), **tally([r for r in rows if a <= r["conf"] < b])} for a, b in LINE_BINS],
+           "by_stat": {st: tally([r for r in rows if r["stat"] == st]) for st in STAT if any(r["stat"] == st for r in rows)},
+           "pick_window": tally([r for r in rows if 0.633 <= r["conf"] < 0.70])}
+    both = [r for r in rows if "p_ours" in r]
+    if both:                    # lines where Sleeper had a number: blend vs each half alone
+        n = len(both)
+        out["sources"] = {"n": n, **{name: {"pct": round(sum(r[k][0] if k else r["hit"] for r in both) / n, 3),
+                                             "brier": round(sum(r[k][1] if k else r["brier"] for r in both) / n, 4)}
+                                     for name, k in (("blend", None), ("ours", "p_ours"), ("sleeper", "p_sleeper"))}}
+    write(Path(store) / "picks" / "line-check.json", out)
+    return out
+
+
+def line_check_text(c):
+    """One line for the results emails."""
+    strong = [b for b in c["by_conf"] if b["from"] >= 0.6 and b["n"]]
+    n, hit = sum(b["n"] for b in strong), sum(b["hit"] for b in strong)
+    txt = (f"Model vs every DraftKings line we saved ({c['n']} graded so far): its lean hit {c['pct']:.0%}"
+           f" (Brier {c['brier']:.3f}; a coin is 0.250)")
+    txt += (f"; leans of 60%+ hit {hit} of {n} ({hit / n:.0%})." if n else ".") + " 52.4% breaks even at -110."
+    s = c.get("sources")
+    if s:
+        txt += (f" Same {s['n']} lines by source: our model alone {s['ours']['pct']:.0%}, Sleeper alone "
+                f"{s['sleeper']['pct']:.0%}, the 50/50 blend {s['blend']['pct']:.0%} (Brier {s['ours']['brier']:.3f} / "
+                f"{s['sleeper']['brier']:.3f} / {s['blend']['brier']:.3f}).")
+    return txt
+
+
 def slate_rows(store, gid):
     """The lines a game's picks were made from: the Odds API snapshot, else the ESPN one."""
     return ((read(Path(store) / "odds" / "props" / f"{gid}.json") or read(Path(store) / "odds" / "espn" / f"{gid}.json") or {})
@@ -1059,6 +1156,8 @@ def lock(data, store, now, api, force=False, slate="night", day=None, fetch=None
     if not any(s["rows"] for s in snaps.values()):
         return {"day": day, "state": "no-props", "why": "the books haven't posted player props for this slate yet"}
 
+    if lines_only:
+        mark_model(data, store, pre, snaps)
     test = pre[0]["week"] < (DAY_RECORD_START_WEEK if day_ else RECORD_START_WEEK)
     picks, n_cands = [], 0
     for g in pre:
@@ -1210,6 +1309,9 @@ def night_results(data, store, stats_rows, now, slate="night"):
         c = clv_summary([g for _, g in rows])
         notes.append(clv_text(c) + " Beating the closing line is the best sign of a real edge; wins and losses take "
                      "hundreds of picks to mean anything." if c else "Closing line: not available for these picks.")
+        lc = line_check(data, store, stats_rows, season)
+        if lc:
+            notes.append(line_check_text(lc))
         title = f"{'TEST · ' if test else ''}{slot} results · {day_label(day)} · {s['w']}-{s['l']}{'-' + str(s['p']) if s['p'] else ''} ({units(s['profit'])})"
         write(file, {"date": day, "season": season, "week": doc.get("week"), "test": test, "graded_at": now.isoformat(),
                      "record": s, "season_record": season_s, "clv": c, "results": [{"id": p["id"], **g} for p, g in rows],
@@ -1218,6 +1320,7 @@ def night_results(data, store, stats_rows, now, slate="night"):
         out = {"day": day, "state": "done", "new": True, "record": record_txt(s)}
         if not test:
             season_clv(store, season)
+            line_check(data, store, stats_rows, season)
     return out
 
 
@@ -1705,6 +1808,8 @@ def main(argv=None):
               "tomorrow": {"day": tomorrow, **nxt},
               "sunday_email": sunday_preview(data, a.store, now),
               "sunday_results": sunday_results(data, a.store, now, sday),
+              "line_check": {k: v for k, v in (line_check(data, a.store, stats_rows, data.meta.get("season")) or {}).items()
+                             if k in ("n", "pct", "brier")},
               "night_update": (headsup(data, a.store, now, "night") if sday == et_date(now) and not a.no_odds
                                else {"state": "none"}),
               "credits": (api.usage if api else read(Path(a.store) / "odds" / "usage.json", {}))}

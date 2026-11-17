@@ -339,6 +339,36 @@ class EspnLines(unittest.TestCase):
         self.assertEqual(r["state"], "no-props")
         self.assertFalse((self.store / "picks" / "2026-11-08.json").exists())
 
+    def test_every_line_gets_the_models_lean_and_is_graded(self):
+        self.lock(self.line)
+        snap = json.loads((self.store / "odds" / "espn" / "2026_09_PHI_WAS.json").read_text())
+        te = next(r for r in snap["rows"] if r["pid"] == "TE1")
+        self.assertAlmostEqual(te["model"]["p_over"], 0.665, delta=0.02)
+        qb = next(r for r in snap["rows"] if r["pid"] == "QB1")
+        self.assertLess(qb["model"]["p_over"], 0.01)                         # graded too, though never a pick
+        stats = stats_rows(9, [("TE1", "PHI", {"receiving_yards": 30, "receptions": 3}),
+                               ("QB1", "WAS", {"passing_yards": 250})])
+        c = N.line_check(self.data, self.store, stats, 2026)
+        self.assertEqual((c["n"], c["hit"]), (2, 1))                         # TE over missed, QB under hit
+        self.assertEqual(c["by_stat"]["rec_yds"]["hit"], 0)
+        self.assertEqual(c["by_conf"][-1]["hit"], 1)                          # the 70%+ lean
+        self.assertTrue((self.store / "picks" / "line-check.json").exists())
+        self.assertIn("2 graded so far", N.line_check_text(c))
+
+    def test_line_check_compares_our_model_and_sleeper(self):
+        te = self.data.by_id["TE1"]
+        te.setdefault("proj", {})["sleeper"] = {"9": {"line": {"rec_yds": 20.0}}}       # Sleeper far lower than us
+        self.lock(self.line)
+        snap = json.loads((self.store / "odds" / "espn" / "2026_09_PHI_WAS.json").read_text())
+        m = next(r for r in snap["rows"] if r["pid"] == "TE1" and r["stat"] == "rec_yds")["model"]
+        self.assertGreater(m["p_ours"], m["p_over"])                                    # ours leans over harder
+        self.assertLess(m["p_sleeper"], 0.5)                                            # Sleeper says under
+        stats = stats_rows(9, [("TE1", "PHI", {"receiving_yards": 80, "receptions": 6})])
+        c = N.line_check(self.data, self.store, stats, 2026)
+        self.assertEqual(c["sources"]["n"], 1)
+        self.assertEqual((c["sources"]["ours"]["pct"], c["sources"]["sleeper"]["pct"]), (1.0, 0.0))
+        self.assertIn("our model alone 100%, Sleeper alone 0%", N.line_check_text(c))
+
     def test_play_to(self):
         self.assertEqual(N.play_to(0.5396), -110)
         self.assertEqual(N.play_to(0.56), -120)
