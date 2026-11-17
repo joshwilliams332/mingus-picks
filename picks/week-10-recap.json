@@ -1,0 +1,67 @@
+{
+ "week": 10,
+ "season": 2026,
+ "test": false,
+ "graded_at": "2026-11-17T18:42:54.037418+00:00",
+ "record": {
+  "w": 2,
+  "l": 4,
+  "p": 0,
+  "v": 0,
+  "profit": -2.131
+ },
+ "season_record": {
+  "w": 4,
+  "l": 4,
+  "p": 0,
+  "v": 0,
+  "profit": -0.455
+ },
+ "results": [
+  {
+   "id": "2026_10_WAS_NYG-00-0041040-rec_yds",
+   "status": "loss",
+   "actual": 42,
+   "profit": -1
+  },
+  {
+   "id": "2026_10_WAS_NYG-00-0037809-rec_yds",
+   "status": "win",
+   "actual": 24,
+   "profit": 0.917
+  },
+  {
+   "id": "2026_10_PIT_CIN-00-0041489-rec_yds",
+   "status": "win",
+   "actual": 0,
+   "profit": 0.952
+  },
+  {
+   "id": "2026_10_PIT_CIN-00-0036900-rec",
+   "status": "loss",
+   "actual": 11,
+   "profit": -1
+  },
+  {
+   "id": "2026_10_LAC_BAL-00-0040727-rec",
+   "status": "loss",
+   "actual": 5,
+   "profit": -1
+  },
+  {
+   "id": "2026_10_LAC_BAL-00-0034975-rec",
+   "status": "loss",
+   "actual": 5,
+   "profit": -1
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 \u274c Week 10 night games: 2-4 (-2.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\u2705 Germie Bernard U 49.5 rec yds (0)\n\u274c Ja'Marr Chase U 7.5 catches (11)\n\u274c Tre Harris U 3.5 catches (5)\n\u274c Justice Hill U 2.5 catches (5)\n\nSeason: 4-4 (-0.5u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Week 10 recap \u00b7 2-4 (-2.1u)",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Week 10 recap \u00b7 2-4 (-2.1u)</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 \u274c Week 10 night games: 2-4 (-2.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\u2705 Germie Bernard U 49.5 rec yds (0)\n\u274c Ja&#x27;Marr Chase U 7.5 catches (11)\n\u274c Tre Harris U 3.5 catches (5)\n\u274c Justice Hill U 2.5 catches (5)\n\nSeason: 4-4 (-0.5u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Graded from nflverse box scores. A player who didn&#x27;t play is a void, like the sportsbooks do it.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 \u274c Week 10 night games: 2-4 (-2.1u).\n\n\u274c Antonio Williams U 37.5 rec yds (42)\n\u2705 Chig Okonkwo U 36.5 rec yds (24)\n\u2705 Germie Bernard U 49.5 rec yds (0)\n\u274c Ja'Marr Chase U 7.5 catches (11)\n\u274c Tre Harris U 3.5 catches (5)\n\u274c Justice Hill U 2.5 catches (5)\n\nSeason: 4-4 (-0.5u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Graded from nflverse box scores. A player who didn't play is a void, like the sportsbooks do it."
+ }
+}
