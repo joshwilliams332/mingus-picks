@@ -1,11 +1,11 @@
 {
- "checked": "2026-11-20T01:47:24.393822+00:00",
- "today": "2026-11-19",
+ "checked": "2026-11-20T17:56:15.381213+00:00",
+ "today": "2026-11-20",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-19",
-  "state": "locked",
-  "why": "already locked"
+  "day": "2026-11-20",
+  "state": "no-games",
+  "why": "no night games on Fri 11/20"
  },
  "recap": {
   "week": 11,
@@ -14,8 +14,9 @@
  },
  "results": {
   "day": "2026-11-19",
-  "state": "pending",
-  "why": "nflverse hasn't published the box score yet"
+  "state": "done",
+  "new": true,
+  "record": "2-0 (+1.8u)"
  },
  "sunday": {
   "early": {
@@ -24,9 +25,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-19",
+    "day": "2026-11-20",
     "state": "no-games",
-    "why": "no Sunday 1 PM games on Thu 11/19"
+    "why": "no Sunday 1 PM games on Fri 11/20"
    },
    "quick": {
     "state": "skipped"
@@ -38,9 +39,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-19",
+    "day": "2026-11-20",
     "state": "no-games",
-    "why": "no Sunday 4 PM games on Thu 11/19"
+    "why": "no Sunday 4 PM games on Fri 11/20"
    },
    "quick": {
     "state": "skipped"
@@ -48,21 +49,21 @@
   }
  },
  "tomorrow": {
-  "day": "2026-11-20",
+  "day": "2026-11-21",
   "early": {
-   "day": "2026-11-20",
+   "day": "2026-11-21",
    "state": "no-games",
-   "why": "no Sunday 1 PM games on Fri 11/20"
+   "why": "no Sunday 1 PM games on Sat 11/21"
   },
   "late": {
-   "day": "2026-11-20",
+   "day": "2026-11-21",
    "state": "no-games",
-   "why": "no Sunday 4 PM games on Fri 11/20"
+   "why": "no Sunday 4 PM games on Sat 11/21"
   },
   "night": {
-   "day": "2026-11-20",
+   "day": "2026-11-21",
    "state": "no-games",
-   "why": "no night games on Fri 11/20"
+   "why": "no night games on Sat 11/21"
   }
  },
  "sunday_email": {
