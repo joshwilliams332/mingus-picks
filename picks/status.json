@@ -1,11 +1,11 @@
 {
- "checked": "2026-11-21T00:06:40.697936+00:00",
- "today": "2026-11-20",
+ "checked": "2026-11-21T19:58:00.440131+00:00",
+ "today": "2026-11-21",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-20",
+  "day": "2026-11-21",
   "state": "no-games",
-  "why": "no night games on Fri 11/20"
+  "why": "no night games on Sat 11/21"
  },
  "recap": {
   "week": 11,
@@ -23,9 +23,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-20",
+    "day": "2026-11-21",
     "state": "no-games",
-    "why": "no Sunday 1 PM games on Fri 11/20"
+    "why": "no Sunday 1 PM games on Sat 11/21"
    },
    "quick": {
     "state": "skipped"
@@ -37,9 +37,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-20",
+    "day": "2026-11-21",
     "state": "no-games",
-    "why": "no Sunday 4 PM games on Fri 11/20"
+    "why": "no Sunday 4 PM games on Sat 11/21"
    },
    "quick": {
     "state": "skipped"
@@ -47,25 +47,27 @@
   }
  },
  "tomorrow": {
-  "day": "2026-11-21",
+  "day": "2026-11-22",
   "early": {
-   "day": "2026-11-21",
-   "state": "no-games",
-   "why": "no Sunday 1 PM games on Sat 11/21"
+   "day": "2026-11-22",
+   "state": "waiting",
+   "why": "locks from Sat 11/21 7 PM ET"
   },
   "late": {
-   "day": "2026-11-21",
-   "state": "no-games",
-   "why": "no Sunday 4 PM games on Sat 11/21"
+   "day": "2026-11-22",
+   "state": "waiting",
+   "why": "locks from Sat 11/21 7 PM ET"
   },
   "night": {
-   "day": "2026-11-21",
-   "state": "no-games",
-   "why": "no night games on Sat 11/21"
+   "day": "2026-11-22",
+   "state": "waiting",
+   "why": "locks from Sat 11/21 7 PM ET"
   }
  },
  "sunday_email": {
-  "state": "none"
+  "day": "2026-11-22",
+  "state": "waiting",
+  "why": "0 of 3 Sunday slates locked"
  },
  "sunday_results": {
   "state": "none"
