@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-20T17:56:15.381213+00:00",
+ "checked": "2026-11-21T00:06:40.697936+00:00",
  "today": "2026-11-20",
  "odds_key": true,
  "lock": {
@@ -14,9 +14,7 @@
  },
  "results": {
   "day": "2026-11-19",
-  "state": "done",
-  "new": true,
-  "record": "2-0 (+1.8u)"
+  "state": "done"
  },
  "sunday": {
   "early": {
