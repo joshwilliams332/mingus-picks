@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-21T19:58:00.440131+00:00",
+ "checked": "2026-11-22T00:21:48.114194+00:00",
  "today": "2026-11-21",
  "odds_key": true,
  "lock": {
@@ -50,24 +50,28 @@
   "day": "2026-11-22",
   "early": {
    "day": "2026-11-22",
-   "state": "waiting",
-   "why": "locks from Sat 11/21 7 PM ET"
+   "state": "locked",
+   "why": "5 pick(s) locked",
+   "new": true
   },
   "late": {
    "day": "2026-11-22",
-   "state": "waiting",
-   "why": "locks from Sat 11/21 7 PM ET"
+   "state": "locked",
+   "why": "4 pick(s) locked",
+   "new": true
   },
   "night": {
    "day": "2026-11-22",
-   "state": "waiting",
-   "why": "locks from Sat 11/21 7 PM ET"
+   "state": "locked",
+   "why": "1 pick(s) locked",
+   "new": true
   }
  },
  "sunday_email": {
   "day": "2026-11-22",
-  "state": "waiting",
-  "why": "0 of 3 Sunday slates locked"
+  "state": "done",
+  "new": true,
+  "picks": 10
  },
  "sunday_results": {
   "state": "none"

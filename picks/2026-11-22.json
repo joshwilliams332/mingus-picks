@@ -1,0 +1,81 @@
+{
+ "date": "2026-11-22",
+ "season": 2026,
+ "week": 11,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_11_MIN_SF"
+ ],
+ "locked_at": "2026-11-22T00:21:48.114194+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_11_MIN_SF-00-0033280-rec_yds",
+   "gid": "2026_11_MIN_SF",
+   "week": 11,
+   "pid": "00-0033280",
+   "name": "Christian McCaffrey",
+   "team": "SF",
+   "opp": "MIN",
+   "pos": "RB",
+   "stat": "rec_yds",
+   "side": "u",
+   "line": 32.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 34.5,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.549,
+   "model": 0.663,
+   "market": 0.5,
+   "edge": 0.048,
+   "kickoff": "2026-11-22T20:20:00-05:00",
+   "why": "Our model's typical game for him: 21.6 vs the 32.5 line (66% for the under), MIN allows the 4th fewest rec yds to RBs.",
+   "deep": [
+    "Christian McCaffrey U 32.5 rec yds \u00b7 DraftKings line (opened 33.5); worth it at -115 or better",
+    "Projection 34.5 = half Sleeper (29), half our model (39.9), less 3%; season 47.9, last 3 80.3 per game.",
+    "Volume: 4.6 targets/game \u2192 4.4 after MIN defense \u00d70.95, SF implied 24.8 \u00d71.02, game script (favored 3) \u00d71.00.",
+    "Efficiency: 8.7 yds/target (steadied toward the league) \u00d7 MIN allows \u00d70.98 \u2192 8.5.",
+    "Chance: ours 66%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 MIN @ SF\n\nOur pick:\n\nChristian McCaffrey U 32.5 rec yds (to -115)\n\nSeason: 6-4 (+1.4u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Christian McCaffrey U 32.5 rec yds: Our model's typical game for him: 21.6 vs the 32.5 line (66% for the under), MIN allows the 4th fewest rec yds to RBs."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 SNF picks \u00b7 Sun 11/22 \u00b7 1 pick",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">SNF picks \u00b7 Sun 11/22 \u00b7 1 pick</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 MIN @ SF\n\nOur pick:\n\nChristian McCaffrey U 32.5 rec yds (to -115)\n\nSeason: 6-4 (+1.4u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Christian McCaffrey U 32.5 rec yds: Our model&#x27;s typical game for him: 21.6 vs the 32.5 line (66% for the under), MIN allows the 4th fewest rec yds to RBs.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Christian McCaffrey U 32.5 rec yds \u00b7 DraftKings line (opened 33.5); worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 34.5 = half Sleeper (29), half our model (39.9), less 3%; season 47.9, last 3 80.3 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 4.6 targets/game \u2192 4.4 after MIN defense \u00d70.95, SF implied 24.8 \u00d71.02, game script (favored 3) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 8.7 yds/target (steadied toward the league) \u00d7 MIN allows \u00d70.98 \u2192 8.5.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 66%, DraftKings&#x27; line taken as 50/50, blended 55%; clears our bar at -115 or better.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked about 25 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 7:21 PM ET from DraftKings&#x27; lines (28 sides across 1 game(s)) in ESPN&#x27;s free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (&quot;to -115&quot; = take it at -115 or better); lines may have moved since.</li><li>Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can&#x27;t see). The record counts each pick at -110.</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 SNF \u00b7 MIN @ SF\n\nOur pick:\n\nChristian McCaffrey U 32.5 rec yds (to -115)\n\nSeason: 6-4 (+1.4u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nChristian McCaffrey U 32.5 rec yds: Our model's typical game for him: 21.6 vs the 32.5 line (66% for the under), MIN allows the 4th fewest rec yds to RBs.\n\nDeep dive:\nChristian McCaffrey U 32.5 rec yds \u00b7 DraftKings line (opened 33.5); worth it at -115 or better\nProjection 34.5 = half Sleeper (29), half our model (39.9), less 3%; season 47.9, last 3 80.3 per game.\nVolume: 4.6 targets/game \u2192 4.4 after MIN defense \u00d70.95, SF implied 24.8 \u00d71.02, game script (favored 3) \u00d71.00.\nEfficiency: 8.7 yds/target (steadied toward the league) \u00d7 MIN allows \u00d70.98 \u2192 8.5.\nChance: ours 66%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better.\n\nNote: Locked about 25 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 7:21 PM ET from DraftKings' lines (28 sides across 1 game(s)) in ESPN's free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (\"to -115\" = take it at -115 or better); lines may have moved since.\nNote: Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can't see). The record counts each pick at -110.\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}

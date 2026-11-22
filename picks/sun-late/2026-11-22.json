@@ -1,0 +1,185 @@
+{
+ "date": "2026-11-22",
+ "season": 2026,
+ "week": 11,
+ "test": false,
+ "slate": "late",
+ "games": [
+  "2026_11_NYJ_LAC",
+  "2026_11_LV_DEN",
+  "2026_11_PIT_PHI"
+ ],
+ "locked_at": "2026-11-22T00:21:48.114194+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_11_NYJ_LAC-00-0039890-rec",
+   "gid": "2026_11_NYJ_LAC",
+   "week": 11,
+   "pid": "00-0039890",
+   "name": "Adonai Mitchell",
+   "team": "NYJ",
+   "opp": "LAC",
+   "pos": "WR",
+   "stat": "rec",
+   "side": "u",
+   "line": 3.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 3.2,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -120,
+   "prob": 0.558,
+   "model": 0.692,
+   "market": 0.5,
+   "edge": 0.065,
+   "kickoff": "2026-11-22T16:05:00-05:00",
+   "why": "Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under), stayed under 3.5 in 3 of his last 5.",
+   "deep": [
+    "Adonai Mitchell U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better",
+    "Projection 3.2 = half Sleeper (3.2), half our model (3.1), less 3%; season 3.2, last 3 3.3 per game.",
+    "Volume: 6.1 targets/game \u2192 5.8 after LAC defense \u00d70.99, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.",
+    "Efficiency: 50% catch rate (steadied toward the league) \u00d7 LAC allows \u00d71.01 \u2192 50%.",
+    "Chance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better."
+   ]
+  },
+  {
+   "id": "2026_11_PIT_PHI-00-0034844-rush_yds",
+   "gid": "2026_11_PIT_PHI",
+   "week": 11,
+   "pid": "00-0034844",
+   "name": "Saquon Barkley",
+   "team": "PHI",
+   "opp": "PIT",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 56.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 51.2,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -120,
+   "prob": 0.557,
+   "model": 0.689,
+   "market": 0.5,
+   "edge": 0.063,
+   "kickoff": "2026-11-22T16:25:00-05:00",
+   "why": "Our model's typical game for him: 39.7 vs the 56.5 line (69% for the under), PIT allows the 5th fewest rush yds to RBs; PHI is implied for just 17; stayed under 56.5 in 3 of his last 5.",
+   "deep": [
+    "Saquon Barkley U 56.5 rush yds \u00b7 DraftKings line (opened 67.5); worth it at -120 or better",
+    "Projection 51.2 = half Sleeper (65.7), half our model (36.6), less 3%; season 42.3, last 3 38 per game.",
+    "Volume: 9.5 carries/game \u2192 8.7 after PIT defense \u00d70.97, PHI implied 17 \u00d70.95, game script (underdog 3.5) \u00d71.00.",
+    "Efficiency: 4.0 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.0.",
+    "Chance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better."
+   ]
+  },
+  {
+   "id": "2026_11_PIT_PHI-00-0041489-rec",
+   "gid": "2026_11_PIT_PHI",
+   "week": 11,
+   "pid": "00-0041489",
+   "name": "Germie Bernard",
+   "team": "PIT",
+   "opp": "PHI",
+   "pos": "WR",
+   "stat": "rec",
+   "side": "u",
+   "line": 3.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 3.3,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.556,
+   "model": 0.687,
+   "market": 0.5,
+   "edge": 0.062,
+   "kickoff": "2026-11-22T16:25:00-05:00",
+   "why": "Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under).",
+   "deep": [
+    "Germie Bernard U 3.5 catches \u00b7 DraftKings line; worth it at -115 or better",
+    "Projection 3.3 = half Sleeper (2.6), half our model (4.1), less 3%; season 4, last 3 2.7 per game.",
+    "Volume: 5.6 targets/game \u2192 5.7 after PHI defense \u00d71.04, PIT implied 20.5 \u00d70.98, game script (favored 3.5) \u00d71.00.",
+    "Efficiency: 67% catch rate (steadied toward the league) \u00d7 PHI allows \u00d70.99 \u2192 67%.",
+    "Chance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -115 or better."
+   ]
+  },
+  {
+   "id": "2026_11_NYJ_LAC-00-0038120-rush_yds",
+   "gid": "2026_11_NYJ_LAC",
+   "week": 11,
+   "pid": "00-0038120",
+   "name": "Breece Hall",
+   "team": "NYJ",
+   "opp": "LAC",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 49.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 47.2,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.549,
+   "model": 0.664,
+   "market": 0.5,
+   "edge": 0.048,
+   "kickoff": "2026-11-22T16:05:00-05:00",
+   "why": "Our model's typical game for him: 36.6 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.",
+   "deep": [
+    "Breece Hall U 49.5 rush yds \u00b7 DraftKings line (opened 46.5); worth it at -115 or better",
+    "Projection 47.2 = half Sleeper (47.8), half our model (46.5), less 3%; season 53, last 3 44.7 per game.",
+    "Volume: 12.5 carries/game \u2192 12.2 after LAC defense \u00d71.01, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.",
+    "Efficiency: 3.6 yds/carry (steadied toward the league) \u00d7 LAC allows \u00d71.00 \u2192 3.6.",
+    "Chance: ours 66%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nAdonai Mitchell U 3.5 catches\nSaquon Barkley U 56.5 rush yds\nGermie Bernard U 3.5 catches\nBreece Hall U 49.5 rush yds\n\nSeason: 13-8 (+3.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Adonai Mitchell U 3.5 catches: Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under), stayed under 3.5 in 3 of his last 5.",
+   "Saquon Barkley U 56.5 rush yds: Our model's typical game for him: 39.7 vs the 56.5 line (69% for the under), PIT allows the 5th fewest rush yds to RBs; PHI is implied for just 17; stayed under 56.5 in 3 of his last 5.",
+   "Germie Bernard U 3.5 catches: Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under).",
+   "Breece Hall U 49.5 rush yds: Our model's typical game for him: 36.6 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Sunday 4 PM picks \u00b7 Sun 11/22 \u00b7 4 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Sunday 4 PM picks \u00b7 Sun 11/22 \u00b7 4 picks</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nAdonai Mitchell U 3.5 catches\nSaquon Barkley U 56.5 rush yds\nGermie Bernard U 3.5 catches\nBreece Hall U 49.5 rush yds\n\nSeason: 13-8 (+3.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Adonai Mitchell U 3.5 catches: Our model&#x27;s typical game for him: 2.3 vs the 3.5 line (69% for the under), stayed under 3.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Saquon Barkley U 56.5 rush yds: Our model&#x27;s typical game for him: 39.7 vs the 56.5 line (69% for the under), PIT allows the 5th fewest rush yds to RBs; PHI is implied for just 17; stayed under 56.5 in 3 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Germie Bernard U 3.5 catches: Our model&#x27;s typical game for him: 2.3 vs the 3.5 line (69% for the under).</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Breece Hall U 49.5 rush yds: Our model&#x27;s typical game for him: 36.6 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Adonai Mitchell U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better</b><div style=\"margin-top:4px;color:#333\">Projection 3.2 = half Sleeper (3.2), half our model (3.1), less 3%; season 3.2, last 3 3.3 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 6.1 targets/game \u2192 5.8 after LAC defense \u00d70.99, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 50% catch rate (steadied toward the league) \u00d7 LAC allows \u00d71.01 \u2192 50%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 69%, DraftKings&#x27; line taken as 50/50, blended 56%; clears our bar at -120 or better.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Saquon Barkley U 56.5 rush yds \u00b7 DraftKings line (opened 67.5); worth it at -120 or better</b><div style=\"margin-top:4px;color:#333\">Projection 51.2 = half Sleeper (65.7), half our model (36.6), less 3%; season 42.3, last 3 38 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 9.5 carries/game \u2192 8.7 after PIT defense \u00d70.97, PHI implied 17 \u00d70.95, game script (underdog 3.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 4.0 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.0.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 69%, DraftKings&#x27; line taken as 50/50, blended 56%; clears our bar at -120 or better.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Germie Bernard U 3.5 catches \u00b7 DraftKings line; worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 3.3 = half Sleeper (2.6), half our model (4.1), less 3%; season 4, last 3 2.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 5.6 targets/game \u2192 5.7 after PHI defense \u00d71.04, PIT implied 20.5 \u00d70.98, game script (favored 3.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 67% catch rate (steadied toward the league) \u00d7 PHI allows \u00d70.99 \u2192 67%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 69%, DraftKings&#x27; line taken as 50/50, blended 56%; clears our bar at -115 or better.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Breece Hall U 49.5 rush yds \u00b7 DraftKings line (opened 46.5); worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 47.2 = half Sleeper (47.8), half our model (46.5), less 3%; season 53, last 3 44.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 12.5 carries/game \u2192 12.2 after LAC defense \u00d71.01, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 3.6 yds/carry (steadied toward the league) \u00d7 LAC allows \u00d71.00 \u2192 3.6.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 66%, DraftKings&#x27; line taken as 50/50, blended 55%; clears our bar at -115 or better.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Sunday 4 PM games: Tracked in the Sunday record, separate from the night-game record.</li><li>Locked about 21 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don&#x27;t change: a pick whose player ends up inactive is graded as a void.</li><li>Locked 7:21 PM ET from DraftKings&#x27; lines (82 sides across 3 game(s)) in ESPN&#x27;s free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (&quot;to -115&quot; = take it at -115 or better); lines may have moved since.</li><li>Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can&#x27;t see). The record counts each pick at -110.</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 Sunday 4 PM games\n\nOur top 4:\n\nAdonai Mitchell U 3.5 catches\nSaquon Barkley U 56.5 rush yds\nGermie Bernard U 3.5 catches\nBreece Hall U 49.5 rush yds\n\nSeason: 13-8 (+3.7u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nAdonai Mitchell U 3.5 catches: Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under), stayed under 3.5 in 3 of his last 5.\n\nSaquon Barkley U 56.5 rush yds: Our model's typical game for him: 39.7 vs the 56.5 line (69% for the under), PIT allows the 5th fewest rush yds to RBs; PHI is implied for just 17; stayed under 56.5 in 3 of his last 5.\n\nGermie Bernard U 3.5 catches: Our model's typical game for him: 2.3 vs the 3.5 line (69% for the under).\n\nBreece Hall U 49.5 rush yds: Our model's typical game for him: 36.6 vs the 49.5 line (66% for the under), stayed under 49.5 in 3 of his last 5.\n\nDeep dive:\nAdonai Mitchell U 3.5 catches \u00b7 DraftKings line; worth it at -120 or better\nProjection 3.2 = half Sleeper (3.2), half our model (3.1), less 3%; season 3.2, last 3 3.3 per game.\nVolume: 6.1 targets/game \u2192 5.8 after LAC defense \u00d70.99, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.\nEfficiency: 50% catch rate (steadied toward the league) \u00d7 LAC allows \u00d71.01 \u2192 50%.\nChance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better.\n\nSaquon Barkley U 56.5 rush yds \u00b7 DraftKings line (opened 67.5); worth it at -120 or better\nProjection 51.2 = half Sleeper (65.7), half our model (36.6), less 3%; season 42.3, last 3 38 per game.\nVolume: 9.5 carries/game \u2192 8.7 after PIT defense \u00d70.97, PHI implied 17 \u00d70.95, game script (underdog 3.5) \u00d71.00.\nEfficiency: 4.0 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.0.\nChance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -120 or better.\n\nGermie Bernard U 3.5 catches \u00b7 DraftKings line; worth it at -115 or better\nProjection 3.3 = half Sleeper (2.6), half our model (4.1), less 3%; season 4, last 3 2.7 per game.\nVolume: 5.6 targets/game \u2192 5.7 after PHI defense \u00d71.04, PIT implied 20.5 \u00d70.98, game script (favored 3.5) \u00d71.00.\nEfficiency: 67% catch rate (steadied toward the league) \u00d7 PHI allows \u00d70.99 \u2192 67%.\nChance: ours 69%, DraftKings' line taken as 50/50, blended 56%; clears our bar at -115 or better.\n\nBreece Hall U 49.5 rush yds \u00b7 DraftKings line (opened 46.5); worth it at -115 or better\nProjection 47.2 = half Sleeper (47.8), half our model (46.5), less 3%; season 53, last 3 44.7 per game.\nVolume: 12.5 carries/game \u2192 12.2 after LAC defense \u00d71.01, NYJ implied 19.2 \u00d70.96, game script (underdog 3) \u00d71.00.\nEfficiency: 3.6 yds/carry (steadied toward the league) \u00d7 LAC allows \u00d71.00 \u2192 3.6.\nChance: ours 66%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better.\n\nNote: Sunday 4 PM games: Tracked in the Sunday record, separate from the night-game record.\nNote: Locked about 21 hours before kickoff, before inactives come out (90 minutes before kickoff). Locked picks don't change: a pick whose player ends up inactive is graded as a void.\nNote: Locked 7:21 PM ET from DraftKings' lines (82 sides across 3 game(s)) in ESPN's free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (\"to -115\" = take it at -115 or better); lines may have moved since.\nNote: Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can't see). The record counts each pick at -110.\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}
