@@ -1,11 +1,11 @@
 {
- "checked": "2026-11-23T00:55:55.695949+00:00",
- "today": "2026-11-22",
+ "checked": "2026-11-23T07:21:05.855176+00:00",
+ "today": "2026-11-23",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-22",
-  "state": "locked",
-  "why": "already locked"
+  "day": "2026-11-23",
+  "state": "waiting",
+  "why": "locks from Mon 11/23 9 AM ET"
  },
  "recap": {
   "week": 11,
@@ -14,80 +14,75 @@
  },
  "results": {
   "day": "2026-11-22",
-  "state": "waiting",
-  "why": "tonight's games haven't been played"
+  "state": "done",
+  "new": true,
+  "record": "1-0 (+0.9u)"
  },
  "sunday": {
   "early": {
    "results": {
     "day": "2026-11-22",
-    "state": "pending",
-    "why": "nflverse hasn't published the box score yet"
+    "state": "done",
+    "new": true,
+    "record": "4-1 (+2.6u)"
    },
    "lock": {
-    "day": "2026-11-22",
-    "state": "locked",
-    "why": "already locked"
+    "day": "2026-11-23",
+    "state": "no-games",
+    "why": "no Sunday 1 PM games on Mon 11/23"
    },
    "quick": {
     "day": "2026-11-22",
-    "state": "done",
-    "new": true,
-    "record": "4-1"
+    "state": "done"
    }
   },
   "late": {
    "results": {
     "day": "2026-11-22",
-    "state": "pending",
-    "why": "nflverse hasn't published the box score yet"
+    "state": "done",
+    "new": true,
+    "record": "1-3 (-2.1u)"
    },
    "lock": {
-    "day": "2026-11-22",
-    "state": "locked",
-    "why": "already locked"
+    "day": "2026-11-23",
+    "state": "no-games",
+    "why": "no Sunday 4 PM games on Mon 11/23"
    },
    "quick": {
     "day": "2026-11-22",
-    "state": "done",
-    "new": true,
-    "record": "1-3"
+    "state": "done"
    }
   }
  },
  "tomorrow": {
-  "day": "2026-11-23",
+  "day": "2026-11-24",
   "early": {
-   "day": "2026-11-23",
+   "day": "2026-11-24",
    "state": "no-games",
-   "why": "no Sunday 1 PM games on Mon 11/23"
+   "why": "no Sunday 1 PM games on Tue 11/24"
   },
   "late": {
-   "day": "2026-11-23",
+   "day": "2026-11-24",
    "state": "no-games",
-   "why": "no Sunday 4 PM games on Mon 11/23"
+   "why": "no Sunday 4 PM games on Tue 11/24"
   },
   "night": {
-   "day": "2026-11-23",
-   "state": "waiting",
-   "why": "locks from Mon 11/23 9 AM ET"
+   "day": "2026-11-24",
+   "state": "no-games",
+   "why": "no night games on Tue 11/24"
   }
  },
  "sunday_email": {
-  "day": "2026-11-22",
-  "state": "done"
+  "state": "none"
  },
  "sunday_results": {
   "day": "2026-11-22",
-  "state": "waiting",
-  "why": "2 of 3 slates graded"
- },
- "night_update": {
-  "day": "2026-11-22",
   "state": "done",
   "new": true,
-  "changed": false,
-  "affected": 0
+  "record": "6-4"
+ },
+ "night_update": {
+  "state": "none"
  },
  "credits": {
   "remaining": 270,
