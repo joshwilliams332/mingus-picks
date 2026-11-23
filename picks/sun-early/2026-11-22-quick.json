@@ -1,0 +1,54 @@
+{
+ "date": "2026-11-22",
+ "slate": "early",
+ "unofficial": true,
+ "graded_at": "2026-11-23T00:55:55.695949+00:00",
+ "record": {
+  "w": 4,
+  "l": 1,
+  "p": 0,
+  "v": 0,
+  "profit": 2.636
+ },
+ "results": [
+  {
+   "id": "2026_11_TB_DET-00-0038129-rec",
+   "status": "win",
+   "actual": 1,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_TEN_DAL-00-0040170-rec",
+   "status": "win",
+   "actual": 3,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_TB_DET-00-0040129-rec",
+   "status": "win",
+   "actual": 2,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_ARI_KC-00-0033873-pass_yds",
+   "status": "win",
+   "actual": 324,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_JAX_NYG-00-0038606-rec",
+   "status": "loss",
+   "actual": 8,
+   "profit": -1
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 Sunday 1 PM results: 4-1 (+2.6u)\n\n\u2705 Cade Otton U 3.5 catches (1)\n\u2705 Elic Ayomanor U 3.5 catches (3)\n\u2705 Emeka Egbuka U 4.5 catches (2)\n\u2705 Patrick Mahomes O 247.5 pass yds (324)\n\u274c Parker Washington U 4.5 catches (8)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Sunday 1 PM results (unofficial) \u00b7 Sun 11/22 \u00b7 4-1",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Sunday 1 PM results (unofficial) \u00b7 Sun 11/22 \u00b7 4-1</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 Sunday 1 PM results: 4-1 (+2.6u)\n\n\u2705 Cade Otton U 3.5 catches (1)\n\u2705 Elic Ayomanor U 3.5 catches (3)\n\u2705 Emeka Egbuka U 4.5 catches (2)\n\u2705 Patrick Mahomes O 247.5 pass yds (324)\n\u274c Parker Washington U 4.5 catches (8)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Unofficial: graded from ESPN&#x27;s box score right after the games. The official grade (nflverse stats) and the record come in tomorrow&#x27;s 8:41 AM results email; stat corrections can change a close one.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 Sunday 1 PM results: 4-1 (+2.6u)\n\n\u2705 Cade Otton U 3.5 catches (1)\n\u2705 Elic Ayomanor U 3.5 catches (3)\n\u2705 Emeka Egbuka U 4.5 catches (2)\n\u2705 Patrick Mahomes O 247.5 pass yds (324)\n\u274c Parker Washington U 4.5 catches (8)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Unofficial: graded from ESPN's box score right after the games. The official grade (nflverse stats) and the record come in tomorrow's 8:41 AM results email; stat corrections can change a close one."
+ }
+}
