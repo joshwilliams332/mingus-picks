@@ -1,21 +1,23 @@
 {
- "checked": "2026-11-24T04:49:18.687389+00:00",
- "today": "2026-11-23",
+ "checked": "2026-11-24T20:17:01.642709+00:00",
+ "today": "2026-11-24",
  "odds_key": true,
  "lock": {
-  "day": "2026-11-23",
-  "state": "locked",
-  "why": "already locked"
+  "day": "2026-11-24",
+  "state": "no-games",
+  "why": "no night games on Tue 11/24"
  },
  "recap": {
   "week": 11,
-  "state": "pending",
-  "why": "nflverse hasn't published every game's player stats yet"
+  "state": "done",
+  "new": true,
+  "record": "5-0 (+4.5u)"
  },
  "results": {
   "day": "2026-11-23",
-  "state": "pending",
-  "why": "nflverse hasn't published the box score yet"
+  "state": "done",
+  "new": true,
+  "record": "2-0 (+1.8u)"
  },
  "sunday": {
   "early": {
@@ -24,9 +26,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-23",
+    "day": "2026-11-24",
     "state": "no-games",
-    "why": "no Sunday 1 PM games on Mon 11/23"
+    "why": "no Sunday 1 PM games on Tue 11/24"
    },
    "quick": {
     "state": "skipped"
@@ -38,9 +40,9 @@
     "state": "done"
    },
    "lock": {
-    "day": "2026-11-23",
+    "day": "2026-11-24",
     "state": "no-games",
-    "why": "no Sunday 4 PM games on Mon 11/23"
+    "why": "no Sunday 4 PM games on Tue 11/24"
    },
    "quick": {
     "state": "skipped"
@@ -48,21 +50,21 @@
   }
  },
  "tomorrow": {
-  "day": "2026-11-24",
+  "day": "2026-11-25",
   "early": {
-   "day": "2026-11-24",
+   "day": "2026-11-25",
    "state": "no-games",
-   "why": "no Sunday 1 PM games on Tue 11/24"
+   "why": "no Sunday 1 PM games on Wed 11/25"
   },
   "late": {
-   "day": "2026-11-24",
+   "day": "2026-11-25",
    "state": "no-games",
-   "why": "no Sunday 4 PM games on Tue 11/24"
+   "why": "no Sunday 4 PM games on Wed 11/25"
   },
   "night": {
-   "day": "2026-11-24",
-   "state": "no-games",
-   "why": "no night games on Tue 11/24"
+   "day": "2026-11-25",
+   "state": "waiting",
+   "why": "locks from Wed 11/25 9 AM ET"
   }
  },
  "sunday_email": {

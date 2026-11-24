@@ -1,0 +1,61 @@
+{
+ "week": 11,
+ "season": 2026,
+ "test": false,
+ "graded_at": "2026-11-24T20:17:01.642709+00:00",
+ "record": {
+  "w": 5,
+  "l": 0,
+  "p": 0,
+  "v": 0,
+  "profit": 4.545
+ },
+ "season_record": {
+  "w": 9,
+  "l": 4,
+  "p": 0,
+  "v": 0,
+  "profit": 4.09
+ },
+ "results": [
+  {
+   "id": "2026_11_IND_HOU-00-0034383-rec",
+   "status": "win",
+   "actual": 1,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_IND_HOU-00-0032951-rec",
+   "status": "win",
+   "actual": 0,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_MIN_SF-00-0033280-rec_yds",
+   "status": "win",
+   "actual": 13,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_CIN_WAS-00-0036900-rec",
+   "status": "win",
+   "actual": 5,
+   "profit": 0.909
+  },
+  {
+   "id": "2026_11_CIN_WAS-00-0037809-rec",
+   "status": "win",
+   "actual": 4,
+   "profit": 0.909
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 \u2705 Week 11 night games: 5-0 (+4.5u).\n\n\u2705 Dalton Schultz U 3.5 catches (1)\n\u2705 Laquon Treadwell U 2.5 catches (0)\n\u2705 Christian McCaffrey U 32.5 rec yds (13)\n\u2705 Ja'Marr Chase U 8.5 catches (5)\n\u2705 Chig Okonkwo U 4.5 catches (4)\n\nSeason: 9-4 (+4.1u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Week 11 recap \u00b7 5-0 (+4.5u)",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Week 11 recap \u00b7 5-0 (+4.5u)</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 \u2705 Week 11 night games: 5-0 (+4.5u).\n\n\u2705 Dalton Schultz U 3.5 catches (1)\n\u2705 Laquon Treadwell U 2.5 catches (0)\n\u2705 Christian McCaffrey U 32.5 rec yds (13)\n\u2705 Ja&#x27;Marr Chase U 8.5 catches (5)\n\u2705 Chig Okonkwo U 4.5 catches (4)\n\nSeason: 9-4 (+4.1u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Graded from nflverse box scores. A player who didn&#x27;t play is a void, like the sportsbooks do it.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 \u2705 Week 11 night games: 5-0 (+4.5u).\n\n\u2705 Dalton Schultz U 3.5 catches (1)\n\u2705 Laquon Treadwell U 2.5 catches (0)\n\u2705 Christian McCaffrey U 32.5 rec yds (13)\n\u2705 Ja'Marr Chase U 8.5 catches (5)\n\u2705 Chig Okonkwo U 4.5 catches (4)\n\nSeason: 9-4 (+4.1u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Graded from nflverse box scores. A player who didn't play is a void, like the sportsbooks do it."
+ }
+}
