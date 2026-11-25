@@ -153,7 +153,10 @@ def kickoff(game):
 
 
 def is_night(game):
-    return int((game.get("time") or "13:00")[:2]) >= NIGHT_HOUR
+    """In a day's own slate (picks/<date>.json, the night-game record): a night game, or any game not on a Sunday
+    (Josh, Nov 25, 2026: Thanksgiving 1 PM / 4:30 PM, Black Friday 3 PM, late-season Saturday afternoons). Sunday
+    daytime games have their own slates (SLATES)."""
+    return int((game.get("time") or "13:00")[:2]) >= NIGHT_HOUR or ("date" in game and kickoff(game).weekday() != 6)
 
 
 def et_date(dt):
@@ -181,6 +184,12 @@ def slot_label(game):
     k = kickoff(game)
     if is_day(game):
         return SLATES[day_slate(game)][2]
+    if k.month == 11 and k.weekday() == 3 and 22 <= k.day <= 28:
+        return "Thanksgiving"
+    if k.month == 11 and k.weekday() == 4 and 23 <= k.day <= 29:
+        return "Black Friday"
+    if k.hour < NIGHT_HOUR:
+        return k.strftime("%A")
     return {3: "TNF", 6: "SNF", 0: "MNF", 5: "Saturday night"}.get(k.weekday(), k.strftime("%A night"))
 
 
@@ -898,8 +907,10 @@ def slate_post(games, picks, season, test):
 
     def build(with_prices):
         return "\n".join([head, "", f"Our top {len(picks)}:" if len(picks) > 1 else "Our pick:", "",
-                          *[short(p) + ((f" ({price_txt(p['price'])})" if p.get("priced", True) else f" (to {price_txt(p['play_to'])})")
-                                        if with_prices else "") for p in picks], "",
+                          *[("⭐ " if p.get("potd") else "") + short(p)
+                            + ((f" ({price_txt(p['price'])})" if p.get("priced", True) else f" (to {price_txt(p['play_to'])})")
+                               if with_prices else "") for p in picks],
+                          *(["⭐ = Play of the Day"] if len(picks) > 1 and picks[0].get("potd") else []), "",
                           f"Season: {record_txt(season)}" if rec else "Graded after the game, wins and losses.",
                           "", FOOT])
     main = build(True)
@@ -1067,6 +1078,10 @@ def lock(data, store, now, api, force=False, slate="night", day=None, fetch=None
         picks += [to_pick(c, g, data) for c in choose(cands)]
     if day_:
         picks = sorted(picks, key=lambda p: -p["edge"])[:DAY_MAX_PICKS]
+    elif picks:
+        # Play of the Day (Josh, Nov 25, 2026): the day's best pick by edge, listed first with a star.
+        picks = sorted(picks, key=lambda p: -p["edge"])
+        picks[0]["potd"] = True
     season = read(Path(store) / "picks" / ("sunday-record.json" if day_ else "record.json"), {}).get("season") if not test else None
     post = slate_post(pre, picks, season, test)
     day_note = ([f"{SLATES[slate][2]} games: " + ("" if lines_only else "receiving and rushing yards only (2 credits a game). ")

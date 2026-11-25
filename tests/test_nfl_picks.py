@@ -96,6 +96,16 @@ class Helpers(unittest.TestCase):
     def test_night_games_only(self):
         self.assertTrue(N.is_night({"time": "20:15"}))
         self.assertFalse(N.is_night({"time": "16:25"}))
+        self.assertFalse(N.is_night({"date": "2026-11-29", "time": "13:00"}))    # Sunday afternoon: its own slates
+        self.assertTrue(N.is_night({"date": "2026-11-26", "time": "13:00"}))     # Thanksgiving afternoon: the day's slate
+        self.assertTrue(N.is_night({"date": "2026-11-27", "time": "15:00"}))     # Black Friday
+
+    def test_holiday_labels(self):
+        self.assertEqual(N.slot_label({"date": "2026-11-26", "time": "13:00"}), "Thanksgiving")
+        self.assertEqual(N.slot_label({"date": "2026-11-26", "time": "20:20"}), "Thanksgiving")
+        self.assertEqual(N.slot_label({"date": "2026-11-27", "time": "15:00"}), "Black Friday")
+        self.assertEqual(N.slot_label({"date": "2026-11-25", "time": "20:00"}), "Wednesday night")
+        self.assertEqual(N.slot_label({"date": "2026-12-19", "time": "16:30"}), "Saturday")
 
     def test_slot_label(self):
         self.assertEqual(N.slot_label({"date": "2026-11-08", "time": "20:20"}), "SNF")
