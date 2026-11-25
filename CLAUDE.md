@@ -33,6 +33,13 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   for credits). raw.githubusercontent.com is blocked from the cloud sandbox; Actions reaches it.
 - Back to priced pulls if credits return: `LINES = "odds_api"` (tests in `LockAndGrade` cover that path).
 
+## Holiday and weekday games (Josh, Nov 25, 2026)
+- Every game not on a Sunday is in that day's own slate (`is_night()`): Thanksgiving 1 PM / 4:30 PM / night together in
+  `picks/<Thursday>.json`, Black Friday 3 PM, Wednesday nights, late-season Saturday afternoons. One email per day,
+  locked from 9 AM ET that morning (or 15 minutes before the first kickoff), counted in the night-game record.
+  `slot_label()` names Thanksgiving and Black Friday. ⭐ **Play of the Day**: the day's best pick by edge (`potd: true`),
+  listed first with a star (not on Sunday daytime slates). Sunday 1 PM / 4 PM games keep their own slates.
+
 ## Picks system (moved from Mingus Football's notes)
 - **Night-game best bets** (`scripts/nfl_picks.py`, tested in `tests/test_nfl_picks.py`, run by
   `.github/workflows/mingus-picks.yml`, separate from the deploy; it downloads the live site's data JSON instead of
@@ -80,7 +87,7 @@ Mingus Football (`joshwilliams332/mingus`) on Nov 3, 2026. This repo is public.
   backtest exists yet (no historical lines); the public record is the test.
 - **Sunday daytime slates** (Josh, Nov 1, 2026: model picks for the 1 PM and 4 PM games, "for tracking"; same script,
   `SLATES` in nfl_picks.py). "early" = Sunday kickoffs noon-3:59 PM ET, "late" = 4-6:59 PM; both lock Saturday night
-  with SNF. Not London 9:30 AM or Thanksgiving.
+  with SNF. Not London 9:30 AM (Thanksgiving and other non-Sunday games are in their day's slate).
   **One Sunday email** (`sunday_preview`, Josh Nov 3): `picks/sunday/<Sunday>.json`, written once all of Sunday's
   slates have locked (or at 11:30 PM ET Saturday with whatever has), one post per time slot; emailed Saturday ~7:45 PM.
   Files `picks/sun-early/` and `picks/sun-late/` (picks + morning-after results); both
