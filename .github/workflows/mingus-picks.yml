@@ -9,9 +9,10 @@ name: Mingus Picks
 
 on:
   schedule:
-    # Night-game mornings, Mon/Thu/Sat (Josh, Nov 3 and 8, 2026: lines and picks out earlier): the night game locks
-    # from 9 AM ET, every 30 min 8:05-11:35 AM EST / 9:05 AM-12:35 PM EDT. Pulls before 10:37 AM show on NFL Lab's run.
-    - cron: "5,35 13-16 * * 1,4,6"
+    # Game-day mornings, every day (Nov 26, 2026: Mon/Thu/Sat only missed Wednesday's GB @ LA; holiday and late-season
+    # games can fall on any day): a day's slate locks from 9 AM ET, every 30 min 8:05-11:35 AM EST / 9:05 AM-12:35 PM
+    # EDT. A morning with no game is a no-op run.
+    - cron: "5,35 13-16 * * *"
     # Saturday night: every Sunday game (1 PM, 4 PM, night) locks from 7 PM ET Saturday and one Sunday email is written
     # (picks/sunday/), every 30 min Sat 7:10-11:40 PM EST / 8:10 PM-12:40 AM EDT (Sunday 00-04 UTC).
     - cron: "10,40 0-4 * * 0"
@@ -27,9 +28,9 @@ on:
     # results email (picks/sunday/<day>-results.json) once the night game is final.
     # GitHub skips or delays scheduled runs on busy Sunday nights, so there are plenty of chances.
     - cron: "5,20,35,50 0-5 * * 1"
-    # Grading, the morning after night games (Fri, Sun, Mon, Tue), once nflverse has the box scores: 4:30 / 7:30 /
+    # Grading, every morning (the morning after any game day), once nflverse has the box scores: 4:30 / 7:30 /
     # 10:30 AM / 1:30 PM EST. The 7:30 run lands before the 8:41 AM results email (which also waits up to an hour).
-    - cron: "30 9,12,15,18 * * 0,1,2,5"
+    - cron: "30 9,12,15,18 * * *"
   workflow_dispatch:
   # Also run on any push to main (e.g. right after merging), and on a push of a `run/<time>` branch: GitHub has never
   # started this repo's scheduled runs (Nov 3-8, 2026), so the scheduled Claude email tasks start the job by pushing an
