@@ -1,11 +1,12 @@
 {
- "checked": "2026-11-26T09:25:47.820767+00:00",
+ "checked": "2026-11-26T19:13:31.419564+00:00",
  "today": "2026-11-26",
  "odds_key": true,
  "lock": {
   "day": "2026-11-26",
-  "state": "waiting",
-  "why": "locks from Thu 11/26 9 AM ET"
+  "state": "locked",
+  "why": "2 pick(s) locked",
+  "new": true
  },
  "recap": {
   "week": 11,
