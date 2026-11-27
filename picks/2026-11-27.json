@@ -1,0 +1,116 @@
+{
+ "date": "2026-11-27",
+ "season": 2026,
+ "week": 12,
+ "test": false,
+ "slate": "night",
+ "games": [
+  "2026_12_DEN_PIT"
+ ],
+ "locked_at": "2026-11-27T19:07:12.572122+00:00",
+ "settings": {
+  "per_game": 2,
+  "model_weight": 0.3,
+  "max_gap": 0.2,
+  "min_prob": 0.54,
+  "min_edge": 0.03,
+  "min_games": 4,
+  "price_range": [
+   -200,
+   180
+  ],
+  "skip_status": [
+   "Out",
+   "Doubtful",
+   "Questionable",
+   "DNP"
+  ],
+  "min_volume": {
+   "att": 20,
+   "car": 8,
+   "tgt": 3.5
+  },
+  "min_books": 2
+ },
+ "picks": [
+  {
+   "id": "2026_12_DEN_PIT-00-0041496-rush_yds",
+   "gid": "2026_12_DEN_PIT",
+   "week": 12,
+   "pid": "00-0041496",
+   "name": "Jonah Coleman",
+   "team": "DEN",
+   "opp": "PIT",
+   "pos": "RB",
+   "stat": "rush_yds",
+   "side": "u",
+   "line": 74.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 69.2,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.552,
+   "model": 0.674,
+   "market": 0.5,
+   "edge": 0.054,
+   "kickoff": "2026-11-27T15:00:00-05:00",
+   "why": "Our model's typical game for him: 54.6 vs the 74.5 line (67% for the under), PIT allows the 5th fewest rush yds to RBs; stayed under 74.5 in 4 of his last 5.",
+   "deep": [
+    "Jonah Coleman U 74.5 rush yds \u00b7 DraftKings line (opened 69.5); worth it at -115 or better",
+    "Projection 69.2 = half Sleeper (72.3), half our model (66), less 3%; season 50.3, last 3 69.7 per game.",
+    "Volume: 15.6 carries/game (incl. J.K. Dobbins out: his share \u00d71.45) \u2192 15 after PIT defense \u00d70.97, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.",
+    "Efficiency: 4.2 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.2.",
+    "Chance: ours 67%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better."
+   ],
+   "potd": true
+  },
+  {
+   "id": "2026_12_DEN_PIT-00-0033881-rec",
+   "gid": "2026_12_DEN_PIT",
+   "week": 12,
+   "pid": "00-0033881",
+   "name": "Evan Engram",
+   "team": "DEN",
+   "opp": "PIT",
+   "pos": "TE",
+   "stat": "rec",
+   "side": "u",
+   "line": 2.5,
+   "price": -110,
+   "book": "DraftKings",
+   "books": 1,
+   "proj": 2.5,
+   "source": "Sleeper + Mingus model",
+   "priced": false,
+   "play_to": -115,
+   "prob": 0.546,
+   "model": 0.652,
+   "market": 0.5,
+   "edge": 0.042,
+   "kickoff": "2026-11-27T15:00:00-05:00",
+   "why": "Our model's typical game for him: 1.9 vs the 2.5 line (65% for the under), PIT allows the 8th fewest catches to TEs; stayed under 2.5 in 3 of his last 5.",
+   "deep": [
+    "Evan Engram U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better",
+    "Projection 2.5 = half Sleeper (2.1), half our model (3), less 3%; season 2.3, last 3 3.3 per game.",
+    "Volume: 4.3 targets/game \u2192 4.1 after PIT defense \u00d70.96, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.",
+    "Efficiency: 68% catch rate (steadied toward the league) \u00d7 PIT allows \u00d71.01 \u2192 68%.",
+    "Chance: ours 65%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better."
+   ]
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football best bets \u00b7 Black Friday \u00b7 DEN @ PIT\n\nOur top 2:\n\n\u2b50 Jonah Coleman U 74.5 rush yds (to -115)\nEvan Engram U 2.5 catches (to -115)\n\u2b50 = Play of the Day\n\nSeason: 11-4 (+5.9u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": [
+   "Jonah Coleman U 74.5 rush yds: Our model's typical game for him: 54.6 vs the 74.5 line (67% for the under), PIT allows the 5th fewest rush yds to RBs; stayed under 74.5 in 4 of his last 5.",
+   "Evan Engram U 2.5 catches: Our model's typical game for him: 1.9 vs the 2.5 line (65% for the under), PIT allows the 8th fewest catches to TEs; stayed under 2.5 in 3 of his last 5."
+  ]
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Black Friday picks \u00b7 Fri 11/27 \u00b7 2 picks",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Black Friday picks \u00b7 Fri 11/27 \u00b7 2 picks</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football best bets \u00b7 Black Friday \u00b7 DEN @ PIT\n\nOur top 2:\n\n\u2b50 Jonah Coleman U 74.5 rush yds (to -115)\nEvan Engram U 2.5 catches (to -115)\n\u2b50 = Play of the Day\n\nSeason: 11-4 (+5.9u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:0 0 6px\">Why</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Jonah Coleman U 74.5 rush yds: Our model&#x27;s typical game for him: 54.6 vs the 74.5 line (67% for the under), PIT allows the 5th fewest rush yds to RBs; stayed under 74.5 in 4 of his last 5.</pre><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">Evan Engram U 2.5 catches: Our model&#x27;s typical game for him: 1.9 vs the 2.5 line (65% for the under), PIT allows the 8th fewest catches to TEs; stayed under 2.5 in 3 of his last 5.</pre><h3 style=\"margin:16px 0 6px\">Deep dive</h3><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Jonah Coleman U 74.5 rush yds \u00b7 DraftKings line (opened 69.5); worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 69.2 = half Sleeper (72.3), half our model (66), less 3%; season 50.3, last 3 69.7 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 15.6 carries/game (incl. J.K. Dobbins out: his share \u00d71.45) \u2192 15 after PIT defense \u00d70.97, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 4.2 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.2.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 67%, DraftKings&#x27; line taken as 50/50, blended 55%; clears our bar at -115 or better.</div></div><div style=\"border:1px solid #dde0e5;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-size:14px\"><b>Evan Engram U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better</b><div style=\"margin-top:4px;color:#333\">Projection 2.5 = half Sleeper (2.1), half our model (3), less 3%; season 2.3, last 3 3.3 per game.</div><div style=\"margin-top:4px;color:#333\">Volume: 4.3 targets/game \u2192 4.1 after PIT defense \u00d70.96, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.</div><div style=\"margin-top:4px;color:#333\">Efficiency: 68% catch rate (steadied toward the league) \u00d7 PIT allows \u00d71.01 \u2192 68%.</div><div style=\"margin-top:4px;color:#333\">Chance: ours 65%, DraftKings&#x27; line taken as 50/50, blended 55%; clears our bar at -115 or better.</div></div><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Locked 2:07 PM ET from DraftKings&#x27; lines (40 sides across 1 game(s)) in ESPN&#x27;s free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (&quot;to -115&quot; = take it at -115 or better); lines may have moved since.</li><li>Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can&#x27;t see). The record counts each pick at -110.</li><li>Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper&#x27;s when the site has it. The deep dive shows each piece.</li><li>Anyone listed questionable, doubtful, out or DNP was skipped. If a pick&#x27;s player is inactive, it&#x27;s graded as a void.</li><li>This football model has no backtest against real lines yet; the public record is the test.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football best bets \u00b7 Black Friday \u00b7 DEN @ PIT\n\nOur top 2:\n\n\u2b50 Jonah Coleman U 74.5 rush yds (to -115)\nEvan Engram U 2.5 catches (to -115)\n\u2b50 = Play of the Day\n\nSeason: 11-4 (+5.9u)\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nJonah Coleman U 74.5 rush yds: Our model's typical game for him: 54.6 vs the 74.5 line (67% for the under), PIT allows the 5th fewest rush yds to RBs; stayed under 74.5 in 4 of his last 5.\n\nEvan Engram U 2.5 catches: Our model's typical game for him: 1.9 vs the 2.5 line (65% for the under), PIT allows the 8th fewest catches to TEs; stayed under 2.5 in 3 of his last 5.\n\nDeep dive:\nJonah Coleman U 74.5 rush yds \u00b7 DraftKings line (opened 69.5); worth it at -115 or better\nProjection 69.2 = half Sleeper (72.3), half our model (66), less 3%; season 50.3, last 3 69.7 per game.\nVolume: 15.6 carries/game (incl. J.K. Dobbins out: his share \u00d71.45) \u2192 15 after PIT defense \u00d70.97, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.\nEfficiency: 4.2 yds/carry (steadied toward the league) \u00d7 PIT allows \u00d70.98 \u2192 4.2.\nChance: ours 67%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better.\n\nEvan Engram U 2.5 catches \u00b7 DraftKings line; worth it at -115 or better\nProjection 2.5 = half Sleeper (2.1), half our model (3), less 3%; season 2.3, last 3 3.3 per game.\nVolume: 4.3 targets/game \u2192 4.1 after PIT defense \u00d70.96, DEN implied 21 \u00d70.99, game script (favored 4.5) \u00d71.00.\nEfficiency: 68% catch rate (steadied toward the league) \u00d7 PIT allows \u00d71.01 \u2192 68%.\nChance: ours 65%, DraftKings' line taken as 50/50, blended 55%; clears our bar at -115 or better.\n\nNote: Locked 2:07 PM ET from DraftKings' lines (40 sides across 1 game(s)) in ESPN's free feed. No prices come with them: check the price in DraftKings. Each pick says the worst price still worth it (\"to -115\" = take it at -115 or better); lines may have moved since.\nNote: Our chance = 30% our projection + 70% the line taken as 50/50 (a book sets its line near even), so a pick needs our model at about 63-70%. Above 70% it was skipped (usually news we can't see). The record counts each pick at -110.\nNote: Projection = our matchup model (opportunities \u00d7 efficiency, adjusted for the defense, the team total, game script and injury openings), averaged with Sleeper's when the site has it. The deep dive shows each piece.\nNote: Anyone listed questionable, doubtful, out or DNP was skipped. If a pick's player is inactive, it's graded as a void.\nNote: This football model has no backtest against real lines yet; the public record is the test."
+ }
+}

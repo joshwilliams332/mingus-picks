@@ -1,0 +1,61 @@
+{
+ "date": "2026-11-26",
+ "season": 2026,
+ "week": 12,
+ "test": false,
+ "graded_at": "2026-11-27T19:07:12.572122+00:00",
+ "record": {
+  "w": 2,
+  "l": 0,
+  "p": 0,
+  "v": 0,
+  "profit": 1.818
+ },
+ "season_record": {
+  "w": 11,
+  "l": 4,
+  "p": 0,
+  "v": 0,
+  "profit": 5.908
+ },
+ "clv": {
+  "n": 2,
+  "beat": 1,
+  "same": 1,
+  "worse": 0,
+  "avg": 0.5
+ },
+ "results": [
+  {
+   "id": "2026_12_KC_BUF-00-0041013-rush_yds",
+   "status": "win",
+   "actual": 72,
+   "profit": 0.909,
+   "close": {
+    "line": 81.5,
+    "open": 81.5
+   },
+   "clv": 1.0
+  },
+  {
+   "id": "2026_12_KC_BUF-00-0037261-rec",
+   "status": "win",
+   "actual": 3,
+   "profit": 0.909,
+   "close": {
+    "line": 3.5,
+    "open": 3.5
+   },
+   "clv": 0.0
+  }
+ ],
+ "post": {
+  "main": "\ud83c\udfc8 Mingus Football \u00b7 \u2705 Thanksgiving results (PHI @ DAL \u00b7 KC @ BUF): 2-0 (+1.8u).\n\n\u2705 Emmett Johnson U 82.5 rush yds (72)\n\u2705 Khalil Shakir U 3.5 catches (3)\n\nSeason: 11-4 (+5.9u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER",
+  "replies": []
+ },
+ "email": {
+  "subject": "\ud83c\udfc8 Thanksgiving results \u00b7 Thu 11/26 \u00b7 2-0 (+1.8u)",
+  "html": "<div style=\"font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#111;max-width:620px\"><h2 style=\"margin:0 0 4px\">Thanksgiving results \u00b7 Thu 11/26 \u00b7 2-0 (+1.8u)</h2><h3 style=\"margin:12px 0 6px\">Picks</h3><pre style=\"white-space:pre-wrap;font:15px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;background:#f4f5f7;border:1px solid #dde0e5;border-radius:10px;padding:12px 14px;margin:0 0 12px\">\ud83c\udfc8 Mingus Football \u00b7 \u2705 Thanksgiving results (PHI @ DAL \u00b7 KC @ BUF): 2-0 (+1.8u).\n\n\u2705 Emmett Johnson U 82.5 rush yds (72)\n\u2705 Khalil Shakir U 3.5 catches (3)\n\nSeason: 11-4 (+5.9u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER</pre><h3 style=\"margin:16px 0 6px\">Notes</h3><ul style=\"color:#444;padding-left:18px;margin:0\"><li>Graded from nflverse box scores. A player who didn&#x27;t play is a void, like the sportsbooks do it.</li><li>Closing line (DraftKings, last line before kickoff): these picks beat it on 1 of 2, matched it on 1; average move +0.5 in our favor. Beating the closing line is the best sign of a real edge; wins and losses take hundreds of picks to mean anything.</li></ul><p style=\"color:#888;font-size:13px;margin-top:18px\">From Mingus Football's picks job. <a href=\"https://joshwilliams332.github.io/mingus/games.html\">This week's games</a></p></div>",
+  "text": "\ud83c\udfc8 Mingus Football \u00b7 \u2705 Thanksgiving results (PHI @ DAL \u00b7 KC @ BUF): 2-0 (+1.8u).\n\n\u2705 Emmett Johnson U 82.5 rush yds (72)\n\u2705 Khalil Shakir U 3.5 catches (3)\n\nSeason: 11-4 (+5.9u)\nEvery pick posted before kickoff, wins and losses.\n\nFor entertainment. 21+ \u00b7 Gamble responsibly \u00b7 1-800-GAMBLER\n\nNote: Graded from nflverse box scores. A player who didn't play is a void, like the sportsbooks do it.\nNote: Closing line (DraftKings, last line before kickoff): these picks beat it on 1 of 2, matched it on 1; average move +0.5 in our favor. Beating the closing line is the best sign of a real edge; wins and losses take hundreds of picks to mean anything."
+ }
+}
